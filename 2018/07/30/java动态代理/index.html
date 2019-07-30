@@ -17,22 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>计算机CPU性能提升 | jiaru个人博客</title>
-  <meta name="description" content="CPU提升的途径：增加晶体管密度、提升CPU主频（晶体管开关的速度） 增加晶体管密度就需要把晶体管造的更小，这就是所谓的”制程” CPU提升带来的是功率的增加： CPU功率 ～=1/2x负载电容x电压的平方x开关频率x晶体管数量 *降低CPU电压最容易提升计算机的续航*  但仅靠提升CPU性能会遇到瓶颈，就需要采用CPU并行提高性能 并行也会需要瓶颈，正如阿姆达尔定律（Amdahl’s Law）">
+  <title>Java动态代理实现原理 | jiaru个人博客</title>
+  <meta name="description" content="Java动态代理（dynamic proxy）实现原理应用场景： spring切片、权限、日志、事务管理、Mapper接口等  当你在使用这些spring集成好的功能是否也会疑惑，为什么加个注解，或者按规则创建好文件就可以实现各种功能了呢？ 一、动态代理定义顾名思义，根据源文件方法，动态生成代理类来帮助处理业务。那什么是代理类呢？为什么要生成代理类呢？为什么要动态生成呢？此中缘由请听我慢慢道来。">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="计算机CPU性能提升">
-<meta property="og:url" content="http://47.244.222.0:8888/2019/07/28/计算机CPU性能提升/index.html">
+<meta property="og:title" content="Java动态代理实现原理">
+<meta property="og:url" content="http://47.244.222.0:8888/2018/07/30/java动态代理/index.html">
 <meta property="og:site_name" content="jiarus">
-<meta property="og:description" content="CPU提升的途径：增加晶体管密度、提升CPU主频（晶体管开关的速度） 增加晶体管密度就需要把晶体管造的更小，这就是所谓的”制程” CPU提升带来的是功率的增加： CPU功率 ～=1/2x负载电容x电压的平方x开关频率x晶体管数量 *降低CPU电压最容易提升计算机的续航*  但仅靠提升CPU性能会遇到瓶颈，就需要采用CPU并行提高性能 并行也会需要瓶颈，正如阿姆达尔定律（Amdahl’s Law）">
+<meta property="og:description" content="Java动态代理（dynamic proxy）实现原理应用场景： spring切片、权限、日志、事务管理、Mapper接口等  当你在使用这些spring集成好的功能是否也会疑惑，为什么加个注解，或者按规则创建好文件就可以实现各种功能了呢？ 一、动态代理定义顾名思义，根据源文件方法，动态生成代理类来帮助处理业务。那什么是代理类呢？为什么要生成代理类呢？为什么要动态生成呢？此中缘由请听我慢慢道来。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5548926-5597f3c1d473c1e9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/228/format/webp">
-<meta property="og:updated_time" content="2019-07-27T20:50:53.596Z">
+<meta property="og:updated_time" content="2019-07-30T17:45:37.834Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="计算机CPU性能提升">
-<meta name="twitter:description" content="CPU提升的途径：增加晶体管密度、提升CPU主频（晶体管开关的速度） 增加晶体管密度就需要把晶体管造的更小，这就是所谓的”制程” CPU提升带来的是功率的增加： CPU功率 ～=1/2x负载电容x电压的平方x开关频率x晶体管数量 *降低CPU电压最容易提升计算机的续航*  但仅靠提升CPU性能会遇到瓶颈，就需要采用CPU并行提高性能 并行也会需要瓶颈，正如阿姆达尔定律（Amdahl’s Law）">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5548926-5597f3c1d473c1e9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/228/format/webp">
+<meta name="twitter:title" content="Java动态代理实现原理">
+<meta name="twitter:description" content="Java动态代理（dynamic proxy）实现原理应用场景： spring切片、权限、日志、事务管理、Mapper接口等  当你在使用这些spring集成好的功能是否也会疑惑，为什么加个注解，或者按规则创建好文件就可以实现各种功能了呢？ 一、动态代理定义顾名思义，根据源文件方法，动态生成代理类来帮助处理业务。那什么是代理类呢？为什么要生成代理类呢？为什么要动态生成呢？此中缘由请听我慢慢道来。">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://47.244.222.0:8888/2019/07/28/计算机CPU性能提升/index.html">
+  <link rel="canonical" href="http://47.244.222.0:8888/2018/07/30/java动态代理/index.html">
   
     <link rel="alternate" href="/atom.xml" title="jiarus" type="application/atom+xml">
   
@@ -343,14 +342,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-计算机CPU性能提升" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-java动态代理" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      计算机CPU性能提升
+      Java动态代理实现原理
     </h1>
   
 
@@ -358,41 +357,72 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/07/28/计算机CPU性能提升/" class="article-date">
-	  <time datetime="2019-07-27T20:16:00.000Z" itemprop="datePublished">2019-07-28</time>
+	<a href="/2018/07/30/java动态代理/" class="article-date">
+	  <time datetime="2018-07-30T15:46:00.000Z" itemprop="datePublished">2018-07-30</time>
 	</a>
 </span>
         
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/java/">java</a>
+  </span>
+
         
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/java/">java</a>
+  </span>
+
 
         
 
 	<span class="article-read hidden-xs">
     	<i class="icon icon-eye-fill" aria-hidden="true"></i>
-    	<span id="/2019/07/28/计算机CPU性能提升/" class="leancloud_visitors"  data-flag-title="计算机CPU性能提升">
+    	<span id="/2018/07/30/java动态代理/" class="leancloud_visitors"  data-flag-title="Java动态代理实现原理">
 			<span class="leancloud-visitors-count">0</span>
 		</span>
     </span>
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/07/28/计算机CPU性能提升/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/07/30/java动态代理/#comments" class="article-comment-link">Comments</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p>CPU提升的途径：增加晶体管密度、提升CPU主频（晶体管开关的速度）</p>
-<p><u><em>增加晶体管密度就需要把晶体管造的更小，这就是所谓的”制程”</em></u></p>
-<p>CPU提升带来的是功率的增加：</p>
-<p>CPU功率 <strong><em>～=1/2x负载电容x电压的平方x开关频率x晶体管数量</em></strong></p>
-<p>*<u>降低CPU电压最容易提升计算机的续航</u>*</p>
-<hr>
-<p><strong>但仅靠提升CPU性能会遇到瓶颈，就需要采用CPU并行提高性能</strong></p>
-<p>并行也会需要瓶颈，正如阿姆达尔定律（Amdahl’s Law）</p>
-<p><em>优化后的执行时间 = 受优化影响的执行时间 / 加速倍数 + 不受影响的执行时间</em></p>
-<p>一个程序可以分解为多个CPU的任务来处理，处理结束需要将多个CPU处理结果汇总在一起</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5548926-5597f3c1d473c1e9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/228/format/webp" alt="pic"></p>
-<p>100/4 + 20 = 45<br>100/100 + 20 = 21</p>
-<p>可以看出仅靠增加CPU是会遇到瓶颈的，不受影响的执行时间无法做到并行处理</p>
+        <h5 id="Java动态代理（dynamic-proxy）实现原理"><a href="#Java动态代理（dynamic-proxy）实现原理" class="headerlink" title="Java动态代理（dynamic proxy）实现原理"></a><strong>Java动态代理（dynamic proxy）实现原理</strong></h5><h5 id="应用场景："><a href="#应用场景：" class="headerlink" title="应用场景："></a>应用场景：</h5><blockquote>
+<p>spring切片、权限、日志、事务管理、Mapper接口等</p>
+</blockquote>
+<p>当你在使用这些spring集成好的功能是否也会疑惑，为什么加个注解，或者按规则创建好文件就可以实现各种功能了呢？</p>
+<h5 id="一、动态代理定义"><a href="#一、动态代理定义" class="headerlink" title="一、动态代理定义"></a>一、动态代理定义</h5><p>顾名思义，根据源文件方法，动态生成代理类来帮助处理业务。那什么是代理类呢？为什么要生成代理类呢？为什么要动态生成呢？此中缘由请听我慢慢道来。</p>
+<p>1.比如说你想去买火车票，但火车站很远而且人也多不方便，就可以到就近的火车票代售点购买车票，代售点就是这里所说的代理。</p>
+<pre><code>代理模式就是在访问类目标方法上加了一层业务处理，这层会做一些增强业务，但最终还是会调用目标方法。对外开放的是代理类，而不是原有的类。</code></pre><p>2.在使用Spring框架的AOP特性时，使用的就是使用动态代理。之所以是动态，是在代码运行阶段在内存里生成代理类，而不是生成文件。否则一个项目里那么多的要代理的类，都生成代理类文件会导致工程庞大冗杂。</p>
+<h5 id="二、动态代理的实现"><a href="#二、动态代理的实现" class="headerlink" title="二、动态代理的实现"></a>二、动态代理的实现</h5><p>动态代理两种实现方式：</p>
+<p>1.JDK动态代理实现</p>
+<ul>
+<li><p>特点</p>
+<p>  1) 使用反射机制</p>
+<p>  2) 实现InvocationHandler，在invoke方法添加业务逻辑，使用Proxy.newProxyInstance产生代理对象</p>
+<p>  3) 代理类和实现类实现同一个接口，代理类有一个实现类的引用，客户调用代理类的方法时，代理类就调用实现类的方法</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ElectricCar car = new ElectricCar();</span><br><span class="line">        ClassLoader classLoader = car.getClass().getClassLoader();</span><br><span class="line">        Class&lt;?&gt;[] interfaces = car.getClass().getInterfaces();</span><br><span class="line">        InvocationHandlerImpl invocationHandler = new InvocationHandlerImpl(car);</span><br><span class="line">        Object proxy = Proxy.newProxyInstance(classLoader, interfaces, invocationHandler);</span><br><span class="line">        Vehicle vehicle = (Vehicle) proxy;</span><br><span class="line">        vehicle.drive();</span><br><span class="line">        Battery battery = (Battery) proxy;</span><br><span class="line">        battery.charge();</span><br></pre></td></tr></table></figure>
+
+<p>2.CGlib动态代理实现</p>
+<ul>
+<li><p>特点</p>
+<p>  1) 使用ASM字节码处理框架</p>
+<blockquote>
+<p><em>ASM 是一个 Java 字节码操控框架。它能够以二进制形式修改已有类或者动态生成类。ASM 可以直接产生二进制 class 文件，也可以在类被加载入 Java 虚拟机之前动态改变类行为。ASM 从类文件中读入信息后，能够改变类行为，分析类信息，甚至能够根据用户要求生成新类</em></p>
+</blockquote>
+<p>  2) 实现 MethodInterceptor方法代理接口，创建代理类</p>
+<p>  3) 通过继承原有方法并重写，代理类是原有类的子类，因此不能代理final修饰的方法</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">       ProxyDriver proxyDriver = new ProxyDriver();</span><br><span class="line">       Enhancer enhancer = new Enhancer();</span><br><span class="line">       enhancer.setSuperclass(Verhicle.class);</span><br><span class="line">       enhancer.setCallback(proxyDriver);</span><br><span class="line">       Verhicle proxy = (Verhicle) enhancer.create();</span><br><span class="line">       proxy.drive();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="三、动态代理的选择"><a href="#三、动态代理的选择" class="headerlink" title="三、动态代理的选择"></a>三、动态代理的选择</h5><blockquote>
+<p>在 Spring Boot 2.0 中，Spring Boot现在默认使用CGLIB动态代理(基于类的动态代理), 包括AOP。 如果需要基于接口的动态代理(JDK基于接口的动态代理) , 需要设置spring.aop.proxy-target-class属性为false。</p>
+</blockquote>
 
       
     </div>
@@ -402,7 +432,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://47.244.222.0:8888/2019/07/28/计算机CPU性能提升/" title="计算机CPU性能提升" target="_blank" rel="external">http://47.244.222.0:8888/2019/07/28/计算机CPU性能提升/</a>
+      <a href="http://47.244.222.0:8888/2018/07/30/java动态代理/" title="Java动态代理实现原理" target="_blank" rel="external">http://47.244.222.0:8888/2018/07/30/java动态代理/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -449,13 +479,9 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2019/07/30/Redis总结/" title="Redis总结"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+      <a href="/2019/07/27/Kafka版本号总结/" title="Kafka版本号总结"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
-    
-    <li class="next">
-      <a href="/2019/07/28/计算机性能之CPU篇/" title="计算机性能之CPU篇"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
-    </li>
     
     
   </ul>
