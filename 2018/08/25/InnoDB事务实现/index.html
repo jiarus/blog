@@ -17,16 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>Category: mysql | jiaru个人博客</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="jiarus">
-<meta property="og:url" content="http://47.244.222.0:8888/categories/mysql/index.html">
+  <title>InnoDB事务和MVCC实现 | jiaru个人博客</title>
+  <meta name="description" content="事务（ACID）定义： Atomicity 一组sql要么全部都执行成功要么全部失败。比如A、B两人转账，扣款和增加同时成功或者失败。 Consistency 写入的结果和预设结果相同。比如转账前和转账后AB两人总额是不变的。 Isolation 事务对其他事务是不可见的，而且互不影响。 Durability 一旦提交，就算宕机也不会出现数据丢失的情况。  事务实现： 依靠undo_log和red">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="InnoDB事务和MVCC实现">
+<meta property="og:url" content="http://47.244.222.0:8888/2018/08/25/InnoDB事务实现/index.html">
 <meta property="og:site_name" content="jiarus">
+<meta property="og:description" content="事务（ACID）定义： Atomicity 一组sql要么全部都执行成功要么全部失败。比如A、B两人转账，扣款和增加同时成功或者失败。 Consistency 写入的结果和预设结果相同。比如转账前和转账后AB两人总额是不变的。 Isolation 事务对其他事务是不可见的，而且互不影响。 Durability 一旦提交，就算宕机也不会出现数据丢失的情况。  事务实现： 依靠undo_log和red">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-31T17:33:17.939Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jiarus">
+<meta name="twitter:title" content="InnoDB事务和MVCC实现">
+<meta name="twitter:description" content="事务（ACID）定义： Atomicity 一组sql要么全部都执行成功要么全部失败。比如A、B两人转账，扣款和增加同时成功或者失败。 Consistency 写入的结果和预设结果相同。比如转账前和转账后AB两人总额是不变的。 Isolation 事务对其他事务是不可见的，而且互不影响。 Durability 一旦提交，就算宕机也不会出现数据丢失的情况。  事务实现： 依靠undo_log和red">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://47.244.222.0:8888/categories/mysql/index.html">
+  <link rel="canonical" href="http://47.244.222.0:8888/2018/08/25/InnoDB事务实现/index.html">
   
     <link rel="alternate" href="/atom.xml" title="jiarus" type="application/atom+xml">
   
@@ -334,79 +339,215 @@
 </aside>
 
   
-  <main class="main" role="main">
-  <article class="content article article-categories article-type-list" itemscope="">
-    <header class="article-header">
-      <h1 itemprop="name" class="hidden-xs">Category: mysql</h1>
-      <p class="hidden-xs">Total 4 articles</p>
-      <nav role="navigation" id="nav-main" class="okayNav">
-        <ul>
-          <li><a href="/categories">All</a></li>
-          
-          <li><a href="/categories/mysql/">mysql</a></li>
-          
-          <li><a href="/categories/redis/">redis</a></li>
-          
-          <li><a href="/categories/java/">java</a></li>
-          
-        </ul>
-      </nav>
-    </header>
-    <!-- /header -->
-    <div class="article-body">
-      <div class="panel panel-default b-no">
-    <div class="panel-heading" role="tab">
-        <h4 class="panel-title">
-            <a data-toggle="collapse" href="#collapsemysql" aria-expanded="true">
-              <i class="icon icon-folder text-active"></i><i class="icon icon-folder-open text"></i>
-              mysql
-            </a>
-            <small class="text-muted">(Total 4 articles)</small>
-        </h4>
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-InnoDB事务实现" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      InnoDB事务和MVCC实现
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2018/08/25/InnoDB事务实现/" class="article-date">
+	  <time datetime="2018-08-25T11:54:00.000Z" itemprop="datePublished">2018-08-25</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/mysql/">mysql</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/mysql/">mysql</a>
+  </span>
+
+
+        
+
+	<span class="article-read hidden-xs">
+    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
+    	<span id="/2018/08/25/InnoDB事务实现/" class="leancloud_visitors"  data-flag-title="InnoDB事务和MVCC实现">
+			<span class="leancloud-visitors-count">0</span>
+		</span>
+    </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/08/25/InnoDB事务实现/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
     </div>
-    <div id="collapsemysql" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingmysql">
-        <div class="panel-body">
-            <div class="collection">
-              
-                
-<a href="/2018/08/25/InnoDB事务实现/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-08-25T11:54:00.000Z" itemprop="datePublished">2018-08-25</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> InnoDB事务和MVCC实现
-</a>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h5 id="事务（ACID）定义："><a href="#事务（ACID）定义：" class="headerlink" title="事务（ACID）定义："></a>事务（ACID）定义：</h5><ul>
+<li><strong>Atomicity</strong> 一组sql要么全部都执行成功要么全部失败。比如A、B两人转账，扣款和增加同时成功或者失败。</li>
+<li><strong>Consistency</strong> 写入的结果和预设结果相同。比如转账前和转账后AB两人总额是不变的。</li>
+<li><strong>Isolation</strong> 事务对其他事务是不可见的，而且互不影响。</li>
+<li><strong>Durability</strong> 一旦提交，就算宕机也不会出现数据丢失的情况。</li>
+</ul>
+<h5 id="事务实现："><a href="#事务实现：" class="headerlink" title="事务实现："></a>事务实现：</h5><ul>
+<li>依靠undo_log和redo_log实现，如果发生失败就回滚到undo_log,成功就提交redo_log。undo_log实现了事务的原子性，redo_log实现了事务的一致性和持久性。而事务的隔离性依靠加锁来实现。<del>（挖坑，再写一篇事务隔离级别）</del><blockquote>
+<p>undo_log记录的是事务执行前的数据</p>
+<p>redo_log记录的是事务执行后的数据</p>
+<p>数据库锁包括共享锁（S）和排他锁(X)</p>
+</blockquote>
+</li>
+</ul>
+<h5 id="举个栗子："><a href="#举个栗子：" class="headerlink" title="举个栗子："></a>举个栗子：</h5><p>A:1000元 B:1000元，两人转账时底层是如何操作的</p>
+<blockquote>
+<p><strong>1</strong>. undo记录A=1000元,set A=500元(在内存中进行),redo记录A=500元</p>
+</blockquote>
+<blockquote>
+<p><strong>2</strong>. undo记录B=1000元,set B=1500元(在内存中进行),redo记录B=1500元</p>
+</blockquote>
+<blockquote>
+<p><strong>3</strong>. 成功：刷新redo日志到数据库中，失败刷新undo日志到数据库</p>
+</blockquote>
+<blockquote>
+<p><strong>4</strong>. commit事务</p>
+</blockquote>
+<hr>
+<h5 id="多版本并发控制-MVCC"><a href="#多版本并发控制-MVCC" class="headerlink" title="多版本并发控制(MVCC)"></a>多版本并发控制(MVCC)</h5><p>因为数据中存在共享锁和排他锁，而二者是互斥的关系。在查询时会获得共享锁，修改时会获取排他锁，这按理来说会阻塞。但Mysql做了一个处理使得二者可以同时进行。</p>
+<blockquote>
+<p>当进行修改时，生成了undo和redo日志，而并发读读的就是这个undo日志，所以读到的是修改前的数据。</p>
+</blockquote>
 
-
-              
-                
-<a href="/2018/08/20/Mysql在线修改表结构/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-08-20T10:43:00.000Z" itemprop="datePublished">2018-08-20</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Mysql在线修改表结构
-</a>
-
-
-              
-                
-<a href="/2018/07/21/Mysql日志/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-07-21T14:34:00.000Z" itemprop="datePublished">2018-07-21</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Mysql日志
-</a>
-
-
-              
-                
-<a href="/2018/07/20/Mysql不同发行版区别及升级步骤/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-07-20T09:50:00.000Z" itemprop="datePublished">2018-07-20</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Mysql不同发行版特性及升级步骤
-</a>
-
-
-              
-            </div>
-        </div>
+      
     </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://47.244.222.0:8888/2018/08/25/InnoDB事务实现/" title="InnoDB事务和MVCC实现" target="_blank" rel="external">http://47.244.222.0:8888/2018/08/25/InnoDB事务实现/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/jiarus" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/jiarus" target="_blank"><span class="text-dark">fever</span><small class="ml-1x">Java Developer</small></a></h3>
+        <div>广告系统引擎开发</div>
+      </div>
+    </figure>
+  </div>
 </div>
+
+
     </div>
   </article>
-   
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2018/08/30/Mysql引擎/" title="Mysql存储引擎区别"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2018/08/20/Mysql在线修改表结构/" title="Mysql在线修改表结构"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/Alipay.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechat.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -459,6 +600,37 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: true
+  });
+  </script>
+
+     
 
 
 
