@@ -17,20 +17,20 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>redis五大数据类型实现原理 | fever的个人博客</title>
-  <meta name="description" content="0.redisObject 12345678910111213typedef struct redisObject&amp;#123;     //类型     unsigned type:4;     //编码     unsigned encoding:4;     //指向底层数据结构的指针     void *ptr;     //引用计数     int refcount;     //记录最后">
-<meta property="og:type" content="article">
-<meta property="og:title" content="redis五大数据类型实现原理">
-<meta property="og:url" content="https://jiarus.github.io/2019/08/03/redis数据结构实现原理/index.html">
+  <title>about | fever的个人博客</title>
+  <meta name="description" content="test">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="https://jiarus.github.io/1/index.html">
 <meta property="og:site_name" content="jiarus">
-<meta property="og:description" content="0.redisObject 12345678910111213typedef struct redisObject&amp;#123;     //类型     unsigned type:4;     //编码     unsigned encoding:4;     //指向底层数据结构的指针     void *ptr;     //引用计数     int refcount;     //记录最后">
+<meta property="og:description" content="test">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-03T14:43:35.171Z">
+<meta property="og:updated_time" content="2019-08-03T10:26:34.774Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="redis五大数据类型实现原理">
-<meta name="twitter:description" content="0.redisObject 12345678910111213typedef struct redisObject&amp;#123;     //类型     unsigned type:4;     //编码     unsigned encoding:4;     //指向底层数据结构的指针     void *ptr;     //引用计数     int refcount;     //记录最后">
+<meta name="twitter:title" content="about">
+<meta name="twitter:description" content="test">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://jiarus.github.io/2019/08/03/redis数据结构实现原理/index.html">
+  <link rel="canonical" href="https://jiarus.github.io/1/index.html">
   
     <link rel="alternate" href="/atom.xml" title="jiarus" type="application/atom+xml">
   
@@ -343,14 +343,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-redis数据结构实现原理" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="page-" class="article article-type-page" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      redis五大数据类型实现原理
+      about
     </h1>
   
 
@@ -358,8 +358,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/08/03/redis数据结构实现原理/" class="article-date">
-	  <time datetime="2019-08-03T08:13:32.000Z" itemprop="datePublished">2019-08-03</time>
+	<a href="/1/index.html" class="article-date">
+	  <time datetime="2019-07-27T21:07:34.000Z" itemprop="datePublished">2019-07-28</time>
 	</a>
 </span>
         
@@ -367,55 +367,14 @@
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/08/03/redis数据结构实现原理/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/1/index.html#comments" class="article-comment-link">Comments</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p>0.<strong>redisObject</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">typedef struct redisObject&#123;</span><br><span class="line">     //类型</span><br><span class="line">     unsigned type:4;</span><br><span class="line">     //编码</span><br><span class="line">     unsigned encoding:4;</span><br><span class="line">     //指向底层数据结构的指针</span><br><span class="line">     void *ptr;</span><br><span class="line">     //引用计数</span><br><span class="line">     int refcount;</span><br><span class="line">     //记录最后一次被程序访问的时间</span><br><span class="line">     unsigned lru:22;</span><br><span class="line"> </span><br><span class="line">&#125;robj</span><br></pre></td></tr></table></figure>
+        <p>test</p>
 
-<p>redis的key都是字符串类型，value是redis的包装类型,以下五种类型表现形式都是一个redisObject。</p>
-<ul>
-<li>type类型来区分是哪种具体类型。<br><code>type key</code></li>
-<li>encoding用来表明该类型使用哪种编码，而每种类型至少使用了两种编码。<br><code>OBJECT ENCODING  key</code></li>
-</ul>
-<p><strong>1.字符串</strong></p>
-<pre><code>a)编码类型
-    int,embstr,raw三种编码
-    int保存可用long表示的无符号整数值
-    embstr表示长度小于44的短字符串
-    raw表示长度大于44的长字符串
-
-    embstr和raw的区别：
-      1.embstr由于是短字符串，redis做了优化，只分配一次空间redisObject和sds是连续的，而raw是分开的。添加和删除时候embstr都比raw少操作一次空间。
-b)编码转换
-   1.embstr由于没有提供修改方法，需要升级为raw才能修改，修改完即使小于44字节还是会变成raw编码。
-   2.如果是float类型保存也是按字符串保存的，当需要时候才转换为float。
-   3.当int编码保存的不再是整数，或超过long的长度就会转换为raw编码。</code></pre><p><strong>2.列表</strong></p>
-<p>存放简单字符串sds的链表结构</p>
-<pre><code>a)编码类型
-    压缩链表（ziplist）和双端链表（linklist）
-b)编码转换
-    当满足字符串长度小于64字节并且字符串数量小于512个俩个条件时，使用ziplist,否则使用linklist。</code></pre><p><strong>3.哈希</strong></p>
-<p>值是字符串，value是键值对</p>
-<pre><code>a)编码类型
-    压缩链表（ziplist）和哈希表(hashtable)
-    哈希表底层使用字典类型结构
-b)编码转换
-    和列表一样，当满足字符串长度小于64字节并且字符串数量小于512个俩个条件时，使用ziplist,否则使用hashtable。</code></pre><p><strong>4.集合</strong><br>    不重复且无序的列表</p>
-<pre><code>a)编码类型
-    intset和哈希表（hashtable）
-    哈希表存放的只有key，value都指向null.类似与java中的HashSet，使用HashMap实现，value都是null。
-b)编码转换
-    当存放的所有元素都是整数且不超过512个使用intset，否则使用哈希表。</code></pre><p><strong>5.有序集合</strong><br>    不重复且有序的列表</p>
-<pre><code>a)编码类型
-    压缩链表（ziplist）和 （字典+跳表）
-    当使用压缩链表实现时，值和分数是相邻存放，前面是值，后面跟的分数，值之间是从小到大有序排列。
-    当使用字典+跳表实现时，执行精确查找使用字典，范围查找使用跳表，他们二者共享同一份数据。
-b)编码转换
-    当存放的元素长度小于64且个数小于128时使用压缩链表，否则使用字典+跳表实现。</code></pre>
       
     </div>
     <div class="article-footer">
@@ -424,7 +383,7 @@ b)编码转换
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://jiarus.github.io/2019/08/03/redis数据结构实现原理/" title="redis五大数据类型实现原理" target="_blank" rel="external">https://jiarus.github.io/2019/08/03/redis数据结构实现原理/</a>
+      <a href="https://jiarus.github.io/1/index.html" title="about" target="_blank" rel="external">https://jiarus.github.io/1/index.html</a>
     </li>
     
     <li class="post-copyright-license">
@@ -467,16 +426,6 @@ b)编码转换
 
   <nav class="bar bar-footer clearfix" data-stick-bottom>
   <div class="bar-inner">
-  
-  <ul class="pager pull-left">
-    
-    
-    <li class="next">
-      <a href="/2019/07/30/Redis总结/" title="redis六种基本数据结构"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
-    </li>
-    
-    
-  </ul>
   
   
   <!-- Button trigger modal -->
@@ -588,10 +537,6 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 <script src="/js/insight.js"></script>
 
 
-
-
-
-   
 
 
 
