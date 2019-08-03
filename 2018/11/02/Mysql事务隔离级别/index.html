@@ -17,20 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>Hello World | jiaru个人博客</title>
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <title>Mysql事务隔离级别 | fever的个人博客</title>
+  <meta name="description" content="Mysql事务隔离级别假如你从Mysql设计师的角度看，在事务处理中可能会出现下面几种问题：1.更新丢失     A、B线程并发修改同一条数据，A修改成功并提交，B回滚了修改，这种情况那么也会把A提交的结果也回滚了。A更新的内容就丢失了。（目前的关系型数据库都不会出现这种问题了）  2.脏读   A、B线程并发修改同一条数据，A修改后未提交，B此时读会就会读到A提交前的数据，A也可能会回滚导致B结">
+<meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://47.244.222.0:8888/2019/07/25/hello-world/index.html">
+<meta property="og:title" content="Mysql事务隔离级别">
+<meta property="og:url" content="http://47.244.222.0:8888/2018/11/02/Mysql事务隔离级别/index.html">
 <meta property="og:site_name" content="jiarus">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="Mysql事务隔离级别假如你从Mysql设计师的角度看，在事务处理中可能会出现下面几种问题：1.更新丢失     A、B线程并发修改同一条数据，A修改成功并提交，B回滚了修改，这种情况那么也会把A提交的结果也回滚了。A更新的内容就丢失了。（目前的关系型数据库都不会出现这种问题了）  2.脏读   A、B线程并发修改同一条数据，A修改后未提交，B此时读会就会读到A提交前的数据，A也可能会回滚导致B结">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-25T08:00:19.145Z">
+<meta property="og:updated_time" content="2019-08-02T12:18:40.544Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="Mysql事务隔离级别">
+<meta name="twitter:description" content="Mysql事务隔离级别假如你从Mysql设计师的角度看，在事务处理中可能会出现下面几种问题：1.更新丢失     A、B线程并发修改同一条数据，A修改成功并提交，B回滚了修改，这种情况那么也会把A提交的结果也回滚了。A更新的内容就丢失了。（目前的关系型数据库都不会出现这种问题了）  2.脏读   A、B线程并发修改同一条数据，A修改后未提交，B此时读会就会读到A提交前的数据，A也可能会回滚导致B结">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://47.244.222.0:8888/2019/07/25/hello-world/index.html">
+  <link rel="canonical" href="http://47.244.222.0:8888/2018/11/02/Mysql事务隔离级别/index.html">
   
     <link rel="alternate" href="/atom.xml" title="jiarus" type="application/atom+xml">
   
@@ -41,6 +42,8 @@
   
   
   
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
   
 </head>
 
@@ -209,18 +212,39 @@
 
     
       
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/redis/">redis</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
 
     
       
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/广告系统/">广告系统</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
 
     
       
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/java/" style="font-size: 13px;">java</a> <a href="/tags/kafka/" style="font-size: 13px;">kafka</a> <a href="/tags/mysql/" style="font-size: 14px;">mysql</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/广告系统/" style="font-size: 13px;">广告系统</a> <a href="/tags/计算机组成原理/" style="font-size: 13.5px;">计算机组成原理</a>
+    </div>
+  </div>
+
     
       
   <div class="widget">
     <h3 class="widget-title">Archive</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -232,6 +256,36 @@
     <div class="widget-body">
       <ul class="recent-post-list list-unstyled no-thumbnail">
         
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2019/08/03/redis数据结构实现原理/" class="title">redis五大数据类型实现原理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-08-03T08:13:32.000Z" itemprop="datePublished">2019-08-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/redis/">redis</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/07/30/Redis总结/" class="title">redis六种基本数据结构</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-07-29T18:19:00.000Z" itemprop="datePublished">2019-07-30</time>
+              </p>
+            </div>
+          </li>
+          
           <li>
             
             <div class="item-inner">
@@ -257,7 +311,7 @@
                 <a href="/2019/07/28/计算机性能之CPU篇/" class="title">计算机性能之CPU篇</a>
               </p>
               <p class="item-date">
-                <time datetime="2019-07-27T19:37:10.000Z" itemprop="datePublished">2019-07-28</time>
+                <time datetime="2019-07-27T19:37:00.000Z" itemprop="datePublished">2019-07-28</time>
               </p>
             </div>
           </li>
@@ -269,40 +323,10 @@
                 
               </p>
               <p class="item-title">
-                <a href="/2019/07/27/Kafka版本号总结/" class="title">Kafka版本号总结</a>
+                <a href="/2019/07/27/Kafka版本号总结/" class="title">Kafka版本号</a>
               </p>
               <p class="item-date">
-                <time datetime="2019-07-26T16:30:02.000Z" itemprop="datePublished">2019-07-27</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                
-              </p>
-              <p class="item-title">
-                <a href="/2019/07/26/My-Gallery/" class="title">My Gallery</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2019-07-26T15:35:44.000Z" itemprop="datePublished">2019-07-26</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                
-              </p>
-              <p class="item-title">
-                <a href="/2019/07/25/hello-world/" class="title">Hello World</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2019-07-25T08:00:19.145Z" itemprop="datePublished">2019-07-25</time>
+                <time datetime="2019-07-26T16:30:00.000Z" itemprop="datePublished">2019-07-27</time>
               </p>
             </div>
           </li>
@@ -320,14 +344,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-hello-world" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-Mysql事务隔离级别" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      Mysql事务隔离级别
     </h1>
   
 
@@ -335,41 +359,82 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/07/25/hello-world/" class="article-date">
-	  <time datetime="2019-07-25T08:00:19.145Z" itemprop="datePublished">2019-07-25</time>
+	<a href="/2018/11/02/Mysql事务隔离级别/" class="article-date">
+	  <time datetime="2018-11-02T11:30:00.000Z" itemprop="datePublished">2018-11-02</time>
 	</a>
 </span>
         
-        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/mysql/">mysql</a>
+  </span>
 
         
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/mysql/">mysql</a>
+  </span>
 
-	<span class="article-read hidden-xs">
-    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
-    	<span id="/2019/07/25/hello-world/" class="leancloud_visitors"  data-flag-title="Hello World">
-			<span class="leancloud-visitors-count">0</span>
-		</span>
-    </span>
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/07/25/hello-world/#comments" class="article-comment-link">Comments</a></span>
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/11/02/Mysql事务隔离级别/#comments" class="article-comment-link">Comments</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h5 id="Mysql事务隔离级别"><a href="#Mysql事务隔离级别" class="headerlink" title="Mysql事务隔离级别"></a>Mysql事务隔离级别</h5><p>假如你从Mysql设计师的角度看，在事务处理中可能会出现下面几种问题：<br>1.更新丢失</p>
+<blockquote>
+<p>   <del>A、B线程并发修改同一条数据，A修改成功并提交，B回滚了修改，这种情况那么也会把A提交的结果也回滚了。A更新的内容就丢失了。（目前的关系型数据库都不会出现这种问题了）</del></p>
+</blockquote>
+<p>2.脏读</p>
+<blockquote>
+<p> A、B线程并发修改同一条数据，A修改后未提交，B此时读会就会读到A提交前的数据，A也可能会回滚导致B结果错误。</p>
+</blockquote>
+<p>3.不可重复读</p>
+<blockquote>
+<p>A、B、C线程并发修改同一条数据，AB修改后提交，C可能分别读到三个不同的结果。</p>
+</blockquote>
+<p>4.幻读</p>
+<blockquote>
+<p>A、B线程并发修改同一条数据，A添加或者删除并提交了数据，B在A提交前和提交后读到了不同的行数的数据。</p>
+</blockquote>
+<p>正因为如此，设计师在数据上设计了4中事务隔离级别,数据库默认隔离级别是可重复度,可重复读使用了MVCC实现。而幻读可以使用间隙锁解决。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>读未提交(read-uncommitted)</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>读已提交(read-commmitted)</td>
+<td>NO</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>可重复读(repeatable)</td>
+<td>NO</td>
+<td>NO</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>可串行化(serializable)</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+</tbody></table>
 
       
     </div>
@@ -379,7 +444,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://47.244.222.0:8888/2019/07/25/hello-world/" title="Hello World" target="_blank" rel="external">http://47.244.222.0:8888/2019/07/25/hello-world/</a>
+      <a href="http://47.244.222.0:8888/2018/11/02/Mysql事务隔离级别/" title="Mysql事务隔离级别" target="_blank" rel="external">http://47.244.222.0:8888/2018/11/02/Mysql事务隔离级别/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -412,7 +477,7 @@
     
   <section id="comments">
   	
-      <div id="vcomments"></div>
+           
     
   </section>
 
@@ -426,12 +491,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2019/07/26/My-Gallery/" title="My Gallery"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+      <a href="/2018/11/03/（转）Mysql锁详解（行锁、表锁、意向锁、Gap锁、插入意向锁）/" title="(转)Mysql锁详解（行锁、表锁、意向锁、Gap锁、插入意向锁）"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2018/07/26/测试一下/" title="测试一下"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2018/08/30/Mysql引擎/" title="Mysql存储引擎区别"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
@@ -557,29 +622,23 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
    
     
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
   <script type="text/javascript">
-  var GUEST = ['nick', 'mail', 'link'];
-  var meta = 'nick,mail,link';
-  meta = meta.split(',').filter(function(item) {
-    return GUEST.indexOf(item) > -1;
-  });
-  new Valine({
-    el: '#vcomments',
-    verify: false,
-    notify: false,
-    appId: '',
-    appKey: '',
-    placeholder: 'Just go go',
-    avatar: 'mm',
-    meta: meta,
-    pageSize: '10' || 10,
-    visitor: true
-  });
+  var gitalk = new Gitalk({
+    clientID: 'c8e620c400da4fd98414',
+    clientSecret: '0ec3e154177b1891fc7e45f48c7339d08da2e920',
+    repo: 'https://github.com/jiarus/jiarus.github.io',
+    owner: 'jiarus',
+    admin: ['jiarus'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
   </script>
 
-     
+      
 
 
 

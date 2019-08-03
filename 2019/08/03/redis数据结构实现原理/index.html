@@ -17,20 +17,17 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>Java动态代理实现原理 | jiaru个人博客</title>
-  <meta name="description" content="Java动态代理（dynamic proxy）实现原理应用场景： spring切片、权限、日志、事务管理、Mapper接口等  当你在使用这些spring集成好的功能是否也会疑惑，为什么加个注解，或者按规则创建好文件就可以实现各种功能了呢？ 一、动态代理定义顾名思义，根据源文件方法，动态生成代理类来帮助处理业务。那什么是代理类呢？为什么要生成代理类呢？为什么要动态生成呢？此中缘由请听我慢慢道来。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java动态代理实现原理">
-<meta property="og:url" content="http://47.244.222.0:8888/2019/07/30/java动态代理/index.html">
+  <title>redis五大数据类型实现原理 | fever的个人博客</title>
+  <meta property="og:type" content="article">
+<meta property="og:title" content="redis五大数据类型实现原理">
+<meta property="og:url" content="http://47.244.222.0:8888/2019/08/03/redis数据结构实现原理/index.html">
 <meta property="og:site_name" content="jiarus">
-<meta property="og:description" content="Java动态代理（dynamic proxy）实现原理应用场景： spring切片、权限、日志、事务管理、Mapper接口等  当你在使用这些spring集成好的功能是否也会疑惑，为什么加个注解，或者按规则创建好文件就可以实现各种功能了呢？ 一、动态代理定义顾名思义，根据源文件方法，动态生成代理类来帮助处理业务。那什么是代理类呢？为什么要生成代理类呢？为什么要动态生成呢？此中缘由请听我慢慢道来。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-30T17:43:14.233Z">
+<meta property="og:updated_time" content="2019-08-03T08:13:59.459Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java动态代理实现原理">
-<meta name="twitter:description" content="Java动态代理（dynamic proxy）实现原理应用场景： spring切片、权限、日志、事务管理、Mapper接口等  当你在使用这些spring集成好的功能是否也会疑惑，为什么加个注解，或者按规则创建好文件就可以实现各种功能了呢？ 一、动态代理定义顾名思义，根据源文件方法，动态生成代理类来帮助处理业务。那什么是代理类呢？为什么要生成代理类呢？为什么要动态生成呢？此中缘由请听我慢慢道来。">
+<meta name="twitter:title" content="redis五大数据类型实现原理">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://47.244.222.0:8888/2019/07/30/java动态代理/index.html">
+  <link rel="canonical" href="http://47.244.222.0:8888/2019/08/03/redis数据结构实现原理/index.html">
   
     <link rel="alternate" href="/atom.xml" title="jiarus" type="application/atom+xml">
   
@@ -41,6 +38,8 @@
   
   
   
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
   
 </head>
 
@@ -212,7 +211,7 @@
   <div class="widget">
     <h3 class="widget-title">Categories</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/redis/">redis</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/redis/">redis</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -222,7 +221,7 @@
   <div class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-body">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/广告系统/">广告系统</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -232,7 +231,7 @@
   <div class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/redis/" style="font-size: 13px;">redis</a>
+      <a href="/tags/java/" style="font-size: 13px;">java</a> <a href="/tags/kafka/" style="font-size: 13px;">kafka</a> <a href="/tags/mysql/" style="font-size: 14px;">mysql</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/广告系统/" style="font-size: 13px;">广告系统</a> <a href="/tags/计算机组成原理/" style="font-size: 13.5px;">计算机组成原理</a>
     </div>
   </div>
 
@@ -241,7 +240,7 @@
   <div class="widget">
     <h3 class="widget-title">Archive</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -260,10 +259,10 @@
                 
               </p>
               <p class="item-title">
-                <a href="/2019/07/30/java动态代理/" class="title">Java动态代理实现原理</a>
+                <a href="/2019/08/03/redis数据结构实现原理/" class="title">redis五大数据类型实现原理</a>
               </p>
               <p class="item-date">
-                <time datetime="2019-07-30T15:46:30.000Z" itemprop="datePublished">2019-07-30</time>
+                <time datetime="2019-08-03T08:13:32.000Z" itemprop="datePublished">2019-08-03</time>
               </p>
             </div>
           </li>
@@ -275,7 +274,7 @@
                 <a class="category-link" href="/categories/redis/">redis</a>
               </p>
               <p class="item-title">
-                <a href="/2019/07/30/Redis总结/" class="title">Redis总结</a>
+                <a href="/2019/07/30/Redis总结/" class="title">redis六种基本数据结构</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-07-29T18:19:00.000Z" itemprop="datePublished">2019-07-30</time>
@@ -308,7 +307,7 @@
                 <a href="/2019/07/28/计算机性能之CPU篇/" class="title">计算机性能之CPU篇</a>
               </p>
               <p class="item-date">
-                <time datetime="2019-07-27T19:37:10.000Z" itemprop="datePublished">2019-07-28</time>
+                <time datetime="2019-07-27T19:37:00.000Z" itemprop="datePublished">2019-07-28</time>
               </p>
             </div>
           </li>
@@ -320,10 +319,10 @@
                 
               </p>
               <p class="item-title">
-                <a href="/2019/07/27/Kafka版本号总结/" class="title">Kafka版本号总结</a>
+                <a href="/2019/07/27/Kafka版本号总结/" class="title">Kafka版本号</a>
               </p>
               <p class="item-date">
-                <time datetime="2019-07-26T16:30:02.000Z" itemprop="datePublished">2019-07-27</time>
+                <time datetime="2019-07-26T16:30:00.000Z" itemprop="datePublished">2019-07-27</time>
               </p>
             </div>
           </li>
@@ -341,14 +340,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-java动态代理" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-redis数据结构实现原理" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      Java动态代理实现原理
+      redis五大数据类型实现原理
     </h1>
   
 
@@ -356,8 +355,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2019/07/30/java动态代理/" class="article-date">
-	  <time datetime="2019-07-30T15:46:30.000Z" itemprop="datePublished">2019-07-30</time>
+	<a href="/2019/08/03/redis数据结构实现原理/" class="article-date">
+	  <time datetime="2019-08-03T08:13:32.000Z" itemprop="datePublished">2019-08-03</time>
 	</a>
 </span>
         
@@ -365,54 +364,13 @@
 
         
 
-	<span class="article-read hidden-xs">
-    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
-    	<span id="/2019/07/30/java动态代理/" class="leancloud_visitors"  data-flag-title="Java动态代理实现原理">
-			<span class="leancloud-visitors-count">0</span>
-		</span>
-    </span>
-
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/07/30/java动态代理/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/08/03/redis数据结构实现原理/#comments" class="article-comment-link">Comments</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h5 id="Java动态代理（dynamic-proxy）实现原理"><a href="#Java动态代理（dynamic-proxy）实现原理" class="headerlink" title="Java动态代理（dynamic proxy）实现原理"></a><strong>Java动态代理（dynamic proxy）实现原理</strong></h5><h5 id="应用场景："><a href="#应用场景：" class="headerlink" title="应用场景："></a>应用场景：</h5><blockquote>
-<p>spring切片、权限、日志、事务管理、Mapper接口等</p>
-</blockquote>
-<p>当你在使用这些spring集成好的功能是否也会疑惑，为什么加个注解，或者按规则创建好文件就可以实现各种功能了呢？</p>
-<h5 id="一、动态代理定义"><a href="#一、动态代理定义" class="headerlink" title="一、动态代理定义"></a>一、动态代理定义</h5><p>顾名思义，根据源文件方法，动态生成代理类来帮助处理业务。<br>那什么是代理类呢？为什么要生成代理类呢？为什么要动态生成呢？此中缘由请听我慢慢道来。</p>
-<p>1.比如说你想去买火车票，但火车站很远而且人也多不方便，就可以到就近的火车票代售点购买车票，代售点就是这里所说的代理。</p>
-<pre><code>代理模式就是在访问类目标方法上加了一层业务处理，这层会做一些增强业务，但最终还是会调用目标方法。对外开放的是代理类，而不是原有的类。</code></pre><p>2.在使用Spring框架的AOP特性时，使用的就是使用动态代理。之所以是动态，是在代码运行阶段在内存里生成代理类，而不是生成文件。否则一个项目里那么多的要代理的类，都生成代理类文，件会导致工程庞大冗杂。</p>
-<h5 id="二、动态代理的实现"><a href="#二、动态代理的实现" class="headerlink" title="二、动态代理的实现"></a>二、动态代理的实现</h5><p>动态代理两种实现方式：</p>
-<p>1.JDK动态代理实现</p>
-<ul>
-<li><p>特点</p>
-<p>  1) 使用反射机制</p>
-<p>  2) 实现InvocationHandler，在invoke方法添加业务逻辑，使用Proxy.newProxyInstance产生代理对象</p>
-<p>  3) 代理类和实现类实现同一个接口，代理类有一个实现类的引用，客户调用代理类的方法时，代理类就调用实现类的方法</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ElectricCar car = new ElectricCar();</span><br><span class="line">        ClassLoader classLoader = car.getClass().getClassLoader();</span><br><span class="line">        Class&lt;?&gt;[] interfaces = car.getClass().getInterfaces();</span><br><span class="line">        InvocationHandlerImpl invocationHandler = new InvocationHandlerImpl(car);</span><br><span class="line">        Object proxy = Proxy.newProxyInstance(classLoader, interfaces, invocationHandler);</span><br><span class="line">        Vehicle vehicle = (Vehicle) proxy;</span><br><span class="line">        vehicle.drive();</span><br><span class="line">        Battery battery = (Battery) proxy;</span><br><span class="line">        battery.charge();</span><br></pre></td></tr></table></figure>
-
-<p>2.CGlib动态代理实现</p>
-<ul>
-<li><p>特点</p>
-<p>  1) 使用ASM字节码处理框架</p>
-<blockquote>
-<p><em>ASM 是一个 Java 字节码操控框架。它能够以二进制形式修改已有类或者动态生成类。ASM 可以直接产生二进制 class 文件，也可以在类被加载入 Java 虚拟机之前动态改变类行为。ASM 从类文件中读入信息后，能够改变类行为，分析类信息，甚至能够根据用户要求生成新类</em></p>
-</blockquote>
-<p>  2) 实现 MethodInterceptor方法代理接口，创建代理类</p>
-<p>  3) 通过继承原有方法并重写，代理类是原有类的子类，因此不能代理final修饰的方法</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">       ProxyDriver proxyDriver = new ProxyDriver();</span><br><span class="line">       Enhancer enhancer = new Enhancer();</span><br><span class="line">       enhancer.setSuperclass(Verhicle.class);</span><br><span class="line">       enhancer.setCallback(proxyDriver);</span><br><span class="line">       Verhicle proxy = (Verhicle) enhancer.create();</span><br><span class="line">       proxy.drive();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="三、动态代理的选择"><a href="#三、动态代理的选择" class="headerlink" title="三、动态代理的选择"></a>三、动态代理的选择</h5><blockquote>
-<p>在 Spring Boot 2.0 中，Spring Boot现在默认使用CGLIB动态代理(基于类的动态代理), 包括AOP。 如果需要基于接口的动态代理(JDK基于接口的动态代理) , 需要设置spring.aop.proxy-target-class属性为false。</p>
-</blockquote>
-
+        
       
     </div>
     <div class="article-footer">
@@ -421,7 +379,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://47.244.222.0:8888/2019/07/30/java动态代理/" title="Java动态代理实现原理" target="_blank" rel="external">http://47.244.222.0:8888/2019/07/30/java动态代理/</a>
+      <a href="http://47.244.222.0:8888/2019/08/03/redis数据结构实现原理/" title="redis五大数据类型实现原理" target="_blank" rel="external">http://47.244.222.0:8888/2019/08/03/redis数据结构实现原理/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -454,7 +412,7 @@
     
   <section id="comments">
   	
-      <div id="vcomments"></div>
+           
     
   </section>
 
@@ -469,7 +427,7 @@
     
     
     <li class="next">
-      <a href="/2019/07/30/Redis总结/" title="Redis总结"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2019/07/30/Redis总结/" title="redis六种基本数据结构"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
@@ -595,29 +553,23 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
    
     
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
   <script type="text/javascript">
-  var GUEST = ['nick', 'mail', 'link'];
-  var meta = 'nick,mail,link';
-  meta = meta.split(',').filter(function(item) {
-    return GUEST.indexOf(item) > -1;
-  });
-  new Valine({
-    el: '#vcomments',
-    verify: false,
-    notify: false,
-    appId: '',
-    appKey: '',
-    placeholder: 'Just go go',
-    avatar: 'mm',
-    meta: meta,
-    pageSize: '10' || 10,
-    visitor: true
-  });
+  var gitalk = new Gitalk({
+    clientID: 'c8e620c400da4fd98414',
+    clientSecret: '0ec3e154177b1891fc7e45f48c7339d08da2e920',
+    repo: 'https://github.com/jiarus/jiarus.github.io',
+    owner: 'jiarus',
+    admin: ['jiarus'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
   </script>
 
-     
+      
 
 
 

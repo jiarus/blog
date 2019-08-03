@@ -17,19 +17,22 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>Redis总结 | jiaru个人博客</title>
-  <meta name="description" content="redis基本数据类型sds(simple dynamic string)简单动态字符串 12345struct sdshdr &amp;#123;    int len;        //buf中已占用空间的长度    int free;       //buf中剩余可用空间的长度    char buf[];     //初始化sds分配的数据空间，而且是柔性数组（Flexible array me">
+  <title>redis六种基本数据结构 | fever的个人博客</title>
+  <meta name="description" content="1.sds(simple dynamic string)简单动态字符串 12345struct sdshdr &amp;#123;    int len;        //buf中已占用空间的长度    int free;       //buf中剩余可用空间的长度    char buf[];     //初始化sds分配的数据空间，而且是柔性数组（Flexible array member）&amp;#12">
 <meta name="keywords" content="redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis总结">
+<meta property="og:title" content="redis六种基本数据结构">
 <meta property="og:url" content="http://47.244.222.0:8888/2019/07/30/Redis总结/index.html">
 <meta property="og:site_name" content="jiarus">
-<meta property="og:description" content="redis基本数据类型sds(simple dynamic string)简单动态字符串 12345struct sdshdr &amp;#123;    int len;        //buf中已占用空间的长度    int free;       //buf中剩余可用空间的长度    char buf[];     //初始化sds分配的数据空间，而且是柔性数组（Flexible array me">
+<meta property="og:description" content="1.sds(simple dynamic string)简单动态字符串 12345struct sdshdr &amp;#123;    int len;        //buf中已占用空间的长度    int free;       //buf中剩余可用空间的长度    char buf[];     //初始化sds分配的数据空间，而且是柔性数组（Flexible array member）&amp;#12">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-29T18:49:26.316Z">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g5mjd7yoauj30vq0ni76y.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g5mjza1nfmj30vq0bjwfv.jpg">
+<meta property="og:updated_time" content="2019-08-03T08:14:39.400Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis总结">
-<meta name="twitter:description" content="redis基本数据类型sds(simple dynamic string)简单动态字符串 12345struct sdshdr &amp;#123;    int len;        //buf中已占用空间的长度    int free;       //buf中剩余可用空间的长度    char buf[];     //初始化sds分配的数据空间，而且是柔性数组（Flexible array me">
+<meta name="twitter:title" content="redis六种基本数据结构">
+<meta name="twitter:description" content="1.sds(simple dynamic string)简单动态字符串 12345struct sdshdr &amp;#123;    int len;        //buf中已占用空间的长度    int free;       //buf中剩余可用空间的长度    char buf[];     //初始化sds分配的数据空间，而且是柔性数组（Flexible array member）&amp;#12">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g5mjd7yoauj30vq0ni76y.jpg">
   <!-- Canonical links -->
   <link rel="canonical" href="http://47.244.222.0:8888/2019/07/30/Redis总结/index.html">
   
@@ -42,6 +45,8 @@
   
   
   
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
   
 </head>
 
@@ -213,7 +218,7 @@
   <div class="widget">
     <h3 class="widget-title">Categories</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/redis/">redis</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/redis/">redis</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -223,7 +228,7 @@
   <div class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-body">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/广告系统/">广告系统</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -233,7 +238,7 @@
   <div class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/java/" style="font-size: 13px;">java</a> <a href="/tags/kafka/" style="font-size: 13px;">kafka</a> <a href="/tags/mysql/" style="font-size: 14px;">mysql</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/计算机组成原理/" style="font-size: 13.5px;">计算机组成原理</a>
+      <a href="/tags/java/" style="font-size: 13px;">java</a> <a href="/tags/kafka/" style="font-size: 13px;">kafka</a> <a href="/tags/mysql/" style="font-size: 14px;">mysql</a> <a href="/tags/redis/" style="font-size: 13px;">redis</a> <a href="/tags/广告系统/" style="font-size: 13px;">广告系统</a> <a href="/tags/计算机组成原理/" style="font-size: 13.5px;">计算机组成原理</a>
     </div>
   </div>
 
@@ -242,7 +247,7 @@
   <div class="widget">
     <h3 class="widget-title">Archive</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">3</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -258,10 +263,25 @@
             
             <div class="item-inner">
               <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2019/08/03/redis数据结构实现原理/" class="title">redis五大数据类型实现原理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-08-03T08:13:32.000Z" itemprop="datePublished">2019-08-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
                 <a class="category-link" href="/categories/redis/">redis</a>
               </p>
               <p class="item-title">
-                <a href="/2019/07/30/Redis总结/" class="title">Redis总结</a>
+                <a href="/2019/07/30/Redis总结/" class="title">redis六种基本数据结构</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-07-29T18:19:00.000Z" itemprop="datePublished">2019-07-30</time>
@@ -314,21 +334,6 @@
             </div>
           </li>
           
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                
-              </p>
-              <p class="item-title">
-                <a href="/2018/08/30/Mysql引擎/" class="title">Mysql存储引擎区别</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2018-08-29T16:24:00.000Z" itemprop="datePublished">2018-08-30</time>
-              </p>
-            </div>
-          </li>
-          
       </ul>
     </div>
   </div>
@@ -349,7 +354,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Redis总结
+      redis六种基本数据结构
     </h1>
   
 
@@ -376,20 +381,13 @@
 
         
 
-	<span class="article-read hidden-xs">
-    	<i class="icon icon-eye-fill" aria-hidden="true"></i>
-    	<span id="/2019/07/30/Redis总结/" class="leancloud_visitors"  data-flag-title="Redis总结">
-			<span class="leancloud-visitors-count">0</span>
-		</span>
-    </span>
-
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/07/30/Redis总结/#comments" class="article-comment-link">Comments</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h4 id="redis基本数据类型"><a href="#redis基本数据类型" class="headerlink" title="redis基本数据类型"></a>redis基本数据类型</h4><p><strong>sds(simple dynamic string)简单动态字符串</strong></p>
+        <p><strong>1.sds(simple dynamic string)简单动态字符串</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct sdshdr &#123;</span><br><span class="line">    int len;        //buf中已占用空间的长度</span><br><span class="line">    int free;       //buf中剩余可用空间的长度</span><br><span class="line">    char buf[];     //初始化sds分配的数据空间，而且是柔性数组（Flexible array member）</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>定义：</strong></p>
@@ -407,6 +405,10 @@
 <li>因为表头存放字符串len，可以根据长度直接获取整个字符串</li>
 </ul>
 </li>
+<li>杜绝缓冲区溢出<ul>
+<li>C语言中使用strcat进行字符串拼接，如果没分配足够的空间就会导致缓冲区溢出。Redis会先判断len长度，自动扩容满足空间需要。</li>
+</ul>
+</li>
 <li>兼容C部分函数<ul>
 <li>使用字符串/0结尾与C语言相同</li>
 </ul>
@@ -417,6 +419,74 @@
 </li>
 </ul>
 <hr>
+<p><strong>2.链表</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">typedef  struct listNode&#123;</span><br><span class="line">       //前置节点</span><br><span class="line">       struct listNode *prev;</span><br><span class="line">       //后置节点</span><br><span class="line">       struct listNode *next;</span><br><span class="line">       //节点的值</span><br><span class="line">       void *value;  </span><br><span class="line">&#125;listNode</span><br></pre></td></tr></table></figure>
+
+<p>根据listNode定义了一个双端链表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">typedef struct list&#123;</span><br><span class="line">     //表头节点</span><br><span class="line">     listNode *head;</span><br><span class="line">     //表尾节点</span><br><span class="line">     listNode *tail;</span><br><span class="line">     //链表所包含的节点数量</span><br><span class="line">     unsigned long len;</span><br><span class="line">     //节点值复制函数</span><br><span class="line">     void (*free) (void *ptr);</span><br><span class="line">     //节点值释放函数</span><br><span class="line">     void (*free) (void *ptr);</span><br><span class="line">     //节点值对比函数</span><br><span class="line">     int (*match) (void *ptr,void *key);</span><br><span class="line">&#125;list;</span><br></pre></td></tr></table></figure>
+
+<p>特点：</p>
+<ul>
+<li>双端</li>
+<li>无环</li>
+<li>len记录了链表长度，获取长度O(1)</li>
+<li>ListNode中void类型可以存放不同类型的值</li>
+</ul>
+<hr>
+<p><strong>3.字典</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">typedef struct dictEntry&#123;</span><br><span class="line">     //键</span><br><span class="line">     void *key;</span><br><span class="line">     //值</span><br><span class="line">     union&#123;</span><br><span class="line">          void *val;</span><br><span class="line">          uint64_tu64;</span><br><span class="line">          int64_ts64;</span><br><span class="line">     &#125;v;</span><br><span class="line"> </span><br><span class="line">     //指向下一个哈希表节点，形成链表</span><br><span class="line">     struct dictEntry *next;</span><br><span class="line">&#125;dictEntry</span><br></pre></td></tr></table></figure>
+
+<p>头文件中定义了字典的大小和使用情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">typedef struct dictht&#123;</span><br><span class="line">     //哈希表数组</span><br><span class="line">     dictEntry **table;</span><br><span class="line">     //哈希表大小</span><br><span class="line">     unsigned long size;</span><br><span class="line">     //哈希表大小掩码，用于计算索引值</span><br><span class="line">     //总是等于 size-1</span><br><span class="line">     unsigned long sizemask;</span><br><span class="line">     //该哈希表已有节点的数量</span><br><span class="line">     unsigned long used;</span><br><span class="line"> </span><br><span class="line">&#125;dictht</span><br></pre></td></tr></table></figure>
+
+<p>特点：</p>
+<ul>
+<li><p>哈希算法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#1、使用字典设置的哈希函数，计算键 key 的哈希值</span><br><span class="line">hash = dict-&gt;type-&gt;hashFunction(key);</span><br><span class="line">#2、使用哈希表的sizemask属性和第一步得到的哈希值，计算索引值</span><br><span class="line">index = hash &amp; dict-&gt;ht[x].sizemask;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用链表法解决hash冲突</p>
+</li>
+<li><p>扩容和缩容</p>
+<ul>
+<li>扩容会增加一倍空间，缩容会根据已使用空间缩小一倍，两者都会创建新的哈希表。</li>
+</ul>
+</li>
+<li><p>触发扩容条件</p>
+<ul>
+<li>当没有执行BGSAVE或BGREWRITEAOF命令，且负载因子大于等于1</li>
+<li>当正在执行BGSAVE或BGREWRITEAOF命令，且负载因子大于等于5</li>
+<li>负载因子 = 哈希表已使用空间/哈希表大小</li>
+</ul>
+</li>
+<li><p>渐进式rehash</p>
+<ul>
+<li>哈希表扩容和缩容并不会一次性将数据导入新的哈希表，而是分多次迁移，保证哈希表的可用性。读取时先查老的哈希表再查新的哈希表，插入一定是插入新的哈希表。</li>
+</ul>
+</li>
+</ul>
+<p><strong>4.跳跃表skiplist</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">typedef struct zskiplistNode &#123;</span><br><span class="line">     //层</span><br><span class="line">     struct zskiplistLevel&#123;</span><br><span class="line">           //前进指针</span><br><span class="line">           struct zskiplistNode *forward;</span><br><span class="line">           //跨度</span><br><span class="line">           unsigned int span;</span><br><span class="line">     &#125;level[];</span><br><span class="line"> </span><br><span class="line">     //后退指针</span><br><span class="line">     struct zskiplistNode *backward;</span><br><span class="line">     //分值</span><br><span class="line">     double score;</span><br><span class="line">     //成员对象</span><br><span class="line">     robj *obj;</span><br><span class="line"> </span><br><span class="line">&#125; zskiplistNode</span><br></pre></td></tr></table></figure>
+
+<p>多个节点构成跳跃表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">typedef struct zskiplist&#123;</span><br><span class="line">     //表头节点和表尾节点</span><br><span class="line">     structz skiplistNode *header, *tail;</span><br><span class="line">     //表中节点的数量</span><br><span class="line">     unsigned long length;</span><br><span class="line">     //表中层数最大的节点的层数</span><br><span class="line">     int level;</span><br><span class="line"> </span><br><span class="line">&#125;zskiplist;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g5mjd7yoauj30vq0ni76y.jpg" alt><br>特点：</p>
+<ul>
+<li>由多层结构组成</li>
+<li>每层都是有序的</li>
+<li>上层节点有下层节点的指针，<del>只对应一个，这个是b+Tree有所不同</del></li>
+<li>底层包含所有的数据</li>
+</ul>
+<p><strong>5.整数集合</strong></p>
+<p>用来保存整数集合，可以存放uint16,uint32,uint64类型,可以保证不会重复</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">typedef struct intset&#123;</span><br><span class="line">     //编码方式</span><br><span class="line">     uint32_t encoding;</span><br><span class="line">     //集合包含的元素数量</span><br><span class="line">     uint32_t length;</span><br><span class="line">     //保存元素的数组</span><br><span class="line">     int8_t contents[];</span><br><span class="line"> </span><br><span class="line">&#125;intset;</span><br></pre></td></tr></table></figure>
+
+<p><strong>6.压缩列表(ziplist)</strong></p>
+<p>特点：</p>
+<ul>
+<li>压缩列表并不是对数据做了<code>压缩</code>，而是在像数组一样在连续的内存空间存放数据。</li>
+<li>数组必须要每个数据大小都相同,按最大长度的数据作为元素大小。压缩列表可以存放不同大小的数据并且不浪费空间，还有个好处是可以存放不同类型的数据。<br><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g5mjza1nfmj30vq0bjwfv.jpg" alt></li>
+</ul>
 
       
     </div>
@@ -426,7 +496,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://47.244.222.0:8888/2019/07/30/Redis总结/" title="Redis总结" target="_blank" rel="external">http://47.244.222.0:8888/2019/07/30/Redis总结/</a>
+      <a href="http://47.244.222.0:8888/2019/07/30/Redis总结/" title="redis六种基本数据结构" target="_blank" rel="external">http://47.244.222.0:8888/2019/07/30/Redis总结/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -459,7 +529,7 @@
     
   <section id="comments">
   	
-      <div id="vcomments"></div>
+           
     
   </section>
 
@@ -471,6 +541,10 @@
   <div class="bar-inner">
   
   <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/08/03/redis数据结构实现原理/" title="redis五大数据类型实现原理"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
     
     
     <li class="next">
@@ -600,29 +674,23 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
    
     
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
   <script type="text/javascript">
-  var GUEST = ['nick', 'mail', 'link'];
-  var meta = 'nick,mail,link';
-  meta = meta.split(',').filter(function(item) {
-    return GUEST.indexOf(item) > -1;
-  });
-  new Valine({
-    el: '#vcomments',
-    verify: false,
-    notify: false,
-    appId: '',
-    appKey: '',
-    placeholder: 'Just go go',
-    avatar: 'mm',
-    meta: meta,
-    pageSize: '10' || 10,
-    visitor: true
-  });
+  var gitalk = new Gitalk({
+    clientID: 'c8e620c400da4fd98414',
+    clientSecret: '0ec3e154177b1891fc7e45f48c7339d08da2e920',
+    repo: 'https://github.com/jiarus/jiarus.github.io',
+    owner: 'jiarus',
+    admin: ['jiarus'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
   </script>
 
-     
+      
 
 
 
