@@ -17,16 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>Archive: 2018/7 | fever的个人博客</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="jiarus">
-<meta property="og:url" content="https://jiarus.github.io/archives/2018/07/index.html">
+  <title>Kafka参数配置(broker、topic、jvm) | fever的个人博客</title>
+  <meta name="description" content="broker中有大概200多个参数，挑选几个重要的记录下来： 1234567log.dirs = /data/kafka1,/data/kafka2,/data/kafka3 #建议每个目录都挂在不同的硬盘上，提高读写性能，也能够支持故障转移zookeeper.connect = zk1:2181,zk2:2181,zk3:2181/kafka1 #最后添加斜杠组名，使zk支持管理多个kafka集">
+<meta name="keywords" content="kafka">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kafka参数配置(broker、topic、jvm)">
+<meta property="og:url" content="https://jiarus.github.io/2018/09/25/Kafka参数配置-broker、topic、jvm/index.html">
 <meta property="og:site_name" content="jiarus">
+<meta property="og:description" content="broker中有大概200多个参数，挑选几个重要的记录下来： 1234567log.dirs = /data/kafka1,/data/kafka2,/data/kafka3 #建议每个目录都挂在不同的硬盘上，提高读写性能，也能够支持故障转移zookeeper.connect = zk1:2181,zk2:2181,zk3:2181/kafka1 #最后添加斜杠组名，使zk支持管理多个kafka集">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-04T19:59:37.770Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jiarus">
+<meta name="twitter:title" content="Kafka参数配置(broker、topic、jvm)">
+<meta name="twitter:description" content="broker中有大概200多个参数，挑选几个重要的记录下来： 1234567log.dirs = /data/kafka1,/data/kafka2,/data/kafka3 #建议每个目录都挂在不同的硬盘上，提高读写性能，也能够支持故障转移zookeeper.connect = zk1:2181,zk2:2181,zk3:2181/kafka1 #最后添加斜杠组名，使zk支持管理多个kafka集">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://jiarus.github.io/archives/2018/07/index.html">
+  <link rel="canonical" href="https://jiarus.github.io/2018/09/25/Kafka参数配置-broker、topic、jvm/index.html">
   
     <link rel="alternate" href="/atom.xml" title="jiarus" type="application/atom+xml">
   
@@ -338,88 +343,200 @@
   
   
 <main class="main" role="main">
-  	<article class="content article article-archives article-type-list" itemscope="">
-	    <header class="article-header">
-	      <h1 itemprop="title">Archive: 2018/7</h1>
-	      <p class="text-muted">Total 5 articles</p>
-	    </header>
-	    <div class="article-body">
-	      
+  <div class="content">
+  <article id="post-Kafka参数配置-broker、topic、jvm" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
   
+    <h1 class="article-title" itemprop="name">
+      Kafka参数配置(broker、topic、jvm)
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2018/09/25/Kafka参数配置-broker、topic、jvm/" class="article-date">
+	  <time datetime="2018-09-25T05:58:00.000Z" itemprop="datePublished">2018-09-25</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/kafka/">kafka</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/kafka/">kafka</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/09/25/Kafka参数配置-broker、topic、jvm/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>broker中有大概200多个参数，挑选几个重要的记录下来：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">log.dirs = /data/kafka1,/data/kafka2,/data/kafka3 #建议每个目录都挂在不同的硬盘上，提高读写性能，也能够支持故障转移</span><br><span class="line"></span><br><span class="line">zookeeper.connect = zk1:2181,zk2:2181,zk3:2181/kafka1 #最后添加斜杠组名，使zk支持管理多个kafka集群。</span><br><span class="line"></span><br><span class="line">listeners:#PLAINTEXT 表示明文传输、SSL表示使用SSL或TLS加密传输</span><br><span class="line">advertised.listenners:#表明该broker对外发布</span><br><span class="line">#都使用主机名，不建议使用IP，因为Broker源代码中使用的是主机名，IP可能导致不能访问。</span><br></pre></td></tr></table></figure>
+
+<p>Topic</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">auto.create.topics.enable：false #是否允许自动创建Topic,建议设置为false，不是设置有可能代码中写错了名称就自动创建错误的Topic。</span><br><span class="line">unclean.leader.election.enable:false #是否允许Unclean Leader选举,不允许数据不完整的副本竞选Leader</span><br><span class="line">auto.leader.rebalance.enable：false #是定期选举Leader，没有性能收益。</span><br><span class="line">retention.ms:规定Topic中消息存放的时间，覆盖Broker中的留存时间，默认7天</span><br><span class="line">retention.bytes:规定Topic中消息的大小，覆盖Broker中的存放数据大小，默认-1</span><br></pre></td></tr></table></figure>
+
+<p>数据存放</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">log.retention.&#123;hour|minutes|ms)#设置Broker数据留存的时间，一般设置hour</span><br><span class="line">log.retention.byte#设置Broker存放数据的大小，-1不限制</span><br><span class="line">message.max.bytes#设置允许单条message的大小，默认1M，建议改成5M</span><br></pre></td></tr></table></figure>
+
+<p>JVM</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">堆大小默认1G，建议手动修改为6G,因为KakfaBroker与客户端交互会在堆上创建大量的bytebuffer</span><br><span class="line">KAFKA_HEAP_OPTS：指定堆大小</span><br><span class="line">垃圾回收器，Java8设置为G1回收。</span><br><span class="line">KAFKA_JVM_PERFORMANCE_OPTS：指定垃圾回收器</span><br><span class="line">$&gt; export KAFKA_HEAP_OPTS=--Xms6g  --Xmx6g</span><br><span class="line">$&gt; export  KAFKA_JVM_PERFORMANCE_OPTS= -server -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:+ExplicitGCInvokesConcurrent -Djava.awt.headless=true</span><br><span class="line">$&gt; bin/kafka-server-start.sh config/server.properties</span><br></pre></td></tr></table></figure>
+
+<p>操作系统</p>
+<ul>
+<li><p>文件描述符限制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ulimit -n 1000000</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文件系统类型</p>
+<p>  这里的文件系统类型指的是如ext3,ext4或XFS日志型文件系统，生产环境最好使用XFS类型。</p>
+</li>
+<li><p>Swappiness</p>
+<p>  按照尽量少使用交换区的原则设置<br>  <code>vm.swappiness=1</code></p>
+</li>
+<li><p>提交时间<br>  kafka向页缓存（Page cache）写入数据即视为写成功来，并不是等落盘才算成功。页缓存会定时刷到文件中，间隔默认5秒可以适当增加这个间隔。kafka软件层做了多副本冗余，不用太担心宕机丢失数据。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://jiarus.github.io/2018/09/25/Kafka参数配置-broker、topic、jvm/" title="Kafka参数配置(broker、topic、jvm)" target="_blank" rel="external">https://jiarus.github.io/2018/09/25/Kafka参数配置-broker、topic、jvm/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/jiarus" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/jiarus" target="_blank"><span class="text-dark">fever</span><small class="ml-1x">Java Developer</small></a></h3>
+        <div>广告系统引擎开发</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
   
     
+  <section id="comments">
+  	
+           
     
-      
-      
-      <section class="panel panel-default b-no">
-        <div class="panel-heading" role="tab">
-          <h3 class="panel-title">
-            <a data-toggle="collapse" href="#collapse2018" aria-expanded="true">
-              <i class="icon icon-calendar-plus text-active"></i><i class="icon icon-calendar-minus text"></i>
-              2018
-            </a>
-            <!-- <a href="/archives/2018" class="archive-year">2018</a> -->
-          </h3>
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2018/11/02/Mysql事务隔离级别/" title="Mysql事务隔离级别"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2018/09/20/Kafka线上部署方案/" title="Kafka线上部署方案"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/Alipay.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechat.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div id="collapse2018" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading2018">
-        <div class="panel-body">
-          <div class="collection">
-    
-    
-<a href="/2018/07/30/java动态代理/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-07-30T15:46:00.000Z" itemprop="datePublished">2018-07-30</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Java动态代理实现原理
-</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 
-  
-    
-    
-    
-<a href="/2018/07/30/Redis总结/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-07-30T04:19:00.000Z" itemprop="datePublished">2018-07-30</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> redis六种基本数据结构
-</a>
 
-
-  
-    
-    
-    
-<a href="/2018/07/21/Mysql日志/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-07-21T14:34:00.000Z" itemprop="datePublished">2018-07-21</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Mysql日志
-</a>
-
-
-  
-    
-    
-    
-<a href="/2018/07/20/Mysql不同发行版区别及升级步骤/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-07-20T09:50:00.000Z" itemprop="datePublished">2018-07-20</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Mysql不同发行版特性及升级步骤
-</a>
-
-
-  
-    
-    
-    
-<a href="/2018/07/03/redis数据结构实现原理/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-07-03T08:13:00.000Z" itemprop="datePublished">2018-07-03</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> redis五大数据类型实现原理
-</a>
-
-
-  
-  
-    </div></div></div></section>
-  
-
-	    </div>
-  	</article>
-  	 	
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -472,6 +589,31 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+   
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: 'c8e620c400da4fd98414',
+    clientSecret: '0ec3e154177b1891fc7e45f48c7339d08da2e920',
+    repo: 'blog-commets',
+    owner: 'jiarus',
+    admin: ['jiarus'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
 
 
 

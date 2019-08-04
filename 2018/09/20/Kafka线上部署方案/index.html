@@ -17,16 +17,25 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>Archive: 2018/7 | fever的个人博客</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="jiarus">
-<meta property="og:url" content="https://jiarus.github.io/archives/2018/07/index.html">
+  <title>Kafka线上部署方案 | fever的个人博客</title>
+  <meta name="description" content="1.操作系统选择 Linux/Windows/MacOS 三种操作系统kafka最好的搭档还是Linux，原因有几个方面 a.I/O模型 kafka客户端的I/O使用Java的Selector实现，Selector在Linux上的实现机制是epoll，在Windows上是select。性能上不如Linux。b.数据传输效率 Linux支持零拷贝（ZeroCopy）,而Windows直到Java 8">
+<meta name="keywords" content="kafka">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kafka线上部署方案">
+<meta property="og:url" content="https://jiarus.github.io/2018/09/20/Kafka线上部署方案/index.html">
 <meta property="og:site_name" content="jiarus">
+<meta property="og:description" content="1.操作系统选择 Linux/Windows/MacOS 三种操作系统kafka最好的搭档还是Linux，原因有几个方面 a.I/O模型 kafka客户端的I/O使用Java的Selector实现，Selector在Linux上的实现机制是epoll，在Windows上是select。性能上不如Linux。b.数据传输效率 Linux支持零拷贝（ZeroCopy）,而Windows直到Java 8">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g5o833am0fj30e506mwei.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g5o87ioioij31240dqwjb.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g5o8a860urj312l0u047d.jpg">
+<meta property="og:updated_time" content="2019-08-04T18:56:18.799Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jiarus">
+<meta name="twitter:title" content="Kafka线上部署方案">
+<meta name="twitter:description" content="1.操作系统选择 Linux/Windows/MacOS 三种操作系统kafka最好的搭档还是Linux，原因有几个方面 a.I/O模型 kafka客户端的I/O使用Java的Selector实现，Selector在Linux上的实现机制是epoll，在Windows上是select。性能上不如Linux。b.数据传输效率 Linux支持零拷贝（ZeroCopy）,而Windows直到Java 8">
+<meta name="twitter:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g5o833am0fj30e506mwei.jpg">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://jiarus.github.io/archives/2018/07/index.html">
+  <link rel="canonical" href="https://jiarus.github.io/2018/09/20/Kafka线上部署方案/index.html">
   
     <link rel="alternate" href="/atom.xml" title="jiarus" type="application/atom+xml">
   
@@ -338,88 +347,185 @@
   
   
 <main class="main" role="main">
-  	<article class="content article article-archives article-type-list" itemscope="">
-	    <header class="article-header">
-	      <h1 itemprop="title">Archive: 2018/7</h1>
-	      <p class="text-muted">Total 5 articles</p>
-	    </header>
-	    <div class="article-body">
-	      
+  <div class="content">
+  <article id="post-Kafka线上部署方案" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
   
+    <h1 class="article-title" itemprop="name">
+      Kafka线上部署方案
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2018/09/20/Kafka线上部署方案/" class="article-date">
+	  <time datetime="2018-09-20T04:33:00.000Z" itemprop="datePublished">2018-09-20</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/kafka/">kafka</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/kafka/">kafka</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/09/20/Kafka线上部署方案/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p><strong>1.操作系统选择</strong></p>
+<p>Linux/Windows/MacOS 三种操作系统kafka最好的搭档还是Linux，原因有几个方面</p>
+<p>a.I/O模型</p>
+<pre><code>kafka客户端的I/O使用Java的Selector实现，Selector在Linux上的实现机制是epoll，在Windows上是select。性能上不如Linux。</code></pre><p>b.数据传输效率</p>
+<pre><code>Linux支持零拷贝（ZeroCopy）,而Windows直到Java 8的60更新版本
+才支持这个功能。
+零拷贝:把内核空间地址和用户空间的虚拟地址映射到同一个物理地址，这样DMA就可以填充对内核和用户空间进程同时可见的缓冲区了。省去了内核与用户空间的往来拷贝，java也利用操作系统的此特性来提升性能。</code></pre><p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5o833am0fj30e506mwei.jpg" alt></p>
+<p>c.社区的支持度</p>
+<pre><code>Kafka官方基本上不修复Windows存在的Bug</code></pre><p><strong>2.磁盘选择</strong></p>
+<pre><code>kafka基本上是顺序读写，机械硬盘就可以支持，不需要固态硬盘</code></pre><p><strong>3.磁盘容量</strong><br><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g5o87ioioij31240dqwjb.jpg" alt="x"></p>
+<p><strong>4.集群数量</strong><br><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g5o8a860urj312l0u047d.jpg" alt="x"></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://jiarus.github.io/2018/09/20/Kafka线上部署方案/" title="Kafka线上部署方案" target="_blank" rel="external">https://jiarus.github.io/2018/09/20/Kafka线上部署方案/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/jiarus" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/jiarus" target="_blank"><span class="text-dark">fever</span><small class="ml-1x">Java Developer</small></a></h3>
+        <div>广告系统引擎开发</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
   
     
+  <section id="comments">
+  	
+           
     
-      
-      
-      <section class="panel panel-default b-no">
-        <div class="panel-heading" role="tab">
-          <h3 class="panel-title">
-            <a data-toggle="collapse" href="#collapse2018" aria-expanded="true">
-              <i class="icon icon-calendar-plus text-active"></i><i class="icon icon-calendar-minus text"></i>
-              2018
-            </a>
-            <!-- <a href="/archives/2018" class="archive-year">2018</a> -->
-          </h3>
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2018/09/25/Kafka参数配置-broker、topic、jvm/" title="Kafka参数配置(broker、topic、jvm)"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2018/09/14/Redis缓存失效的问题/" title="Redis缓存失效引发的问题"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/Alipay.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechat.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div id="collapse2018" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading2018">
-        <div class="panel-body">
-          <div class="collection">
-    
-    
-<a href="/2018/07/30/java动态代理/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-07-30T15:46:00.000Z" itemprop="datePublished">2018-07-30</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Java动态代理实现原理
-</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 
-  
-    
-    
-    
-<a href="/2018/07/30/Redis总结/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-07-30T04:19:00.000Z" itemprop="datePublished">2018-07-30</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> redis六种基本数据结构
-</a>
 
-
-  
-    
-    
-    
-<a href="/2018/07/21/Mysql日志/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-07-21T14:34:00.000Z" itemprop="datePublished">2018-07-21</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Mysql日志
-</a>
-
-
-  
-    
-    
-    
-<a href="/2018/07/20/Mysql不同发行版区别及升级步骤/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-07-20T09:50:00.000Z" itemprop="datePublished">2018-07-20</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Mysql不同发行版特性及升级步骤
-</a>
-
-
-  
-    
-    
-    
-<a href="/2018/07/03/redis数据结构实现原理/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-07-03T08:13:00.000Z" itemprop="datePublished">2018-07-03</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> redis五大数据类型实现原理
-</a>
-
-
-  
-  
-    </div></div></div></section>
-  
-
-	    </div>
-  	</article>
-  	 	
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -472,6 +578,31 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+   
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: 'c8e620c400da4fd98414',
+    clientSecret: '0ec3e154177b1891fc7e45f48c7339d08da2e920',
+    repo: 'blog-commets',
+    owner: 'jiarus',
+    admin: ['jiarus'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
 
 
 

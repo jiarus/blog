@@ -17,16 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>Archive: 2018/7 | fever的个人博客</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="jiarus">
-<meta property="og:url" content="https://jiarus.github.io/archives/2018/07/index.html">
+  <title>redis五大数据类型实现原理 | fever的个人博客</title>
+  <meta name="description" content="0.redisObject 12345678910111213typedef struct redisObject&amp;#123;     //类型     unsigned type:4;     //编码     unsigned encoding:4;     //指向底层数据结构的指针     void *ptr;     //引用计数     int refcount;     //记录最后">
+<meta name="keywords" content="redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis五大数据类型实现原理">
+<meta property="og:url" content="https://jiarus.github.io/2018/07/03/redis数据结构实现原理/index.html">
 <meta property="og:site_name" content="jiarus">
+<meta property="og:description" content="0.redisObject 12345678910111213typedef struct redisObject&amp;#123;     //类型     unsigned type:4;     //编码     unsigned encoding:4;     //指向底层数据结构的指针     void *ptr;     //引用计数     int refcount;     //记录最后">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-03T14:55:18.369Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jiarus">
+<meta name="twitter:title" content="redis五大数据类型实现原理">
+<meta name="twitter:description" content="0.redisObject 12345678910111213typedef struct redisObject&amp;#123;     //类型     unsigned type:4;     //编码     unsigned encoding:4;     //指向底层数据结构的指针     void *ptr;     //引用计数     int refcount;     //记录最后">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://jiarus.github.io/archives/2018/07/index.html">
+  <link rel="canonical" href="https://jiarus.github.io/2018/07/03/redis数据结构实现原理/index.html">
   
     <link rel="alternate" href="/atom.xml" title="jiarus" type="application/atom+xml">
   
@@ -338,88 +343,216 @@
   
   
 <main class="main" role="main">
-  	<article class="content article article-archives article-type-list" itemscope="">
-	    <header class="article-header">
-	      <h1 itemprop="title">Archive: 2018/7</h1>
-	      <p class="text-muted">Total 5 articles</p>
-	    </header>
-	    <div class="article-body">
-	      
+  <div class="content">
+  <article id="post-redis数据结构实现原理" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
   
+    <h1 class="article-title" itemprop="name">
+      redis五大数据类型实现原理
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2018/07/03/redis数据结构实现原理/" class="article-date">
+	  <time datetime="2018-07-03T08:13:00.000Z" itemprop="datePublished">2018-07-03</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/redis/">redis</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/redis/">redis</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/07/03/redis数据结构实现原理/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>0.<strong>redisObject</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">typedef struct redisObject&#123;</span><br><span class="line">     //类型</span><br><span class="line">     unsigned type:4;</span><br><span class="line">     //编码</span><br><span class="line">     unsigned encoding:4;</span><br><span class="line">     //指向底层数据结构的指针</span><br><span class="line">     void *ptr;</span><br><span class="line">     //引用计数</span><br><span class="line">     int refcount;</span><br><span class="line">     //记录最后一次被程序访问的时间</span><br><span class="line">     unsigned lru:22;</span><br><span class="line"> </span><br><span class="line">&#125;robj</span><br></pre></td></tr></table></figure>
+
+<p>redis的key都是字符串类型，value是redis的包装类型,以下五种类型表现形式都是一个redisObject。</p>
+<ul>
+<li>type类型来区分是哪种具体类型。<br><code>type key</code></li>
+<li>encoding用来表明该类型使用哪种编码，而每种类型至少使用了两种编码。<br><code>OBJECT ENCODING  key</code></li>
+</ul>
+<p><strong>1.字符串</strong></p>
+<pre><code>a)编码类型
+    int,embstr,raw三种编码
+    int保存可用long表示的无符号整数值
+    embstr表示长度小于44的短字符串
+    raw表示长度大于44的长字符串
+
+    embstr和raw的区别：
+      1.embstr由于是短字符串，redis做了优化，只分配一次空间redisObject和sds是连续的，而raw是分开的。添加和删除时候embstr都比raw少操作一次空间。
+b)编码转换
+   1.embstr由于没有提供修改方法，需要升级为raw才能修改，修改完即使小于44字节还是会变成raw编码。
+   2.如果是float类型保存也是按字符串保存的，当需要时候才转换为float。
+   3.当int编码保存的不再是整数，或超过long的长度就会转换为raw编码。</code></pre><p><strong>2.列表</strong></p>
+<p>存放简单字符串sds的链表结构</p>
+<pre><code>a)编码类型
+    压缩链表（ziplist）和双端链表（linklist）
+b)编码转换
+    当满足字符串长度小于64字节并且字符串数量小于512个俩个条件时，使用ziplist,否则使用linklist。</code></pre><p><strong>3.哈希</strong></p>
+<p>值是字符串，value是键值对</p>
+<pre><code>a)编码类型
+    压缩链表（ziplist）和哈希表(hashtable)
+    哈希表底层使用字典类型结构
+b)编码转换
+    和列表一样，当满足字符串长度小于64字节并且字符串数量小于512个俩个条件时，使用ziplist,否则使用hashtable。</code></pre><p><strong>4.集合</strong><br>    不重复且无序的列表</p>
+<pre><code>a)编码类型
+    intset和哈希表（hashtable）
+    哈希表存放的只有key，value都指向null.类似与java中的HashSet，使用HashMap实现，value都是null。
+b)编码转换
+    当存放的所有元素都是整数且不超过512个使用intset，否则使用哈希表。</code></pre><p><strong>5.有序集合</strong><br>    不重复且有序的列表</p>
+<pre><code>a)编码类型
+    压缩链表（ziplist）和 （字典+跳表）
+    当使用压缩链表实现时，值和分数是相邻存放，前面是值，后面跟的分数，值之间是从小到大有序排列。
+    当使用字典+跳表实现时，执行精确查找使用字典，范围查找使用跳表，他们二者共享同一份数据。
+b)编码转换
+    当存放的元素长度小于64且个数小于128时使用压缩链表，否则使用字典+跳表实现。</code></pre>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://jiarus.github.io/2018/07/03/redis数据结构实现原理/" title="redis五大数据类型实现原理" target="_blank" rel="external">https://jiarus.github.io/2018/07/03/redis数据结构实现原理/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/jiarus" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/jiarus" target="_blank"><span class="text-dark">fever</span><small class="ml-1x">Java Developer</small></a></h3>
+        <div>广告系统引擎开发</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
   
     
+  <section id="comments">
+  	
+           
     
-      
-      
-      <section class="panel panel-default b-no">
-        <div class="panel-heading" role="tab">
-          <h3 class="panel-title">
-            <a data-toggle="collapse" href="#collapse2018" aria-expanded="true">
-              <i class="icon icon-calendar-plus text-active"></i><i class="icon icon-calendar-minus text"></i>
-              2018
-            </a>
-            <!-- <a href="/archives/2018" class="archive-year">2018</a> -->
-          </h3>
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2018/07/20/Mysql不同发行版区别及升级步骤/" title="Mysql不同发行版特性及升级步骤"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2018/05/09/DSP系统架构/" title="DSP系统架构"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/Alipay.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechat.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div id="collapse2018" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading2018">
-        <div class="panel-body">
-          <div class="collection">
-    
-    
-<a href="/2018/07/30/java动态代理/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-07-30T15:46:00.000Z" itemprop="datePublished">2018-07-30</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Java动态代理实现原理
-</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 
-  
-    
-    
-    
-<a href="/2018/07/30/Redis总结/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-07-30T04:19:00.000Z" itemprop="datePublished">2018-07-30</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> redis六种基本数据结构
-</a>
 
-
-  
-    
-    
-    
-<a href="/2018/07/21/Mysql日志/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-07-21T14:34:00.000Z" itemprop="datePublished">2018-07-21</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Mysql日志
-</a>
-
-
-  
-    
-    
-    
-<a href="/2018/07/20/Mysql不同发行版区别及升级步骤/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-07-20T09:50:00.000Z" itemprop="datePublished">2018-07-20</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Mysql不同发行版特性及升级步骤
-</a>
-
-
-  
-    
-    
-    
-<a href="/2018/07/03/redis数据结构实现原理/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-07-03T08:13:00.000Z" itemprop="datePublished">2018-07-03</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> redis五大数据类型实现原理
-</a>
-
-
-  
-  
-    </div></div></div></section>
-  
-
-	    </div>
-  	</article>
-  	 	
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -472,6 +605,31 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+   
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: 'c8e620c400da4fd98414',
+    clientSecret: '0ec3e154177b1891fc7e45f48c7339d08da2e920',
+    repo: 'blog-commets',
+    owner: 'jiarus',
+    admin: ['jiarus'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
 
 
 
