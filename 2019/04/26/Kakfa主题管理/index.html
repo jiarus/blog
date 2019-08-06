@@ -26,10 +26,12 @@
 <meta property="og:site_name" content="jiarus">
 <meta property="og:description" content="创建Topic 1bin/kafka-topics.sh --bootstrap-server broker_host:port --create --topic my_topic_name  --partitions 1 --replication-factor 1  kafka2.2之后推荐使用--bootstrap-server代替--zookeeper，因为通过前者创建可以控制权限，只和B">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-06T03:34:38.865Z">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g5qlb5wdfxj31380d0aca.jpg">
+<meta property="og:updated_time" content="2019-08-06T19:57:16.706Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kakfa主题管理">
 <meta name="twitter:description" content="创建Topic 1bin/kafka-topics.sh --bootstrap-server broker_host:port --create --topic my_topic_name  --partitions 1 --replication-factor 1  kafka2.2之后推荐使用--bootstrap-server代替--zookeeper，因为通过前者创建可以控制权限，只和B">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g5qlb5wdfxj31380d0aca.jpg">
   <!-- Canonical links -->
   <link rel="canonical" href="https://jiarus.github.io/2019/04/26/Kakfa主题管理/index.html">
   
@@ -204,7 +206,7 @@
     <div class="widget-body">
         <div id="board">
             <div class="content">
-                <p>欢迎交流与分享经验!</p>
+                <p>Stay hungry,Stay foolish</p>
             </div>
         </div>
     </div>
@@ -400,7 +402,7 @@
 <p><strong>增加Topic分区</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --bootstrap-server broker_host:port --alter --topic &lt;topic_name&gt; --partitions &lt; 新分区数 &gt;</span><br></pre></td></tr></table></figure>
 
-<p>（kafka不允许增加分区。因为多个broker节点都冗余有分区的数据，减少分区数需要操作多个broker且需要迁移该分区数据到其他分区。如果是按消息key hash选的分区，那么迁移就不知道迁到哪里了，因为只有业务代码可以决定放在哪。不知道我想的对不对）</p>
+<p>kafka不允许增加分区。因为多个broker节点都冗余有分区的数据，减少分区数需要操作多个broker且需要迁移该分区数据到其他分区。如果是按消息key hash选的分区，那么迁移就不知道迁到哪里了，因为只有业务代码可以决定放在哪。已经被大佬肯定了，应该没错。:)<br><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g5qlb5wdfxj31380d0aca.jpg" alt></p>
 <p><strong>修改Topic参数</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-configs.sh --zookeeper zookeeper_host:port --entity-type topics --entity-name &lt;topic_name&gt; --alter --add-config max.message.bytes=10485760</span><br></pre></td></tr></table></figure>
 

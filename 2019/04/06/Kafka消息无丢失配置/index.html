@@ -18,18 +18,18 @@
   
   
   <title>Kafka消息无丢失/重复消费配置 | fever的个人博客</title>
-  <meta name="description" content="消息丢失/重复消费的场景： 提交消息失败  使用producer.send(msg)提交消息。因为没有回调结果，这时可能消息broker因为网络波动并没有收到，此时消息就丢失了。所以建议使用有回调函数的producer.send(msg,callback)。   消费者丢失/重复消费消息  offset超前，超过了HighWater（真实已消费的位置）。再次消费会从offset位置开始，中间的消息">
+  <meta name="description" content="消息丢失/重复消费的场景： 提交消息失败  使用producer.send(msg)提交消息。因为没有回调结果，这时可能消息broker因为网络波动并没有收到，此时消息就丢失了。所以建议使用有回调函数的producer.send(msg,callback)。   Broker端丢失消息  消费者丢失/重复消费消息  offset超前，超过了HighWater（真实已消费的位置）。再次消费会从off">
 <meta name="keywords" content="kafka">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kafka消息无丢失&#x2F;重复消费配置">
 <meta property="og:url" content="https://jiarus.github.io/2019/04/06/Kafka消息无丢失配置/index.html">
 <meta property="og:site_name" content="jiarus">
-<meta property="og:description" content="消息丢失/重复消费的场景： 提交消息失败  使用producer.send(msg)提交消息。因为没有回调结果，这时可能消息broker因为网络波动并没有收到，此时消息就丢失了。所以建议使用有回调函数的producer.send(msg,callback)。   消费者丢失/重复消费消息  offset超前，超过了HighWater（真实已消费的位置）。再次消费会从offset位置开始，中间的消息">
+<meta property="og:description" content="消息丢失/重复消费的场景： 提交消息失败  使用producer.send(msg)提交消息。因为没有回调结果，这时可能消息broker因为网络波动并没有收到，此时消息就丢失了。所以建议使用有回调函数的producer.send(msg,callback)。   Broker端丢失消息  消费者丢失/重复消费消息  offset超前，超过了HighWater（真实已消费的位置）。再次消费会从off">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-06T19:17:18.369Z">
+<meta property="og:updated_time" content="2019-08-06T19:40:45.505Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kafka消息无丢失&#x2F;重复消费配置">
-<meta name="twitter:description" content="消息丢失/重复消费的场景： 提交消息失败  使用producer.send(msg)提交消息。因为没有回调结果，这时可能消息broker因为网络波动并没有收到，此时消息就丢失了。所以建议使用有回调函数的producer.send(msg,callback)。   消费者丢失/重复消费消息  offset超前，超过了HighWater（真实已消费的位置）。再次消费会从offset位置开始，中间的消息">
+<meta name="twitter:description" content="消息丢失/重复消费的场景： 提交消息失败  使用producer.send(msg)提交消息。因为没有回调结果，这时可能消息broker因为网络波动并没有收到，此时消息就丢失了。所以建议使用有回调函数的producer.send(msg,callback)。   Broker端丢失消息  消费者丢失/重复消费消息  offset超前，超过了HighWater（真实已消费的位置）。再次消费会从off">
   <!-- Canonical links -->
   <link rel="canonical" href="https://jiarus.github.io/2019/04/06/Kafka消息无丢失配置/index.html">
   
@@ -204,7 +204,7 @@
     <div class="widget-body">
         <div id="board">
             <div class="content">
-                <p>欢迎交流与分享经验!</p>
+                <p>Stay hungry,Stay foolish</p>
             </div>
         </div>
     </div>
@@ -390,6 +390,8 @@
 <li>使用<code>producer.send(msg)</code>提交消息。因为没有回调结果，这时可能消息broker因为网络波动并没有收到，此时消息就丢失了。所以建议使用有回调函数的<code>producer.send(msg,callback)</code>。</li>
 </ul>
 </li>
+<li><p>Broker端丢失消息</p>
+</li>
 <li><p>消费者丢失/重复消费消息</p>
 <ul>
 <li><p>offset超前，超过了HighWater（真实已消费的位置）。再次消费会从offset位置开始，中间的消息就丢失了。相反offset落后与HW就导致重复消费。</p>
@@ -408,6 +410,10 @@
 <p> 6.设置<code>min.insync.replicas&gt;1</code>,设置消息要写入多少个副本才算成功。生产环境最好要&gt;1。</p>
 <p> 7.确保<code>replication.factor &gt; min.insync.replicas</code> 即副本个数大于需成功写入的个数。生产环境设置<code>replication.factor = min.insync.replicas + 1</code>这样可以保证有一个副本挂掉的情况下仍然可以提交数据。</p>
 <p> 8.设置<code>enable.auto.commit = false</code> 即设置手动提交offset方式，对单consumer多线程的情况很关键。</p>
+<p>在提交消息时，也建议同时使用异步提交+同步提交的策略。保证性能和安全性！</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">    try &#123;</span><br><span class="line">           while(true) &#123;</span><br><span class="line">             ConsumerRecords&lt;String, String&gt; records = consumer.poll(Duration.ofSeconds(1));</span><br><span class="line">             process(records); // 处理消息</span><br><span class="line">             commitAysnc(); // 使用异步提交规避阻塞</span><br><span class="line">            &#125;</span><br><span class="line">&#125; catch(Exception e) &#123;</span><br><span class="line">            handle(e); // 处理异常</span><br><span class="line">&#125; finally &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                   consumer.commitSync(); // 最后一次提交使用同步阻塞式提交</span><br><span class="line">	&#125; finally &#123;</span><br><span class="line">	     consumer.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
 
       
     </div>
