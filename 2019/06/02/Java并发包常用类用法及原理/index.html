@@ -18,20 +18,20 @@
   
   
   <title>Java并发包常用类用法及原理 | fever的个人博客</title>
-  <meta name="description" content="com.java.util.concurrent包是java5时添加的，中专门处理多线程提供的工具类 1.atomic包  AtomicBoolean、AtomicInteger、AtomicLong、AtomicReference类提供多种方法，可以原子性地为参数取值、赋值、交换值（getAndSet）、比较并且设置值（CAS:compareAndSet）等。  为什么需要使用atomic？先说">
+  <meta name="description" content="com.java.util.concurrent包是java5时添加的，专门处理多线程提供的工具类  一、Atomic二、Lock三、BlockingQueue四、BlockDeque五、ConcurrnetMap六、CountDownLatch七、CyclicBarrier八、ExecutorService九、ForkJoinPool  1.atomic包  AtomicBoolean、Atom">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java并发包常用类用法及原理">
 <meta property="og:url" content="https://jiarus.github.io/2019/06/02/Java并发包常用类用法及原理/index.html">
 <meta property="og:site_name" content="jiarus">
-<meta property="og:description" content="com.java.util.concurrent包是java5时添加的，中专门处理多线程提供的工具类 1.atomic包  AtomicBoolean、AtomicInteger、AtomicLong、AtomicReference类提供多种方法，可以原子性地为参数取值、赋值、交换值（getAndSet）、比较并且设置值（CAS:compareAndSet）等。  为什么需要使用atomic？先说">
+<meta property="og:description" content="com.java.util.concurrent包是java5时添加的，专门处理多线程提供的工具类  一、Atomic二、Lock三、BlockingQueue四、BlockDeque五、ConcurrnetMap六、CountDownLatch七、CyclicBarrier八、ExecutorService九、ForkJoinPool  1.atomic包  AtomicBoolean、Atom">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g5rl37o1xwj30fa0r077q.jpg">
-<meta property="og:updated_time" content="2019-08-07T19:00:46.880Z">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g5st76um2ej30w00k0dlh.jpg">
+<meta property="og:updated_time" content="2019-08-08T18:56:32.263Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发包常用类用法及原理">
-<meta name="twitter:description" content="com.java.util.concurrent包是java5时添加的，中专门处理多线程提供的工具类 1.atomic包  AtomicBoolean、AtomicInteger、AtomicLong、AtomicReference类提供多种方法，可以原子性地为参数取值、赋值、交换值（getAndSet）、比较并且设置值（CAS:compareAndSet）等。  为什么需要使用atomic？先说">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g5rl37o1xwj30fa0r077q.jpg">
+<meta name="twitter:description" content="com.java.util.concurrent包是java5时添加的，专门处理多线程提供的工具类  一、Atomic二、Lock三、BlockingQueue四、BlockDeque五、ConcurrnetMap六、CountDownLatch七、CyclicBarrier八、ExecutorService九、ForkJoinPool  1.atomic包  AtomicBoolean、Atom">
+<meta name="twitter:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g5st76um2ej30w00k0dlh.jpg">
   <!-- Canonical links -->
   <link rel="canonical" href="https://jiarus.github.io/2019/06/02/Java并发包常用类用法及原理/index.html">
   
@@ -386,8 +386,11 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p>com.java.util.concurrent包是java5时添加的，中专门处理多线程提供的工具类<br><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g5rl37o1xwj30fa0r077q.jpg" width="35%" height="25%"></p>
-<p>1.atomic包</p>
+        <p>com.java.util.concurrent包是java5时添加的，专门处理多线程提供的工具类</p>
+<blockquote>
+<p><a href="#1"><strong>一、Atomic</strong></a><br><br><a href="#2"><strong>二、Lock</strong></a><br><br><a href="#3"><strong>三、BlockingQueue</strong></a><br><br><a href="#4"><strong>四、BlockDeque</strong></a><br><br><a href="#5"><strong>五、ConcurrnetMap</strong></a><br><br><a href="#6"><strong>六、CountDownLatch</strong></a><br><br><a href="#7"><strong>七、CyclicBarrier</strong></a><br><br><a href="#8"><strong>八、ExecutorService</strong></a><br><br><a href="#8"><strong>九、ForkJoinPool</strong></a><br></p>
+</blockquote>
+<p><a name="1"><strong>1.atomic包</strong></a></p>
 <blockquote>
 <p>AtomicBoolean、AtomicInteger、AtomicLong、AtomicReference<br>类提供多种方法，可以原子性地为参数取值、赋值、交换值（getAndSet）、比较并且设置值（CAS:compareAndSet）等。</p>
 </blockquote>
@@ -412,7 +415,7 @@
 <p>3.使用volatile修饰变量。volatile是变量具有可见性（<del>当寄存器中修改了值，会立即通知主内存和其他寄存器修改值</del>）和有序性，查看AtomicInteger的源码，发现变量被volatile修饰。而原子性是Atomic中使用CAS（<del>修改前判断主内存的值是否和当前的值一致</del>）实现的，可见性就解决了上面问题1的脏读，有序性和原子性就解决了问题2中的问题。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">private volatile int value;</span><br><span class="line"></span><br><span class="line">public AtomicInteger(int initialValue) &#123;</span><br><span class="line">    value = initialValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>2.locks</p>
+<p><a name="2"><strong>2.locks</strong></a></p>
 <ul>
 <li><p>ReentrantLock</p>
 <ul>
@@ -427,7 +430,7 @@
 </ul>
 <p>Synchronized加锁实现原理：</p>
 <blockquote>
-<p>Synchronized进过编译，会在同步块的前后分别形成monitorenter和monitorexit这个两个字节码指令。在执行monitorenter指令时，首先要尝试获取对象锁。如果这个对象没被锁定，或者当前线程已经拥有了那个对象锁，把锁的计算器加1，相应的，在执行monitorexit指令时会将锁计算器就减1，当计算器为0时，锁就被释放了。如果获取对象锁失败，那当前线程就要阻塞，直到对象锁被另一个线程释放为止。</p>
+<p>Synchronized经过编译，会在同步块的前后分别形成monitorenter和monitorexit这个两个字节码指令。在执行monitorenter指令时，首先要尝试获取对象锁。如果这个对象没被锁定，或者当前线程已经拥有了那个对象锁，把锁的计算器加1，相应的，在执行monitorexit指令时会将锁计算器就减1，当计算器为0时，锁就被释放了。如果获取对象锁失败，那当前线程就要阻塞，直到对象锁被另一个线程释放为止。</p>
 </blockquote>
 <p>Synchronized和ReentrantLock的区别联系：</p>
 <ul>
@@ -449,8 +452,234 @@
 </ul>
 </li>
 </ul>
-<p>3.BlockQueue</p>
-<p>4.</p>
+<p><a name="3"><strong>3.BlockingQueue</strong></a></p>
+<blockquote>
+<p>提供了不同的插入移除检查方法，可以支持不同的返回值。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>抛异常</th>
+<th>特定值</th>
+<th>阻塞</th>
+<th>超时</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>插入</td>
+<td>add(o)</td>
+<td>offer(o)</td>
+<td>put(o)</td>
+<td>offer(o, timeout, timeunit)</td>
+</tr>
+<tr>
+<td>移除</td>
+<td>remove(o)</td>
+<td>poll(o)</td>
+<td>take(o)</td>
+<td>poll(timeout, timeunit)</td>
+</tr>
+<tr>
+<td>检查</td>
+<td>get(o)</td>
+<td>peek(o)</td>
+<td>/</td>
+<td>/</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>阻塞队列值提供一个队列可以提供遵守FIFO放入和取出的操作，如果队列满了放入就会阻塞，相反队列如果为空，取出就会阻塞。</p>
+<p>BlockingQueue是一个接口类，具体有多种实现，主要介绍5种常用的：</p>
+</blockquote>
+<ul>
+<li><p>ArrayBlockingQueue</p>
+<blockquote>
+<p>数组阻塞队列，故名思议是用数组实现的阻塞队列，是有界的，只能在初始化确定队列容量大小。内部只有一个reentrantLock，读和写使用同一个锁，因此效率不高。</p>
+</blockquote>
+</li>
+<li><p>LinkedBlockingQueue</p>
+<blockquote>
+<p>链表阻塞队列，顾名思义是用链表实现的阻塞队列，但它可以是有界的也可以无界的，内部有两个reentrantLock，读写锁是分离的。性能要比ArrayBlockingQueue要高。但创建和销毁Node，高并发对GC有一定压力。</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//默认的构造器</span><br><span class="line">public LinkedBlockingQueue() &#123;</span><br><span class="line">        this(Integer.MAX_VALUE);</span><br><span class="line">&#125;</span><br><span class="line">//指定容量的构造器</span><br><span class="line">public LinkedBlockingQueue(int capacity) &#123;</span><br><span class="line">        if (capacity &lt;= 0) throw new IllegalArgumentException();</span><br><span class="line">        this.capacity = capacity;</span><br><span class="line">        last = head = new Node&lt;E&gt;(null);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>PriorityBlockingQueue</p>
+<blockquote>
+<p>优先级阻塞队列。基于最小二叉堆实现，线程安全的无界队列。构造器中可以传入初始值和比较器的规则。根据比较器规则对内部元素排序。</p>
+</blockquote>
+</li>
+<li><p>SynchronousQueue</p>
+<blockquote>
+<p>同步队列。内部只能存放一个元素。如果满了就插入就阻塞，相反如果为空取出就阻塞。</p>
+</blockquote>
+</li>
+<li><p>DelayQueue</p>
+<blockquote>
+<p>延迟队列无界队列。内部使用优先级阻塞队列实现，只有元素过期才能取出来。并且按过期长短排序，队头的是过期最长的元素。使用ReentrantLock实现线程安全。</p>
+</blockquote>
+</li>
+</ul>
+<p><a name="4"><strong>4.BlockDeque</strong></a></p>
+<blockquote>
+<p>提供了不同的插入移除检查方法，可以支持不同的返回值。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>抛异常</th>
+<th>特定值</th>
+<th>阻塞</th>
+<th>超时</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>插入</td>
+<td>addFirst(o)</td>
+<td>offerFirst(o)</td>
+<td>putFirst(o)</td>
+<td>offerFirst(o, timeout, timeunit)</td>
+</tr>
+<tr>
+<td>移除</td>
+<td>removeFirst(o)</td>
+<td>pollFirst(o)</td>
+<td>takeFirst(o)</td>
+<td>pollFirst(timeout, timeunit)</td>
+</tr>
+<tr>
+<td>检查</td>
+<td>getFirst(o)</td>
+<td>peekFirst(o)</td>
+<td>/</td>
+<td>/</td>
+</tr>
+</tbody></table>
+<ul>
+<li>LinkedBlockingDeque<blockquote>
+<p>双端链式阻塞队列。默认是无界的，也可以指定容量。该阻塞队列同时支持FIFO和FILO两种操作方式，队头和队尾都可以执行插入取出的操作。使用一把锁+两个条件维持队列的同步，和ArrayBlockingQueue的原理一样。</p>
+</blockquote>
+</li>
+</ul>
+<p><a name="5"><strong>5.ConcurrentMap</strong></a></p>
+<blockquote>
+<p>支持并发操作的Map。</p>
+</blockquote>
+<ul>
+<li>ConcurrentHashMap 是ConcurrentMap的具体实现。<blockquote>
+<p>1.发展。JDK1.7及之前都是使用Segment分段锁来实现的，因为Segment数量会限制并发量，而且在寻址也会执行两次hash，JDK1.8后取消Segment改为数组+链表+红黑树和CAS原子操作+synchronized实现。</p>
+<p>2.初始化参数。</p>
+<ul>
+<li>initialCapacity初始化Map的容量</li>
+<li>loadFactor负载因子</li>
+<li>concurrencyLevel是最好情况下可以达到的并发数<del>（如果都访问的不同的Segment上）</del>。Segment的个数是大于等于的第一个2的n次方的数,即设置15。即Segment = concurrencyLevel = 2<sup>4</sup> = 16。默认情况下，initialCapacity等于16，loadFactor等于0.75，concurrencyLevel等于16.</li>
+</ul>
+<p>3.关于锁</p>
+<ul>
+<li>1.7<ul>
+<li>Get没有加锁，因为Map中的key,value,nextHashEntry都是使用volatile修饰符修饰，多线程具有可见行。但是会进行两次Hash()方法寻址，第一次确定Segment位置，第二次确定table数组中位置。</li>
+<li>Put使用的分段锁继承来ReentrantLock实现可重入锁。</li>
+</ul>
+</li>
+<li>1.8<ul>
+<li>Get方法同1.7相似都是没有加锁，一次hash寻址。</li>
+<li>Put方法。使用CAS无锁机制，仅在Hash冲突时候加了synchronized同步锁。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>4.扩容<br>    数组容量增加一倍，并迁移链表中的数据</p>
+</blockquote>
+<p><a name="6"><strong>6.CountDownLatch</strong></a></p>
+<blockquote>
+<p>倒计时控制器(<del>自己起的名字</del>)。因为他类似于一个倒计时启动的功能。<br>初始化指定倒计时的值<code>CountDownLatch latch = new CountDownLatch(3)</code>并使用<code>latch.await()</code>等待执行，当其他其他线程调用3次<code>latch.countDown()</code>就触发主线程继续。</p>
+</blockquote>
+<p><a name="7"><strong>7.CyclicBarrier</strong></a></p>
+<blockquote>
+<p>栅栏。允许定义N个线程到达栅栏才执行某个方法。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//创建一个栅栏，这里设置2个线程都执行barrier1.await()方法后可以执行barrier1Action方法</span><br><span class="line">CyclicBarrier barrier1 = new CyclicBarrier(2, barrier1Action);</span><br></pre></td></tr></table></figure>
+
+<p><a name="8"><strong>8.ExecutorService</strong></a><br>线程池服务接口，有两种具体的实现方式</p>
+<ul>
+<li>ThreadPoolExecutor</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>名称</th>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>corePoolSize</td>
+<td>int</td>
+<td>核心线程池大小</td>
+</tr>
+<tr>
+<td>2</td>
+<td>maximumPoolSize</td>
+<td>int</td>
+<td>最大线程池大小</td>
+</tr>
+<tr>
+<td>3</td>
+<td>keepAliveTime</td>
+<td>long</td>
+<td>线程最大空闲时间</td>
+</tr>
+<tr>
+<td>4</td>
+<td>unit</td>
+<td>TimeUnit</td>
+<td>时间单位</td>
+</tr>
+<tr>
+<td>5</td>
+<td>workQueue</td>
+<td>BlockingQueue<runnable></runnable></td>
+<td>线程等待队列</td>
+</tr>
+<tr>
+<td>6</td>
+<td>threadFactory</td>
+<td>ThreadFactory</td>
+<td>线程创建工厂</td>
+</tr>
+<tr>
+<td>7</td>
+<td>handler</td>
+<td>RejectedExecutionHandler</td>
+<td>拒绝策略</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>实际上Executors类使用上述参数为他提供了多种预定义的实现。<br>  <img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5st76um2ej30w00k0dlh.jpg" width="80%"></p>
+<p>简单介绍几种预定义实现：</p>
+<p>1.FixedThreadPool:可以指定固定数量的核心线程，但是队列使用<code>LinkedBlockingQueue</code>是无界的，可能导致内存溢出。</p>
+<p>2.CachedThreadPool:不限制线程的个数，要设置线程生存的周期，超过这个时间没有使用将自动回收线程。但是队列使用的是<code>SynchronousQueue</code>入队时必须出队。因为这些特性，该线程池应该用于类似于Netty中的短连接，快速处理大量耗时短的任务。</p>
+<p>3.newSingleThreadExecutor:只创建一个线程，但是队列使用<code>LinkedBlockingQueue</code>无界队列。</p>
+</blockquote>
+<ul>
+<li>ScheduledThreadPoolExecutor<blockquote>
+<p>继承了ThreadPoolExecutor，可以设置核心和最大线程的大小，使用<code>DelayedWorkQueue</code>延迟队列。</p>
+</blockquote>
+</li>
+</ul>
+<p><a name="9"><strong>9.ForkJoinPool</strong></a></p>
+<blockquote>
+<p>实现了Executor接口，支持将一个大任务分为若干个子任务交给子线程处理，然后合并为一个结果集。采用了分治和递归的思想。内部维护了多个队列。<br><del>（挖坑以后用到了再详细写）</del></p>
+</blockquote>
 
       
     </div>
