@@ -17,16 +17,25 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>Archive: 2018 | fever的个人博客</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="jiarus">
-<meta property="og:url" content="https://jiarus.github.io/archives/2018/index.html">
+  <title>JVM内存模型和垃圾回收策略 | fever的个人博客</title>
+  <meta name="description" content="内存模型结构：  JVM内存模型主要有图中的5块组成：方法区、堆（这两块是线程共享的）、栈、本地方法栈、程序计数器（这三块是线程私有的） 方法区：是线程共享的区域，用于存放类的模版信息、常量、静态变量、字段、方法等。具体实现：jdk1.7和之前都是永久代（Perm区），当永久代满了就会触发FullGC,影响整个系统。JDK1.8时取掉了永久代，改为了元空间(Metaspace)，元空间数据不再存放">
+<meta name="keywords" content="JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM内存模型和垃圾回收策略">
+<meta property="og:url" content="https://jiarus.github.io/2018/09/17/JVM基础知识/index.html">
 <meta property="og:site_name" content="jiarus">
+<meta property="og:description" content="内存模型结构：  JVM内存模型主要有图中的5块组成：方法区、堆（这两块是线程共享的）、栈、本地方法栈、程序计数器（这三块是线程私有的） 方法区：是线程共享的区域，用于存放类的模版信息、常量、静态变量、字段、方法等。具体实现：jdk1.7和之前都是永久代（Perm区），当永久代满了就会触发FullGC,影响整个系统。JDK1.8时取掉了永久代，改为了元空间(Metaspace)，元空间数据不再存放">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g5tyjpg4hoj30rs0k50vt.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g5u0ogkj52j30x60q67h2.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g5u20hg9ezj30vs0u0dpg.jpg">
+<meta property="og:updated_time" content="2019-08-09T20:13:20.063Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jiarus">
+<meta name="twitter:title" content="JVM内存模型和垃圾回收策略">
+<meta name="twitter:description" content="内存模型结构：  JVM内存模型主要有图中的5块组成：方法区、堆（这两块是线程共享的）、栈、本地方法栈、程序计数器（这三块是线程私有的） 方法区：是线程共享的区域，用于存放类的模版信息、常量、静态变量、字段、方法等。具体实现：jdk1.7和之前都是永久代（Perm区），当永久代满了就会触发FullGC,影响整个系统。JDK1.8时取掉了永久代，改为了元空间(Metaspace)，元空间数据不再存放">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g5tyjpg4hoj30rs0k50vt.jpg">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://jiarus.github.io/archives/2018/index.html">
+  <link rel="canonical" href="https://jiarus.github.io/2018/09/17/JVM基础知识/index.html">
   
     <link rel="alternate" href="/atom.xml" title="jiarus" type="application/atom+xml">
   
@@ -338,164 +347,228 @@
   
   
 <main class="main" role="main">
-  	<article class="content article article-archives article-type-list" itemscope="">
-	    <header class="article-header">
-	      <h1 itemprop="title">Archive: 2018</h1>
-	      <p class="text-muted">Total 10 articles</p>
-	    </header>
-	    <div class="article-body">
-	      
-  
-  
+  <div class="content">
+  <article id="post-JVM基础知识" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
-    
+    <div class="article-header">
       
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JVM内存模型和垃圾回收策略
+    </h1>
+  
+
       
-      <section class="panel panel-default b-no">
-        <div class="panel-heading" role="tab">
-          <h3 class="panel-title">
-            <a data-toggle="collapse" href="#collapse2018" aria-expanded="true">
-              <i class="icon icon-calendar-plus text-active"></i><i class="icon icon-calendar-minus text"></i>
-              2018
-            </a>
-            <!-- <a href="/archives/2018" class="archive-year">2018</a> -->
-          </h3>
-        </div>
-        <div id="collapse2018" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading2018">
-        <div class="panel-body">
-          <div class="collection">
-    
-    
-<a href="/2018/11/02/Mysql事务隔离级别/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-11-02T11:30:00.000Z" itemprop="datePublished">2018-11-02</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Mysql事务隔离级别
-</a>
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2018/09/17/JVM基础知识/" class="article-date">
+	  <time datetime="2018-09-16T19:50:00.000Z" itemprop="datePublished">2018-09-17</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/JVM/">JVM</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/JVM/">JVM</a>
+  </span>
 
 
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/09/17/JVM基础知识/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p><strong>内存模型结构：</strong><br><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g5tyjpg4hoj30rs0k50vt.jpg" alt></p>
+<ul>
+<li>JVM内存模型主要有图中的5块组成：方法区、堆（这两块是线程共享的）、栈、本地方法栈、程序计数器（这三块是线程私有的）<ul>
+<li>方法区：是线程共享的区域，用于存放类的模版信息、常量、静态变量、字段、方法等。具体实现：jdk1.7和之前都是永久代（Perm区），当永久代满了就会触发FullGC,影响整个系统。JDK1.8时取掉了永久代，改为了元空间(Metaspace)，元空间数据不再存放在JVM中而是存放到本地内存中。GC效率提高了。空间不足抛出OutOfMemoryError。</li>
+<li>堆：也是线程共享的区域，存放java类的实例。具体可分为新生代和老年代，新生代又包括Eden区、survivor0、survivor1区，是GC主要管理的区域。空间不足抛出OutOfMemoryError。</li>
+<li>栈：是线程私有区域。包括了局部变量区、操作数栈、动态链接、方法出口信息。栈中可以包含多个栈帧，即一个线程内的调用多个方法开辟多个栈空间。空间不足抛出StackOverflowError。</li>
+<li>本地方法栈：存放本地的C或C++方法。比如<code>public static native void sleep(long millis) throws InterruptedException;</code>这就是调用C编写的方法。</li>
+<li>程序计数器：因为CPU运行时会切换，需要记录每个线程执行的指令地址。</li>
+</ul>
+</li>
+<li><em>垃圾回收策略：*</em><br><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g5u0ogkj52j30x60q67h2.jpg" alt></li>
+<li>垃圾对象判定标准：<ul>
+<li>引用计数法：记录对象被引用的次数，引用一次加一，引用失效就减一，引用计数为0即为失效对象。目前新版本JDK不再使用，因为无法判断循环引用的对象是否过期。</li>
+<li>根搜索法：构建一个GCRoots为根的树，从根开始搜索，不在树中的即为失效对象。</li>
+</ul>
+</li>
+<li>垃圾回收算法：<ul>
+<li>标记清除。对活跃对象标注，清除没有标注的对象。清除后空间内对象不再连续，会造成数据内存碎片的问题。</li>
+<li>复制。对活跃对象标注，复制到新的空间，再清空老空间的数据。虽然解决了数据碎片，但是清理时会消耗内存空间。</li>
+<li>标记整理。是对标记清除的优化，标记清除完数据，在对空间内的存活对象整理向前移动，使之连续。解决内存碎片的问题。</li>
+<li>分代回收。将JVM堆分为新生代和老年代，不同的代使用不同的回收算法。新生代因为失效的比较多，所以使用复制算法。老年代因为存活率比较高，而且占用空间大也没有额外的空间分配，所以采用标记清除和标记整理算法。</li>
+</ul>
+</li>
+</ul>
+<p><strong>JVM垃圾回收器具体实现：</strong><br><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5u20hg9ezj30vs0u0dpg.jpg" alt><br><em>在生产环境一般在不同的代使用不同的垃圾回收器，图上显示不同回收器针对的内存代</em></p>
+<ul>
+<li><p>并行垃圾回收器（Parallel Garbage Collector）</p>
+<ul>
+<li>年轻代垃圾回收器。使用复制算法。</li>
+</ul>
+</li>
+<li><p>并发标记扫描垃圾回收器（CMS Garbage Collector）</p>
+<ul>
+<li>老年代收集器。使用标记清除算法，GC可以和用户线程并发执行，牺牲了部分性能，减少停顿时间。缺点：GC时加重CPU压力影响性能，造成严重的内存碎片化。</li>
+</ul>
+</li>
+<li><p>G1垃圾回收器（Garbage First Collector）</p>
+<ul>
+<li>使用标记整理+复制。JDK7正式发布，在JDK9中成为默认的垃圾回收器。手动设置：<code>-XX:+UseG1GC</code>。最主要就会有碎片整理的功能。<del>其他的有时间深入研究下2333…</del></li>
+</ul>
+</li>
+</ul>
+<p><strong>FullGC</strong>  </p>
+<p>FullGC发生的条件：</p>
+<ul>
+<li><p>年老代（Tenured）被写满；</p>
+</li>
+<li><p>持久代（Perm）被写满；</p>
+</li>
+<li><p>System.gc()被显示调用；</p>
+</li>
+<li><p>上一次GC之后Heap的各域分配策略动态变化；</p>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://jiarus.github.io/2018/09/17/JVM基础知识/" title="JVM内存模型和垃圾回收策略" target="_blank" rel="external">https://jiarus.github.io/2018/09/17/JVM基础知识/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/jiarus" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/jiarus" target="_blank"><span class="text-dark">fever</span><small class="ml-1x">Java Developer</small></a></h3>
+        <div>广告系统引擎开发</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
   
     
-    
-    
-<a href="/2018/09/25/Kafka参数配置-broker、topic、jvm/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-09-25T05:58:00.000Z" itemprop="datePublished">2018-09-25</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Kafka参数配置(broker、topic、jvm)
-</a>
-
-
-  
-    
-    
-    
-<a href="/2018/09/20/Kafka线上部署方案/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-09-20T04:33:00.000Z" itemprop="datePublished">2018-09-20</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Kafka线上部署方案
-</a>
-
-
-  
-    
-    
-    
-<a href="/2018/09/17/JVM基础知识/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-09-16T19:50:00.000Z" itemprop="datePublished">2018-09-17</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> JVM内存模型和垃圾回收策略
-</a>
-
-
-  
-    
-    
-    
-<a href="/2018/09/17/Java类生命周期及底层调用/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-09-16T19:49:00.000Z" itemprop="datePublished">2018-09-17</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Java类生命周期
-</a>
-
-
-  
-    
-    
-    
-<a href="/2018/09/14/Redis缓存失效的问题/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-09-14T13:34:00.000Z" itemprop="datePublished">2018-09-14</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Redis缓存失效引发的问题
-</a>
-
-
-  
-    
-    
-    
-<a href="/2018/08/30/Mysql引擎/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-08-29T16:24:00.000Z" itemprop="datePublished">2018-08-30</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Mysql存储引擎区别
-</a>
-
-
-  
-    
-    
-    
-<a href="/2018/08/25/InnoDB事务实现/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-08-25T11:54:00.000Z" itemprop="datePublished">2018-08-25</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> InnoDB事务和MVCC实现
-</a>
-
-
-  
-    
-    
-    
-<a href="/2018/08/20/Mysql在线修改表结构/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-08-20T10:43:00.000Z" itemprop="datePublished">2018-08-20</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Mysql在线修改表结构
-</a>
-
-
-  
-    
-    
-    
-<a href="/2018/08/18/Mysql索引数据结构/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-08-18T13:09:00.000Z" itemprop="datePublished">2018-08-18</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Mysql索引数据结构
-</a>
-
-
-  
-  
-    </div></div></div></section>
-  
-
-	    </div>
-  	</article>
+  <section id="comments">
   	
+           
     
-    <nav class="bar bar-footer clearfix" data-stick-bottom>
-        <div class="bar-inner">
-        <ul class="pager pull-left">
-            
-            <li class="prev disabled">
-                <a href="javascript:;">
-                    <i class="icon icon-angle-left"></i>
-                    Prev
-                </a>
-            </li>
-            
-            
-            <li class="next">
-                <a href="/archives/2018/page/2/">
-                    Next
-                    <i class="icon icon-angle-right"></i>
-                </a>
-            </li>
-            
-        </ul>
-        <div class="total-article bar-right">Page 1 of 2</div>
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2018/09/20/Kafka线上部署方案/" title="Kafka线上部署方案"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2018/09/17/Java类生命周期及底层调用/" title="Java类生命周期"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/Alipay.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechat.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
         </div>
-    </nav>
-    
- 	
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -548,6 +621,31 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+   
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: 'c8e620c400da4fd98414',
+    clientSecret: '0ec3e154177b1891fc7e45f48c7339d08da2e920',
+    repo: 'blog-commets',
+    owner: 'jiarus',
+    admin: ['jiarus'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
 
 
 
