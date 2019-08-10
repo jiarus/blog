@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000">
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top">
+  
+  
+  <title>布隆过滤器 | fever的个人博客</title>
+  <meta name="description" content="判断一个字符串存不存在,可以用来过滤非法字符串、垃圾邮件等  1.使用BigSet存放hash位置信息  初始化定义存放位置size,如4、8、16、32  有多少个size就需要多少次hash，将得到的hash值作为索引存放在set中，value为true   2.判断是否存在，即将该字符串做hash处理，判断Bigset每个位置都为true，那么就认定该字符串存在 3.内存回收，当set占满">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="布隆过滤器">
+<meta property="og:url" content="https://jiarus.github.io/2019/05/08/布隆过滤器/index.html">
+<meta property="og:site_name" content="jiarus">
+<meta property="og:description" content="判断一个字符串存不存在,可以用来过滤非法字符串、垃圾邮件等  1.使用BigSet存放hash位置信息  初始化定义存放位置size,如4、8、16、32  有多少个size就需要多少次hash，将得到的hash值作为索引存放在set中，value为true   2.判断是否存在，即将该字符串做hash处理，判断Bigset每个位置都为true，那么就认定该字符串存在 3.内存回收，当set占满">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-10T07:05:45.032Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="布隆过滤器">
+<meta name="twitter:description" content="判断一个字符串存不存在,可以用来过滤非法字符串、垃圾邮件等  1.使用BigSet存放hash位置信息  初始化定义存放位置size,如4、8、16、32  有多少个size就需要多少次hash，将得到的hash值作为索引存放在set中，value为true   2.判断是否存在，即将该字符串做hash处理，判断Bigset每个位置都为true，那么就认定该字符串存在 3.内存回收，当set占满">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://jiarus.github.io/2019/05/08/布隆过滤器/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="jiarus" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+</head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/jiarus" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">fever</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Java Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Beijing, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">Repository</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">Books</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">Links</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/jiarus" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/fever4summer" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>Stay hungry,Stay foolish</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/kafka/">kafka</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mybatis/">mybatis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/redis/">redis</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/广告系统/">广告系统</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/JVM/" style="font-size: 13px;">JVM</a> <a href="/tags/java/" style="font-size: 13.6px;">java</a> <a href="/tags/kafka/" style="font-size: 14px;">kafka</a> <a href="/tags/linux/" style="font-size: 13px;">linux</a> <a href="/tags/mybatis/" style="font-size: 13px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 13.8px;">mysql</a> <a href="/tags/redis/" style="font-size: 13.6px;">redis</a> <a href="/tags/spring/" style="font-size: 13.2px;">spring</a> <a href="/tags/广告系统/" style="font-size: 13px;">广告系统</a> <a href="/tags/算法/" style="font-size: 13.4px;">算法</a> <a href="/tags/计算机组成原理/" style="font-size: 13.2px;">计算机组成原理</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2019/08/10/Redis-Debug-命令/" class="title">Redis Debug 命令</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-08-10T06:45:32.000Z" itemprop="datePublished">2019-08-10</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2019/08/10/二叉树遍历/" class="title">二叉树遍历</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-08-10T03:58:03.000Z" itemprop="datePublished">2019-08-10</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2019/07/28/计算机CPU性能提升/" class="title">计算机CPU性能提升</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-07-27T20:16:00.000Z" itemprop="datePublished">2019-07-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2019/07/28/计算机性能之CPU篇/" class="title">计算机性能之CPU篇</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-07-27T19:37:00.000Z" itemprop="datePublished">2019-07-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2019/07/27/Kafka版本号总结/" class="title">Kafka版本号</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-07-26T16:30:00.000Z" itemprop="datePublished">2019-07-27</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-布隆过滤器" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      布隆过滤器
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/05/08/布隆过滤器/" class="article-date">
+	  <time datetime="2019-05-08T07:00:00.000Z" itemprop="datePublished">2019-05-08</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/算法/">算法</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/05/08/布隆过滤器/#comments" class="article-comment-link">Comments</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <blockquote>
+<p>判断一个字符串存不存在,可以用来过滤非法字符串、垃圾邮件等</p>
+</blockquote>
+<p>1.使用BigSet存放hash位置信息</p>
+<ul>
+<li><p>初始化定义存放位置size,如4、8、16、32</p>
+</li>
+<li><p>有多少个size就需要多少次hash，将得到的hash值作为索引存放在set中，value为true</p>
+</li>
+</ul>
+<p>2.判断是否存在，即将该字符串做hash处理，判断Bigset每个位置都为true，那么就认定该字符串存在</p>
+<p>3.内存回收，当set占满，即每个字符串判断时都会存在，所以不能占满。<br>可以设置为百分之80，清空该set</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br></pre></td><td class="code"><pre><span class="line">package com.onedesk.dsp.utils;</span><br><span class="line"></span><br><span class="line">import java.io.*;</span><br><span class="line">import java.util.BitSet;</span><br><span class="line">import java.util.concurrent.atomic.AtomicInteger;</span><br><span class="line"></span><br><span class="line">public class BloomFilter implements Serializable &#123;</span><br><span class="line">    private static final long serialVersionUID = -5221305273707291280L;</span><br><span class="line">    private final int[] seeds;</span><br><span class="line">    private final int size;</span><br><span class="line">    private final BitSet notebook;</span><br><span class="line">    private final MisjudgmentRate rate;</span><br><span class="line">    private final AtomicInteger useCount = new AtomicInteger(0);</span><br><span class="line">    private final Double autoClearRate;</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     * 默认中等程序的误判率：MisjudgmentRate.MIDDLE 以及不自动清空数据（性能会有少许提升）</span><br><span class="line">     *</span><br><span class="line">     * @param dataCount 预期处理的数据规模，如预期用于处理1百万数据的查重，这里则填写1000000</span><br><span class="line">     */</span><br><span class="line">    public BloomFilter(int dataCount) &#123;</span><br><span class="line">        this(MisjudgmentRate.MIDDLE, dataCount, 0.8);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     * @param rate          一个枚举类型的误判率</span><br><span class="line">     * @param dataCount     预期处理的数据规模，如预期用于处理1百万数据的查重，这里则填写1000000</span><br><span class="line">     * @param autoClearRate 自动清空过滤器内部信息的使用比率，传null则表示不会自动清理，</span><br><span class="line">     *                      当过滤器使用率达到100%时，则无论传入什么数据，都会认为在数据已经存在了</span><br><span class="line">     *                      当希望过滤器使用率达到80%时自动清空重新使用，则传入0.8</span><br><span class="line">     */</span><br><span class="line">    public BloomFilter(MisjudgmentRate rate, int dataCount, Double autoClearRate) &#123;</span><br><span class="line">        long bitSize = rate.seeds.length * dataCount;</span><br><span class="line">        if (bitSize &lt; 0 || bitSize &gt; Integer.MAX_VALUE) &#123;</span><br><span class="line">            throw new RuntimeException(&quot;位数太大溢出了，请降低误判率或者降低数据大小&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        this.rate = rate;</span><br><span class="line">        seeds = rate.seeds;</span><br><span class="line">        size = (int) bitSize;</span><br><span class="line">        notebook = new BitSet(size);</span><br><span class="line">        this.autoClearRate = autoClearRate;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void add(String data) &#123;</span><br><span class="line">        checkNeedClear();</span><br><span class="line">        </span><br><span class="line">        for (int i = 0; i &lt; seeds.length; i++) &#123;</span><br><span class="line">            int index = hash(data, seeds[i]);</span><br><span class="line">            setTrue(index);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public boolean check(String data) &#123;</span><br><span class="line">        for (int i = 0; i &lt; seeds.length; i++) &#123;</span><br><span class="line">            int index = hash(data, seeds[i]);</span><br><span class="line">            if (!notebook.get(index)) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     * 如果不存在就进行记录并返回false，如果存在了就返回true</span><br><span class="line">     *</span><br><span class="line">     * @param data</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public boolean addIfNotExist(String data) &#123;</span><br><span class="line">        checkNeedClear();</span><br><span class="line">        </span><br><span class="line">        int[] indexs = new int[seeds.length];</span><br><span class="line">        // 先假定存在</span><br><span class="line">        boolean exist = true;</span><br><span class="line">        int index;</span><br><span class="line">        </span><br><span class="line">        for (int i = 0; i &lt; seeds.length; i++) &#123;</span><br><span class="line">            indexs[i] = index = hash(data, seeds[i]);</span><br><span class="line">            </span><br><span class="line">            if (exist) &#123;</span><br><span class="line">                if (!notebook.get(index)) &#123;</span><br><span class="line">                    // 只要有一个不存在，就可以认为整个字符串都是第一次出现的</span><br><span class="line">                    exist = false;</span><br><span class="line">                    // 补充之前的信息</span><br><span class="line">                    for (int j = 0; j &lt;= i; j++) &#123;</span><br><span class="line">                        setTrue(indexs[j]);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                setTrue(index);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        return exist;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    private void checkNeedClear() &#123;</span><br><span class="line">        if (autoClearRate != null) &#123;</span><br><span class="line">            if (getUseRate() &gt;= autoClearRate) &#123;</span><br><span class="line">                synchronized (this) &#123;</span><br><span class="line">                    if (getUseRate() &gt;= autoClearRate) &#123;</span><br><span class="line">                        notebook.clear();</span><br><span class="line">                        useCount.set(0);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void setTrue(int index) &#123;</span><br><span class="line">        useCount.incrementAndGet();</span><br><span class="line">        notebook.set(index, true);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    private int hash(String data, int seeds) &#123;</span><br><span class="line">        char[] value = data.toCharArray();</span><br><span class="line">        int hash = 0;</span><br><span class="line">        if (value.length &gt; 0) &#123;</span><br><span class="line">            </span><br><span class="line">            for (int i = 0; i &lt; value.length; i++) &#123;</span><br><span class="line">                hash = i * hash + value[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        hash = hash * seeds % size;</span><br><span class="line">        // 防止溢出变成负数</span><br><span class="line">        return Math.abs(hash);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public double getUseRate() &#123;</span><br><span class="line">        return (double) useCount.intValue() / (double) size;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     * 清空过滤器中的记录信息</span><br><span class="line">     */</span><br><span class="line">    public void clear() &#123;</span><br><span class="line">        useCount.set(0);</span><br><span class="line">        notebook.clear();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public MisjudgmentRate getRate() &#123;</span><br><span class="line">        return rate;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     * 分配的位数越多，误判率越低但是越占内存</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * 4个位误判率大概是0.14689159766308</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * 8个位误判率大概是0.02157714146322</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * 16个位误判率大概是0.00046557303372</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * 32个位误判率大概是0.00000021167340</span><br><span class="line">     *</span><br><span class="line">     * @author lianghaohui</span><br><span class="line">     */</span><br><span class="line">    public enum MisjudgmentRate &#123;</span><br><span class="line">        // 这里要选取质数，能很好的降低错误率</span><br><span class="line">        /**</span><br><span class="line">         * 每个字符串分配4个位</span><br><span class="line">         */</span><br><span class="line">        VERY_SMALL(new int[]&#123;2, 3, 5, 7&#125;),</span><br><span class="line">        /**</span><br><span class="line">         * 每个字符串分配8个位</span><br><span class="line">         */</span><br><span class="line">        SMALL(new int[]&#123;2, 3, 5, 7, 11, 13, 17, 19&#125;), //</span><br><span class="line">        /**</span><br><span class="line">         * 每个字符串分配16个位</span><br><span class="line">         */</span><br><span class="line">        MIDDLE(new int[]&#123;2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53&#125;), //</span><br><span class="line">        /**</span><br><span class="line">         * 每个字符串分配32个位</span><br><span class="line">         */</span><br><span class="line">        HIGH(new int[]&#123;2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97,</span><br><span class="line">                101, 103, 107, 109, 113, 127, 131&#125;);</span><br><span class="line">        </span><br><span class="line">        private int[] seeds;</span><br><span class="line">        </span><br><span class="line">        private MisjudgmentRate(int[] seeds) &#123;</span><br><span class="line">            this.seeds = seeds;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        public int[] getSeeds() &#123;</span><br><span class="line">            return seeds;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        public void setSeeds(int[] seeds) &#123;</span><br><span class="line">            this.seeds = seeds;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        BloomFilter fileter = new BloomFilter(100000);</span><br><span class="line">        System.out.println(fileter.addIfNotExist(&quot;1111111111111&quot;))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://jiarus.github.io/2019/05/08/布隆过滤器/" title="布隆过滤器" target="_blank" rel="external">https://jiarus.github.io/2019/05/08/布隆过滤器/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/jiarus" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/jiarus" target="_blank"><span class="text-dark">fever</span><small class="ml-1x">Java Developer</small></a></h3>
+        <div>广告系统引擎开发</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/06/02/Java并发包常用类用法及原理/" title="Java并发包常用类用法及原理"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2019/04/26/Kakfa主题管理/" title="Kakfa主题管理"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/Alipay.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechat.jpg" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/jiarus" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/fever4summer" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2019 fever
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: 'c8e620c400da4fd98414',
+    clientSecret: '0ec3e154177b1891fc7e45f48c7339d08da2e920',
+    repo: 'blog-commets',
+    owner: 'jiarus',
+    admin: ['jiarus'],
+    id: md5(location.pathname),
+    distractionFreeMode: true
+  })
+  gitalk.render('comments')
+  </script>
+
+      
+
+
+
+
+
+
+
+</body>
+</html>
