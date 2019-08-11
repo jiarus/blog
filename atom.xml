@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>jiarus</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://jiarus.github.io/"/>
+  <updated>2019-08-10T06:54:06.684Z</updated>
+  <id>https://jiarus.github.io/</id>
+  
+  <author>
+    <name>fever</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Redis Debug 命令</title>
+    <link href="https://jiarus.github.io/2019/08/10/Redis-Debug-%E5%91%BD%E4%BB%A4/"/>
+    <id>https://jiarus.github.io/2019/08/10/Redis-Debug-命令/</id>
+    <published>2019-08-10T06:45:32.000Z</published>
+    <updated>2019-08-10T06:54:06.684Z</updated>
+    
+    <content type="html"><![CDATA[<p>查看某一个Key的Debug信息，使用<code>debug object [key]</code><br><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g5ukxhidosj30ts06mq3r.jpg" alt></p><p>查看redis内存使用情况使用<code>info memeroy</code><br><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5ukxk9mpej30860azmy5.jpg" alt></p><ul><li>used_memory_human: 已使用内存（格式化可读性的）</li><li>used_memory_peak_human: 使用最高峰值</li><li>total_system_memory_human: 总内存</li><li>used_memory_rss_huamn: Redis进程占用内存</li><li>evicted_keys: 因为内存满而被驱逐/回收的key</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;查看某一个Key的Debug信息，使用&lt;code&gt;debug object [key]&lt;/code&gt;&lt;br&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/006tNc79ly1g5ukxhidosj30ts06mq3r.jpg&quot; alt&gt;&lt;/p
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>计算机CPU性能提升</title>
+    <link href="https://jiarus.github.io/2019/07/28/%E8%AE%A1%E7%AE%97%E6%9C%BACPU%E6%80%A7%E8%83%BD%E6%8F%90%E5%8D%87/"/>
+    <id>https://jiarus.github.io/2019/07/28/计算机CPU性能提升/</id>
+    <published>2019-07-27T20:16:00.000Z</published>
+    <updated>2019-08-11T02:36:48.123Z</updated>
+    
+    <content type="html"><![CDATA[<p>CPU提升的途径：增加晶体管密度、提升CPU主频（晶体管开关的速度）</p><p><u><em>增加晶体管密度就需要把晶体管造的更小，这就是所谓的”制程”</em></u></p><p>CPU提升带来的是功率的增加：</p><p>CPU功率 <strong><em>～=1/2x负载电容x电压的平方x开关频率x晶体管数量</em></strong></p><p>*<u>降低CPU电压最容易提升计算机的续航</u>*</p><hr><p><strong>但仅靠提升CPU性能会遇到瓶颈，就需要采用CPU并行提高性能</strong></p><p>并行也会需要瓶颈，正如阿姆达尔定律（Amdahl’s Law）</p><p><em>优化后的执行时间 = 受优化影响的执行时间 / 加速倍数 + 不受影响的执行时间</em></p><p>一个程序可以分解为多个CPU的任务来处理，处理结束需要将多个CPU处理结果汇总在一起</p><p><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g5oa9jvga5j30w20kmta0.jpg" alt></p><p>100/4 + 20 = 45<br>100/100 + 20 = 21</p><p>可以看出仅靠增加CPU是会遇到瓶颈的，不受影响的执行时间无法做到并行处理</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;CPU提升的途径：增加晶体管密度、提升CPU主频（晶体管开关的速度）&lt;/p&gt;
+&lt;p&gt;&lt;u&gt;&lt;em&gt;增加晶体管密度就需要把晶体管造的更小，这就是所谓的”制程”&lt;/em&gt;&lt;/u&gt;&lt;/p&gt;
+&lt;p&gt;CPU提升带来的是功率的增加：&lt;/p&gt;
+&lt;p&gt;CPU功率 &lt;strong&gt;&lt;em&gt;～
+      
+    
+    </summary>
+    
+      <category term="计算机组成原理" scheme="https://jiarus.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"/>
+    
+    
+      <category term="计算机组成原理" scheme="https://jiarus.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>计算机性能之CPU篇</title>
+    <link href="https://jiarus.github.io/2019/07/28/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%80%A7%E8%83%BD%E4%B9%8BCPU%E7%AF%87/"/>
+    <id>https://jiarus.github.io/2019/07/28/计算机性能之CPU篇/</id>
+    <published>2019-07-27T19:37:00.000Z</published>
+    <updated>2019-08-11T02:37:04.064Z</updated>
+    
+    <content type="html"><![CDATA[<p>Keyword:<br><strong>响应时间、吞吐率</strong><br><em>响应时间主要依靠提升CPU性能、吞吐率可以多增加几台机器</em><br><strong>计算性能衡量：1/响应时间</strong></p><hr><p>统计从1到100w需要花费的时间<br><code>time seq 1000000 | wc -l1000000real  0m0.101s //系统真正花费的时间user  0m0.031s //在用户态花费的时间sys   0m0.016s //程序花费的时间</code></p><hr><p><em>有可能real &lt; user + sys ，这是因为系统是多个CPU的情况，user+sys统计的在多个CPU上一共花费的时间，而real是现实中时钟过去的时间 *<br>CPU执行时间 = user + sys  = CPU时钟周期数 x CPU时钟周期时间<br>CPU时钟周期时间：计算机的主频（2.8GHz），是计算机CPU中晶体振荡器（晶振）滴答一次的时间 = 1/2.8GHz<br>CPU时钟周期数 ：指令数 x 每条指令的平均时钟周期数（每条指令平均花费的时间,Cycles Per Instruction简称CPI）<br>CPU执行时间 =  指令数 x CPI x 2.8GHz<br>**</em>结论：要提高程序的执行效率，需要从CPU的主频、单个时钟周期时间内能执行的指令数和指令总条数上来优化</p><hr>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Keyword:&lt;br&gt;&lt;strong&gt;响应时间、吞吐率&lt;/strong&gt;&lt;br&gt;&lt;em&gt;响应时间主要依靠提升CPU性能、吞吐率可以多增加几台机器&lt;/em&gt;&lt;br&gt;&lt;strong&gt;计算性能衡量：1/响应时间&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;统计从1到100w需要花
+      
+    
+    </summary>
+    
+      <category term="计算机组成原理" scheme="https://jiarus.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"/>
+    
+    
+      <category term="计算机组成原理" scheme="https://jiarus.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kafka版本号</title>
+    <link href="https://jiarus.github.io/2019/07/27/Kafka%E7%89%88%E6%9C%AC%E5%8F%B7%E6%80%BB%E7%BB%93/"/>
+    <id>https://jiarus.github.io/2019/07/27/Kafka版本号总结/</id>
+    <published>2019-07-26T16:30:00.000Z</published>
+    <updated>2019-08-04T20:02:37.221Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong><em>kafka目前总共演进了7个大版本，分别是0.7、0.8、0.9、0.11、1.0和2.0<br>1.0以前都是4位版本号，之后改为3位版本号。如今kafka已经发行到2.3.0版本了</em></strong><br><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g5oa7vgn48j30le046wf2.jpg" alt><br>Scala 2.11代表的是Scala编译器的版本</p><hr><ol><li><strong><em>0.7v</em></strong> <ol><li>只有基本的消息队列功能，不包含副本机制</li></ol></li><li><strong><em>0.8v</em></strong> <ol><li>引入了副本机制，正式进化为高可用的分布式消息队列解决方案。<strong><em>0.8.2.0</em></strong>之前的客户端API需要制定zookeeper地址，而不是broker地址。</li><li>producerAPI默认使用同步方式发送消息，异步可能会出现丢失消息的情况。建议升级到0.8.2.2</li></ol></li><li><strong><em>0.9v</em></strong> <ol><li>2015年发布的0.9.0.0版本，增加了基础安全认证和权限功能</li><li>使用Java重写了消费者客户端（<em>但存在很多BUG</em>）</li></ol></li><li><strong><em>0.10v</em></strong><ol><li>主要变更都是在kafka Streams组件上</li></ol></li><li><strong><em>0.11v</em></strong><ol><li>引入幂等性producerAPI和事务API</li><li>对kafka消息格式重构</li><li>这个版本各个组件都非常稳定了。建议使用0.11.0.3，这个是国内最主流的版本。</li></ol></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;&lt;em&gt;kafka目前总共演进了7个大版本，分别是0.7、0.8、0.9、0.11、1.0和2.0&lt;br&gt;1.0以前都是4位版本号，之后改为3位版本号。如今kafka已经发行到2.3.0版本了&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;&lt;img src=&quot;http:
+      
+    
+    </summary>
+    
+    
+      <category term="kafka" scheme="https://jiarus.github.io/tags/kafka/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用一维数组存储二叉树</title>
+    <link href="https://jiarus.github.io/2019/07/10/%E4%BD%BF%E7%94%A8%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E5%AD%98%E5%82%A8%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
+    <id>https://jiarus.github.io/2019/07/10/使用一维数组存储二叉树/</id>
+    <published>2019-07-10T03:58:00.000Z</published>
+    <updated>2019-08-10T03:59:41.632Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">/***</span><br><span class="line"> * 需求：使用一维数组存储二叉树</span><br><span class="line"> * 步骤：</span><br><span class="line"> * 1、查看原始数据的个数（8个），从而制定二叉树层级（4层），得到满二叉树节点个数（15个）</span><br><span class="line"> * 2、二叉树节点（15个）为一维数组，全设置为0</span><br><span class="line"> * 3、循环遍历原始数据，第一个值为树根</span><br><span class="line"> * 4、第二个值与父节点比较，如果大于树根，则往右子树比较，如果数组内的值小于或等于树根，则往左子树比较</span><br><span class="line"> * 5、【循环】步骤4，直到形成二叉树</span><br><span class="line"> * </span><br><span class="line"> * 备注：左节点的坐标等于父节点的坐标*2，右节点的坐标等于父节点的坐标*2+1</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">import java.io.*;</span><br><span class="line">public class binaryTree&#123; </span><br><span class="line"></span><br><span class="line">    public static void main(String args[]) throws IOException</span><br><span class="line"></span><br><span class="line">       &#123;  </span><br><span class="line">        int i,level;</span><br><span class="line">        int data[]=&#123;6,3,5,9,7,8,4,2&#125;; /*原始数组*/</span><br><span class="line">        int btree[]=new int[16];</span><br><span class="line">        for(i=0;i&lt;16;i++) btree[i]=0;</span><br><span class="line">        System.out.print(&quot;原始数组内容: \n&quot;);</span><br><span class="line">        for(i=0;i&lt;8;i++)</span><br><span class="line">        System.out.print(&quot;[&quot;+data[i]+&quot;] &quot;);</span><br><span class="line">        System.out.println();</span><br><span class="line">        for(i=0;i&lt;8;i++)                    /*把原始数组中的值逐一对比*/</span><br><span class="line">        &#123;  </span><br><span class="line">            System.out.println(&quot;i==&gt;&quot;+i);</span><br><span class="line">            for(level=1;btree[level]!=0;)   /*比较树根及数组内的值*/</span><br><span class="line">            &#123;  </span><br><span class="line">                System.out.println(&quot;levele==&gt;&quot;+level+&quot; btree[level]==&gt;&quot;+btree[level]);</span><br><span class="line">                if(data[i]&gt;btree[level])    /*如果数组内的值大于树根，则往右子树比较*/</span><br><span class="line">                    level=level*2+1;</span><br><span class="line">                else                        /*如果数组内的值小于或等于树根，则往左子树比较*/</span><br><span class="line">                    level=level*2;</span><br><span class="line">            &#125;                               /*如果子树节点的值不为0，则再与数组内的值比较一次*/</span><br><span class="line">            btree[level]=data[i];           /*把数组值放入二叉树*/</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.print(&quot;二叉树内容：\n&quot;);</span><br><span class="line">        for (i=1;i&lt;16;i++)</span><br><span class="line">            System.out.print(&quot;[&quot;+btree[i]+&quot;] &quot;);</span><br><span class="line">        System.out.print(&quot;\n&quot;);</span><br><span class="line"></span><br><span class="line">       &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class
+      
+    
+    </summary>
+    
+      <category term="算法" scheme="https://jiarus.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法" scheme="https://jiarus.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java并发包常用类用法及原理</title>
+    <link href="https://jiarus.github.io/2019/06/02/Java%E5%B9%B6%E5%8F%91%E5%8C%85%E5%B8%B8%E7%94%A8%E7%B1%BB%E7%94%A8%E6%B3%95%E5%8F%8A%E5%8E%9F%E7%90%86/"/>
+    <id>https://jiarus.github.io/2019/06/02/Java并发包常用类用法及原理/</id>
+    <published>2019-06-02T04:33:00.000Z</published>
+    <updated>2019-08-08T19:29:08.166Z</updated>
+    
+    <content type="html"><![CDATA[<p>com.java.util.concurrent包是java5时添加的，专门处理多线程提供的工具类</p><blockquote><p><a href="#1"><strong>一、Atomic</strong></a><br><br><a href="#2"><strong>二、Lock</strong></a><br><br><a href="#3"><strong>三、BlockingQueue</strong></a><br><br><a href="#4"><strong>四、BlockDeque</strong></a><br><br><a href="#5"><strong>五、ConcurrnetMap</strong></a><br><br><a href="#6"><strong>六、CountDownLatch</strong></a><br><br><a href="#7"><strong>七、CyclicBarrier</strong></a><br><br><a href="#8"><strong>八、ExecutorService</strong></a><br><br><a href="#9"><strong>九、ForkJoinPool</strong></a><br></p></blockquote><p><a name="1"><strong>1.atomic包</strong></a></p><blockquote><p>AtomicBoolean、AtomicInteger、AtomicLong、AtomicReference<br>类提供多种方法，可以原子性地为参数取值、赋值、交换值（getAndSet）、比较并且设置值（CAS:compareAndSet）等。</p></blockquote><p>为什么需要使用atomic？<br>先说几个概念：</p><ul><li>重排序<blockquote><p>Java优化程序性能，在编译、处理和内存中对代码进行<strong>重排序</strong>，重排序是对代码的执行顺序做了修改。</p></blockquote></li><li>happens-before<blockquote><p>规定在编译、处理、内存中对代码执行重排序的规则。</p></blockquote></li><li>as-if-serial语义<blockquote><p>规定单线程中重排序和顺序执行的结果一致。</p></blockquote></li></ul><p>至于为什么需要在多线程使用atomic，有以下几点原因：</p><p>1.多个线程不能保证哪个线程先执行。因为不可见主内存值的问题，可能出现脏读的情况。</p><p>2.多线程赋值过程非原子性。因为变量在多线程中，修改一个主内存中的值，需要执行多个步骤（读取主内存，放入寄存器，修改值、赋值到主内存中），这么一来可能你在执行这个步骤的过程中，该变量被其他线程修改了，不能保证原子性。</p><p>3.使用volatile修饰变量。volatile是变量具有可见性（<del>当寄存器中修改了值，会立即通知主内存和其他寄存器修改值</del>）和有序性，查看AtomicInteger的源码，发现变量被volatile修饰。而原子性是Atomic中使用CAS（<del>修改前判断主内存的值是否和当前的值一致</del>）实现的，可见性就解决了上面问题1的脏读，有序性和原子性就解决了问题2中的问题。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">private volatile int value;</span><br><span class="line"></span><br><span class="line">public AtomicInteger(int initialValue) &#123;</span><br><span class="line">    value = initialValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><a name="2"><strong>2.locks</strong></a></p><ul><li><p>ReentrantLock</p><ul><li>可重入的互斥锁，即同一线程可以多次获得该锁，线程间是互斥的。</li></ul></li><li><p>ReentrantReadWriteLock</p><ul><li>可重入的读写锁，是在ReentrantLock的基础上的增强，更细粒度地控制。在特殊场景中会使用到，分为readLock和writeLock，读读共享，读写和写写排他。</li></ul></li></ul><p>Synchronized加锁实现原理：</p><blockquote><p>Synchronized经过编译，会在同步块的前后分别形成monitorenter和monitorexit这个两个字节码指令。在执行monitorenter指令时，首先要尝试获取对象锁。如果这个对象没被锁定，或者当前线程已经拥有了那个对象锁，把锁的计算器加1，相应的，在执行monitorexit指令时会将锁计算器就减1，当计算器为0时，锁就被释放了。如果获取对象锁失败，那当前线程就要阻塞，直到对象锁被另一个线程释放为止。</p></blockquote><p>Synchronized和ReentrantLock的区别联系：</p><ul><li><p>相同点：<br>都是加锁实现阻塞式的同步，一个线程获取了锁，其他线程就必须等待。</p></li><li><p>不同点：</p><ul><li><p>使用上。Synchronized修饰方法和对象，ReentrantLock需要实例化，并且显示地调用lock()加锁和unlock()解锁。</p></li><li><p>等待可中断。ReentrantLock可以使用lockInterruptibly()方法中断锁或者设置超时中断。</p></li><li><p>公平锁。Synchronized是非公平锁，ReentrantLock默认也是非公平锁，可以指定为公平锁。</p></li><li><p>使用Condition条件</p><blockquote><p>在Condition中，用await()替换wait()，用signal()替换notify()，用signalAll()替换notifyAll()，传统线程的通信方式，Condition都可以实现，这里注意，Condition是被绑定到Lock上的，要创建一个Lock的Condition必须用newCondition()方法。</p></blockquote></li></ul></li></ul><p><a name="3"><strong>3.BlockingQueue</strong></a></p><blockquote><p>提供了不同的插入移除检查方法，可以支持不同的返回值。</p></blockquote><table><thead><tr><th></th><th>抛异常</th><th>特定值</th><th>阻塞</th><th>超时</th></tr></thead><tbody><tr><td>插入</td><td>add(o)</td><td>offer(o)</td><td>put(o)</td><td>offer(o, timeout, timeunit)</td></tr><tr><td>移除</td><td>remove(o)</td><td>poll(o)</td><td>take(o)</td><td>poll(timeout, timeunit)</td></tr><tr><td>检查</td><td>get(o)</td><td>peek(o)</td><td>/</td><td>/</td></tr></tbody></table><blockquote><p>阻塞队列值提供一个队列可以提供遵守FIFO放入和取出的操作，如果队列满了放入就会阻塞，相反队列如果为空，取出就会阻塞。</p><p>BlockingQueue是一个接口类，具体有多种实现，主要介绍5种常用的：</p></blockquote><ul><li><p>ArrayBlockingQueue</p><blockquote><p>数组阻塞队列，故名思议是用数组实现的阻塞队列，是有界的，只能在初始化确定队列容量大小。内部只有一个reentrantLock，读和写使用同一个锁，因此效率不高。</p></blockquote></li><li><p>LinkedBlockingQueue</p><blockquote><p>链表阻塞队列，顾名思义是用链表实现的阻塞队列，但它可以是有界的也可以无界的，内部有两个reentrantLock，读写锁是分离的。性能要比ArrayBlockingQueue要高。但创建和销毁Node，高并发对GC有一定压力。</p></blockquote></li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//默认的构造器</span><br><span class="line">public LinkedBlockingQueue() &#123;</span><br><span class="line">        this(Integer.MAX_VALUE);</span><br><span class="line">&#125;</span><br><span class="line">//指定容量的构造器</span><br><span class="line">public LinkedBlockingQueue(int capacity) &#123;</span><br><span class="line">        if (capacity &lt;= 0) throw new IllegalArgumentException();</span><br><span class="line">        this.capacity = capacity;</span><br><span class="line">        last = head = new Node&lt;E&gt;(null);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li><p>PriorityBlockingQueue</p><blockquote><p>优先级阻塞队列。基于最小二叉堆实现，线程安全的无界队列。构造器中可以传入初始值和比较器的规则。根据比较器规则对内部元素排序。</p></blockquote></li><li><p>SynchronousQueue</p><blockquote><p>同步队列。内部只能存放一个元素。如果满了就插入就阻塞，相反如果为空取出就阻塞。</p></blockquote></li><li><p>DelayQueue</p><blockquote><p>延迟队列无界队列。内部使用优先级阻塞队列实现，只有元素过期才能取出来。并且按过期长短排序，队头的是过期最长的元素。使用ReentrantLock实现线程安全。</p></blockquote></li></ul><p><a name="4"><strong>4.BlockDeque</strong></a></p><blockquote><p>提供了不同的插入移除检查方法，可以支持不同的返回值。</p></blockquote><table><thead><tr><th></th><th>抛异常</th><th>特定值</th><th>阻塞</th><th>超时</th></tr></thead><tbody><tr><td>插入</td><td>addFirst(o)</td><td>offerFirst(o)</td><td>putFirst(o)</td><td>offerFirst(o, timeout, timeunit)</td></tr><tr><td>移除</td><td>removeFirst(o)</td><td>pollFirst(o)</td><td>takeFirst(o)</td><td>pollFirst(timeout, timeunit)</td></tr><tr><td>检查</td><td>getFirst(o)</td><td>peekFirst(o)</td><td>/</td><td>/</td></tr></tbody></table><ul><li>LinkedBlockingDeque<blockquote><p>双端链式阻塞队列。默认是无界的，也可以指定容量。该阻塞队列同时支持FIFO和FILO两种操作方式，队头和队尾都可以执行插入取出的操作。使用一把锁+两个条件维持队列的同步，和ArrayBlockingQueue的原理一样。</p></blockquote></li></ul><p><a name="5"><strong>5.ConcurrentMap</strong></a></p><blockquote><p>支持并发操作的Map。</p></blockquote><ul><li>ConcurrentHashMap 是ConcurrentMap的具体实现。<blockquote><p>1.发展。JDK1.7及之前都是使用Segment分段锁来实现的，因为Segment数量会限制并发量，而且在寻址也会执行两次hash，JDK1.8后取消Segment改为数组+链表+红黑树和CAS原子操作+synchronized实现。</p><p>2.初始化参数。</p><ul><li>initialCapacity初始化Map的容量</li><li>loadFactor负载因子</li><li>concurrencyLevel是最好情况下可以达到的并发数<del>（如果都访问的不同的Segment上）</del>。Segment的个数是大于等于的第一个2的n次方的数,即设置15。即Segment = concurrencyLevel = 2<sup>4</sup> = 16。默认情况下，initialCapacity等于16，loadFactor等于0.75，concurrencyLevel等于16.</li></ul><p>3.关于锁</p><ul><li>1.7<ul><li>Get没有加锁，因为Map中的key,value,nextHashEntry都是使用volatile修饰符修饰，多线程具有可见行。但是会进行两次Hash()方法寻址，第一次确定Segment位置，第二次确定table数组中位置。</li><li>Put使用的分段锁继承来ReentrantLock实现可重入锁。</li></ul></li><li>1.8<ul><li>Get方法同1.7相似都是没有加锁，一次hash寻址。</li><li>Put方法。使用CAS无锁机制，仅在Hash冲突时候加了synchronized同步锁。</li></ul></li></ul></blockquote></li></ul><blockquote><p>4.扩容<br>    数组容量增加一倍，并迁移链表中的数据</p></blockquote><p><a name="6"><strong>6.CountDownLatch</strong></a></p><blockquote><p>倒计时控制器(<del>自己起的名字</del>)。因为他类似于一个倒计时启动的功能。<br>初始化指定倒计时的值<code>CountDownLatch latch = new CountDownLatch(3)</code>并使用<code>latch.await()</code>等待执行，当其他其他线程调用3次<code>latch.countDown()</code>就触发主线程继续。</p></blockquote><p><a name="7"><strong>7.CyclicBarrier</strong></a></p><blockquote><p>栅栏。允许定义N个线程到达栅栏才执行某个方法。</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//创建一个栅栏，这里设置2个线程都执行barrier1.await()方法后可以执行barrier1Action方法</span><br><span class="line">CyclicBarrier barrier1 = new CyclicBarrier(2, barrier1Action);</span><br></pre></td></tr></table></figure><p><a name="8"><strong>8.ExecutorService</strong></a><br>线程池服务接口，有两种具体的实现方式</p><ul><li>ThreadPoolExecutor</li></ul><table><thead><tr><th>序号</th><th>名称</th><th>类型</th><th>含义</th></tr></thead><tbody><tr><td>1</td><td>corePoolSize</td><td>int</td><td>核心线程池大小</td></tr><tr><td>2</td><td>maximumPoolSize</td><td>int</td><td>最大线程池大小</td></tr><tr><td>3</td><td>keepAliveTime</td><td>long</td><td>线程最大空闲时间</td></tr><tr><td>4</td><td>unit</td><td>TimeUnit</td><td>时间单位</td></tr><tr><td>5</td><td>workQueue</td><td>BlockingQueue<runnable></runnable></td><td>线程等待队列</td></tr><tr><td>6</td><td>threadFactory</td><td>ThreadFactory</td><td>线程创建工厂</td></tr><tr><td>7</td><td>handler</td><td>RejectedExecutionHandler</td><td>拒绝策略</td></tr></tbody></table><blockquote><p>实际上Executors类使用上述参数为他提供了多种预定义的实现。<br>  <img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5st76um2ej30w00k0dlh.jpg" width="80%"></p><p>简单介绍几种预定义实现：</p><p>1.FixedThreadPool:可以指定固定数量的核心线程，但是队列使用<code>LinkedBlockingQueue</code>是无界的，可能导致内存溢出。</p><p>2.CachedThreadPool:不限制线程的个数，要设置线程生存的周期，超过这个时间没有使用将自动回收线程。但是队列使用的是<code>SynchronousQueue</code>入队时必须出队。因为这些特性，该线程池应该用于类似于Netty中的短连接，快速处理大量耗时短的任务。</p><p>3.newSingleThreadExecutor:只创建一个线程，但是队列使用<code>LinkedBlockingQueue</code>无界队列。</p></blockquote><ul><li>ScheduledThreadPoolExecutor<blockquote><p>继承了ThreadPoolExecutor，可以设置核心和最大线程的大小，使用<code>DelayedWorkQueue</code>延迟队列。</p></blockquote></li></ul><p><a name="9"><strong>9.ForkJoinPool</strong></a></p><blockquote><p>实现了Executor接口，支持将一个大任务分为若干个子任务交给子线程处理，然后合并为一个结果集。采用了分治和递归的思想。内部维护了多个队列。<br><del>（挖坑以后用到了再详细写）</del></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;com.java.util.concurrent包是java5时添加的，专门处理多线程提供的工具类&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;#1&quot;&gt;&lt;strong&gt;一、Atomic&lt;/strong&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;&lt;a href=&quot;#2&quot;&gt;&lt;str
+      
+    
+    </summary>
+    
+      <category term="java" scheme="https://jiarus.github.io/categories/java/"/>
+    
+    
+      <category term="java" scheme="https://jiarus.github.io/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>布隆过滤器</title>
+    <link href="https://jiarus.github.io/2019/05/08/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/"/>
+    <id>https://jiarus.github.io/2019/05/08/布隆过滤器/</id>
+    <published>2019-05-08T07:00:00.000Z</published>
+    <updated>2019-08-10T07:05:45.033Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>判断一个字符串存不存在,可以用来过滤非法字符串、垃圾邮件等</p></blockquote><p>1.使用BigSet存放hash位置信息</p><ul><li><p>初始化定义存放位置size,如4、8、16、32</p></li><li><p>有多少个size就需要多少次hash，将得到的hash值作为索引存放在set中，value为true</p></li></ul><p>2.判断是否存在，即将该字符串做hash处理，判断Bigset每个位置都为true，那么就认定该字符串存在</p><p>3.内存回收，当set占满，即每个字符串判断时都会存在，所以不能占满。<br>可以设置为百分之80，清空该set</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br></pre></td><td class="code"><pre><span class="line">package com.onedesk.dsp.utils;</span><br><span class="line"></span><br><span class="line">import java.io.*;</span><br><span class="line">import java.util.BitSet;</span><br><span class="line">import java.util.concurrent.atomic.AtomicInteger;</span><br><span class="line"></span><br><span class="line">public class BloomFilter implements Serializable &#123;</span><br><span class="line">    private static final long serialVersionUID = -5221305273707291280L;</span><br><span class="line">    private final int[] seeds;</span><br><span class="line">    private final int size;</span><br><span class="line">    private final BitSet notebook;</span><br><span class="line">    private final MisjudgmentRate rate;</span><br><span class="line">    private final AtomicInteger useCount = new AtomicInteger(0);</span><br><span class="line">    private final Double autoClearRate;</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     * 默认中等程序的误判率：MisjudgmentRate.MIDDLE 以及不自动清空数据（性能会有少许提升）</span><br><span class="line">     *</span><br><span class="line">     * @param dataCount 预期处理的数据规模，如预期用于处理1百万数据的查重，这里则填写1000000</span><br><span class="line">     */</span><br><span class="line">    public BloomFilter(int dataCount) &#123;</span><br><span class="line">        this(MisjudgmentRate.MIDDLE, dataCount, 0.8);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     * @param rate          一个枚举类型的误判率</span><br><span class="line">     * @param dataCount     预期处理的数据规模，如预期用于处理1百万数据的查重，这里则填写1000000</span><br><span class="line">     * @param autoClearRate 自动清空过滤器内部信息的使用比率，传null则表示不会自动清理，</span><br><span class="line">     *                      当过滤器使用率达到100%时，则无论传入什么数据，都会认为在数据已经存在了</span><br><span class="line">     *                      当希望过滤器使用率达到80%时自动清空重新使用，则传入0.8</span><br><span class="line">     */</span><br><span class="line">    public BloomFilter(MisjudgmentRate rate, int dataCount, Double autoClearRate) &#123;</span><br><span class="line">        long bitSize = rate.seeds.length * dataCount;</span><br><span class="line">        if (bitSize &lt; 0 || bitSize &gt; Integer.MAX_VALUE) &#123;</span><br><span class="line">            throw new RuntimeException(&quot;位数太大溢出了，请降低误判率或者降低数据大小&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        this.rate = rate;</span><br><span class="line">        seeds = rate.seeds;</span><br><span class="line">        size = (int) bitSize;</span><br><span class="line">        notebook = new BitSet(size);</span><br><span class="line">        this.autoClearRate = autoClearRate;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void add(String data) &#123;</span><br><span class="line">        checkNeedClear();</span><br><span class="line">        </span><br><span class="line">        for (int i = 0; i &lt; seeds.length; i++) &#123;</span><br><span class="line">            int index = hash(data, seeds[i]);</span><br><span class="line">            setTrue(index);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public boolean check(String data) &#123;</span><br><span class="line">        for (int i = 0; i &lt; seeds.length; i++) &#123;</span><br><span class="line">            int index = hash(data, seeds[i]);</span><br><span class="line">            if (!notebook.get(index)) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     * 如果不存在就进行记录并返回false，如果存在了就返回true</span><br><span class="line">     *</span><br><span class="line">     * @param data</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public boolean addIfNotExist(String data) &#123;</span><br><span class="line">        checkNeedClear();</span><br><span class="line">        </span><br><span class="line">        int[] indexs = new int[seeds.length];</span><br><span class="line">        // 先假定存在</span><br><span class="line">        boolean exist = true;</span><br><span class="line">        int index;</span><br><span class="line">        </span><br><span class="line">        for (int i = 0; i &lt; seeds.length; i++) &#123;</span><br><span class="line">            indexs[i] = index = hash(data, seeds[i]);</span><br><span class="line">            </span><br><span class="line">            if (exist) &#123;</span><br><span class="line">                if (!notebook.get(index)) &#123;</span><br><span class="line">                    // 只要有一个不存在，就可以认为整个字符串都是第一次出现的</span><br><span class="line">                    exist = false;</span><br><span class="line">                    // 补充之前的信息</span><br><span class="line">                    for (int j = 0; j &lt;= i; j++) &#123;</span><br><span class="line">                        setTrue(indexs[j]);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                setTrue(index);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        return exist;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    private void checkNeedClear() &#123;</span><br><span class="line">        if (autoClearRate != null) &#123;</span><br><span class="line">            if (getUseRate() &gt;= autoClearRate) &#123;</span><br><span class="line">                synchronized (this) &#123;</span><br><span class="line">                    if (getUseRate() &gt;= autoClearRate) &#123;</span><br><span class="line">                        notebook.clear();</span><br><span class="line">                        useCount.set(0);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void setTrue(int index) &#123;</span><br><span class="line">        useCount.incrementAndGet();</span><br><span class="line">        notebook.set(index, true);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    private int hash(String data, int seeds) &#123;</span><br><span class="line">        char[] value = data.toCharArray();</span><br><span class="line">        int hash = 0;</span><br><span class="line">        if (value.length &gt; 0) &#123;</span><br><span class="line">            </span><br><span class="line">            for (int i = 0; i &lt; value.length; i++) &#123;</span><br><span class="line">                hash = i * hash + value[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        hash = hash * seeds % size;</span><br><span class="line">        // 防止溢出变成负数</span><br><span class="line">        return Math.abs(hash);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public double getUseRate() &#123;</span><br><span class="line">        return (double) useCount.intValue() / (double) size;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     * 清空过滤器中的记录信息</span><br><span class="line">     */</span><br><span class="line">    public void clear() &#123;</span><br><span class="line">        useCount.set(0);</span><br><span class="line">        notebook.clear();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public MisjudgmentRate getRate() &#123;</span><br><span class="line">        return rate;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /**</span><br><span class="line">     * 分配的位数越多，误判率越低但是越占内存</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * 4个位误判率大概是0.14689159766308</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * 8个位误判率大概是0.02157714146322</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * 16个位误判率大概是0.00046557303372</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * 32个位误判率大概是0.00000021167340</span><br><span class="line">     *</span><br><span class="line">     * @author lianghaohui</span><br><span class="line">     */</span><br><span class="line">    public enum MisjudgmentRate &#123;</span><br><span class="line">        // 这里要选取质数，能很好的降低错误率</span><br><span class="line">        /**</span><br><span class="line">         * 每个字符串分配4个位</span><br><span class="line">         */</span><br><span class="line">        VERY_SMALL(new int[]&#123;2, 3, 5, 7&#125;),</span><br><span class="line">        /**</span><br><span class="line">         * 每个字符串分配8个位</span><br><span class="line">         */</span><br><span class="line">        SMALL(new int[]&#123;2, 3, 5, 7, 11, 13, 17, 19&#125;), //</span><br><span class="line">        /**</span><br><span class="line">         * 每个字符串分配16个位</span><br><span class="line">         */</span><br><span class="line">        MIDDLE(new int[]&#123;2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53&#125;), //</span><br><span class="line">        /**</span><br><span class="line">         * 每个字符串分配32个位</span><br><span class="line">         */</span><br><span class="line">        HIGH(new int[]&#123;2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97,</span><br><span class="line">                101, 103, 107, 109, 113, 127, 131&#125;);</span><br><span class="line">        </span><br><span class="line">        private int[] seeds;</span><br><span class="line">        </span><br><span class="line">        private MisjudgmentRate(int[] seeds) &#123;</span><br><span class="line">            this.seeds = seeds;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        public int[] getSeeds() &#123;</span><br><span class="line">            return seeds;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        public void setSeeds(int[] seeds) &#123;</span><br><span class="line">            this.seeds = seeds;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        BloomFilter fileter = new BloomFilter(100000);</span><br><span class="line">        System.out.println(fileter.addIfNotExist(&quot;1111111111111&quot;))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;判断一个字符串存不存在,可以用来过滤非法字符串、垃圾邮件等&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;1.使用BigSet存放hash位置信息&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;初始化定义存放位置size,如4、8、16、32&lt;/p&gt;
+&lt;/li&gt;
+&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://jiarus.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kakfa主题管理</title>
+    <link href="https://jiarus.github.io/2019/04/26/Kakfa%E4%B8%BB%E9%A2%98%E7%AE%A1%E7%90%86/"/>
+    <id>https://jiarus.github.io/2019/04/26/Kakfa主题管理/</id>
+    <published>2019-04-26T12:13:00.000Z</published>
+    <updated>2019-08-06T19:57:16.707Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>创建Topic</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --bootstrap-server broker_host:port --create --topic my_topic_name  --partitions 1 --replication-factor 1</span><br></pre></td></tr></table></figure><p>kafka2.2之后推荐使用<code>--bootstrap-server</code>代替<code>--zookeeper</code>，因为通过前者创建可以控制权限，只和Broker打交道也是官方之后标准。</p><p><strong>查看Topic列表</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --bootstrap-server broker_host:port --list</span><br></pre></td></tr></table></figure><p><strong>查看Topic详情</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --bootstrap-server broker_host:port --describe --topic &lt;topic_name&gt;</span><br></pre></td></tr></table></figure><p><strong>删除Topic</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --bootstrap-server broker_host:port --delete  --topic &lt;topic_name&gt;</span><br></pre></td></tr></table></figure><p><strong>增加Topic分区</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-topics.sh --bootstrap-server broker_host:port --alter --topic &lt;topic_name&gt; --partitions &lt; 新分区数 &gt;</span><br></pre></td></tr></table></figure><p>kafka不允许增加分区。因为多个broker节点都冗余有分区的数据，减少分区数需要操作多个broker且需要迁移该分区数据到其他分区。如果是按消息key hash选的分区，那么迁移就不知道迁到哪里了，因为只有业务代码可以决定放在哪。已经被大佬肯定了，应该没错。:)<br><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g5qlb5wdfxj31380d0aca.jpg" alt></p><p><strong>修改Topic参数</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-configs.sh --zookeeper zookeeper_host:port --entity-type topics --entity-name &lt;topic_name&gt; --alter --add-config max.message.bytes=10485760</span><br></pre></td></tr></table></figure><p>设置允许最大消息大小</p><p><strong>变更Topic副本数</strong></p><p>使用kafka-reassign-partitions</p><p><strong>修改Topic限速</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-configs.sh --zookeeper zookeeper_host:port --alter --add-config &apos;leader.replication.throttled.rate=104857600,follower.replication.throttled.rate=104857600&apos; --entity-type brokers --entity-name 0</span><br></pre></td></tr></table></figure><p>主要限制Leader和Follower的副本使用的带宽。broker 0 代表某一个节点，多个需要每个都单独执行命令。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-configs.sh --zookeeper zookeeper_host:port --alter --add-config &apos;leader.replication.throttled.replicas=*,follower.replication.throttled.replicas=*&apos; --entity-type topics --entity-name test</span><br></pre></td></tr></table></figure><p>同时还要设置要限速的副本*代表所有副本</p><p><strong>内部Topic</strong><br>__consumer_offsets是用来记录consumer的offset值，默认创建50个分区。不需要手动管理。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;创建Topic&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td
+      
+    
+    </summary>
+    
+      <category term="kafka" scheme="https://jiarus.github.io/categories/kafka/"/>
+    
+    
+      <category term="kafka" scheme="https://jiarus.github.io/tags/kafka/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Golang中遍历非指针对象的坑</title>
+    <link href="https://jiarus.github.io/2019/04/20/Golang%E4%B8%AD%E9%81%8D%E5%8E%86%E9%9D%9E%E6%8C%87%E9%92%88%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%9D%91/"/>
+    <id>https://jiarus.github.io/2019/04/20/Golang中遍历非指针对象的坑/</id>
+    <published>2019-04-20T10:47:00.000Z</published>
+    <updated>2019-08-11T00:56:51.988Z</updated>
+    
+    <content type="html"><![CDATA[<p>前段时间写了个递归树，中间遇到了个坑，按逻辑看是没问题，没想到结果不对。</p><blockquote><p><code>for _, v := range tree</code>我在遍历这个tree数组的时候传递的是数组对象，修改了数组的内容但返回时发现没有变化。这就是golang和java的差别，遍历的时候如果是非指针对象，那么golang会copy一个副本v，你修改的只是v的值，除非你修改完再重新放入数组，否则结果是不会变的。或者使用指针传递，使用数组的指针就没问题了。</p></blockquote><p>这应该是golang和java思想的不同之处，golang处处都应该尽量使用指针，特别是大对象。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">func genGeoTree(arr *[]entity.GeoCommon) []*entity.GeoTree &#123;</span><br><span class="line">root := buildGeoRoot(arr)</span><br><span class="line">buildGeoChildren(arr, root)</span><br><span class="line">return root</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func buildGeoRoot(arr *[]entity.GeoCommon) []*entity.GeoTree &#123;</span><br><span class="line">var pNodes []*entity.GeoTree</span><br><span class="line">for _, v := range *arr &#123;</span><br><span class="line">if v.PCode == 0 &#123;</span><br><span class="line">var child entity.GeoTree</span><br><span class="line">child.Code = v.Code</span><br><span class="line">child.Name = v.Name</span><br><span class="line">child.Sort = v.Sort</span><br><span class="line">child.PCode = v.PCode</span><br><span class="line">pNodes = append(pNodes, &amp;child)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">return pNodes</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func buildGeoChildren(arr *[]entity.GeoCommon, tree []*entity.GeoTree) &#123;</span><br><span class="line">for _, v := range tree &#123;</span><br><span class="line">pNodes := make([]*entity.GeoTree, 0)</span><br><span class="line">for _, vv := range *arr &#123;</span><br><span class="line">if vv.PCode == v.Code &#123;</span><br><span class="line">var child entity.GeoTree</span><br><span class="line">child.Code = vv.Code</span><br><span class="line">child.Name = vv.Name</span><br><span class="line">child.Sort = vv.Sort</span><br><span class="line">child.PCode = vv.PCode</span><br><span class="line">pNodes = append(pNodes, &amp;child)</span><br><span class="line">buildGeoChildren(arr, pNodes)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">v.Children = pNodes</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;前段时间写了个递归树，中间遇到了个坑，按逻辑看是没问题，没想到结果不对。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;for _, v := range tree&lt;/code&gt;我在遍历这个tree数组的时候传递的是数组对象，修改了数组的内容但返回时发现没有变化。这就
+      
+    
+    </summary>
+    
+      <category term="golang" scheme="https://jiarus.github.io/categories/golang/"/>
+    
+    
+      <category term="golang" scheme="https://jiarus.github.io/tags/golang/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kafka消费者组和Rebalance</title>
+    <link href="https://jiarus.github.io/2019/04/18/Kafka%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84/"/>
+    <id>https://jiarus.github.io/2019/04/18/Kafka消费者组/</id>
+    <published>2019-04-18T03:05:00.000Z</published>
+    <updated>2019-08-06T03:32:21.402Z</updated>
+    
+    <content type="html"><![CDATA[<h6 id="消费者组"><a href="#消费者组" class="headerlink" title="消费者组"></a>消费者组</h6><blockquote><p>Consumer Group 是 Kafka 提供的可扩展且具有容错性的消费者机制</p></blockquote><p>特性：</p><p>1.一个组下可以包含多个消费者实例。可以是消费者进程，也可以是消费者线程。</p><p>2.GroupID是个字符串，标识唯一的group。</p><p>3.Topic下的分区只能被某个Group的一个Consumer消费。一个Consumer可以消费多个分区，即分区和消费者是多对一的关系。所以Kafka可以实现消息队列（一个消费者属于单个Group）,也可以实现发布/订阅模型（一个消费者属于多个Group）。</p><p><strong>group中的offset</strong><br>老版本中保存在Zookeeper中，新版本保存在Broker节点Topic中。</p><h6 id="Rebalance"><a href="#Rebalance" class="headerlink" title="Rebalance"></a>Rebalance</h6><blockquote><p>Rebalance 本质上是一种协议，规定了一个 Consumer Group 下的所有 Consumer 如何达成一致，来分配订阅 Topic 的每个分区。</p></blockquote><p>触发条件:</p><p>1.Group下的consumer成员变更</p><p>2.Topic变更</p><p>3.Topic分区变更</p><p>影响：</p><p>Stop The World.即在Rebalance时kafka会停止所有的服务，因为当前版本的Kafka触发Rebalance时候会重新分配所有的Consumer对应的分区，并不是像一致性哈希（一致性Hash算法对于节点的增减都只需重定位环空间中的一小部分数据，具有较好的容错性和可扩展性。）那样尽量保证其他节点不影响。所以要尽量避免发生Rebalance的发生。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h6 id=&quot;消费者组&quot;&gt;&lt;a href=&quot;#消费者组&quot; class=&quot;headerlink&quot; title=&quot;消费者组&quot;&gt;&lt;/a&gt;消费者组&lt;/h6&gt;&lt;blockquote&gt;
+&lt;p&gt;Consumer Group 是 Kafka 提供的可扩展且具有容错性的消费者机制&lt;/p&gt;
+&lt;/b
+      
+    
+    </summary>
+    
+      <category term="kafka" scheme="https://jiarus.github.io/categories/kafka/"/>
+    
+    
+      <category term="kafka" scheme="https://jiarus.github.io/tags/kafka/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kafka幂等性和事务</title>
+    <link href="https://jiarus.github.io/2019/04/07/Kafka%E5%B9%82%E7%AD%89%E6%80%A7%E5%92%8C%E4%BA%8B%E5%8A%A1/"/>
+    <id>https://jiarus.github.io/2019/04/07/Kafka幂等性和事务/</id>
+    <published>2019-04-07T05:42:00.000Z</published>
+    <updated>2019-08-06T02:04:27.552Z</updated>
+    
+    <content type="html"><![CDATA[<h6 id="幂等性"><a href="#幂等性" class="headerlink" title="幂等性"></a>幂等性</h6><blockquote><p>幂等性值多次执行某个操作，每次执行的结果都和第一次一样。Kafka可以在Producer端设置幂等性，<em>0.11.0.0</em>之后加入的新功能，<code>enable.idempotence = true</code>设置后Producer自动会对你的消息进行去重。但是只能保证单分区上的幂等性，即一个幂等性Producer只能保证某个Topic下的一个分区内不会出现重复数据，无法实现多分区幂等性。还有只能保证单会话幂等性，Producer重启后就不能与之前的数据共享幂等性。</p></blockquote><p><em>个人认为在消息者端实现幂等性，可以最大程度避免重复消费。</em></p><h6 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h6><blockquote><p>事务Producer可以保证跨会话和跨分区的幂等性。和幂等性设置一样<code>enable.idempotence = true</code>，设置Producer端<code>transcational.id</code>,业务代码中也要手动开启和提交事务。在Consumer端设置<code>isolation.level = read_committed</code>。一般是在Kafka Streams 流处理中使用，保证精确的一次语义。平时一般不会使用因为性能不太高。</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h6 id=&quot;幂等性&quot;&gt;&lt;a href=&quot;#幂等性&quot; class=&quot;headerlink&quot; title=&quot;幂等性&quot;&gt;&lt;/a&gt;幂等性&lt;/h6&gt;&lt;blockquote&gt;
+&lt;p&gt;幂等性值多次执行某个操作，每次执行的结果都和第一次一样。Kafka可以在Producer端设置幂等性，&lt;e
+      
+    
+    </summary>
+    
+      <category term="kafka" scheme="https://jiarus.github.io/categories/kafka/"/>
+    
+    
+      <category term="kafka" scheme="https://jiarus.github.io/tags/kafka/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kafka消息无丢失/重复消费配置</title>
+    <link href="https://jiarus.github.io/2019/04/06/Kafka%E6%B6%88%E6%81%AF%E6%97%A0%E4%B8%A2%E5%A4%B1%E9%85%8D%E7%BD%AE/"/>
+    <id>https://jiarus.github.io/2019/04/06/Kafka消息无丢失配置/</id>
+    <published>2019-04-06T01:00:00.000Z</published>
+    <updated>2019-08-06T19:40:45.506Z</updated>
+    
+    <content type="html"><![CDATA[<h6 id="消息丢失-重复消费的场景："><a href="#消息丢失-重复消费的场景：" class="headerlink" title="消息丢失/重复消费的场景："></a>消息丢失/重复消费的场景：</h6><ul><li><p>提交消息失败</p><ul><li>使用<code>producer.send(msg)</code>提交消息。因为没有回调结果，这时可能消息broker因为网络波动并没有收到，此时消息就丢失了。所以建议使用有回调函数的<code>producer.send(msg,callback)</code>。</li></ul></li><li><p>Broker端丢失消息</p></li><li><p>消费者丢失/重复消费消息</p><ul><li><p>offset超前，超过了HighWater（真实已消费的位置）。再次消费会从offset位置开始，中间的消息就丢失了。相反offset落后与HW就导致重复消费。</p></li><li><p>自动提交offset。可能你使用了多线程处理消息并且是自动提交。如果某个线程处理失败，并且没有显示地通知那么自动提交后就会丢失消息。</p></li></ul></li></ul><h6 id="最佳实践："><a href="#最佳实践：" class="headerlink" title="最佳实践："></a>最佳实践：</h6><p> 1～3 producer端参数<br> 4～8 broker端参数</p><p> 1.不使用<code>producer.send(msg)</code>提交消息，一定使用带有回调函数方式提交。</p><p> 2.使用<code>acks = all</code>,意味着在ISR中的所有的副本broker都接收消息才认为提交成功。</p><p> 3.设置producer端的retries值&gt;0，即设置重试次数。</p><p> 4.设置<code>unclean.leader.election.enable=false</code>禁止落后太多的副本选举成为leader，unclean leader指的是落后于最新消息的节点，如果它被选作leader那就肯定会丢失数据。有利有弊，这个参数发挥作用的情况只有当ISR(副本集合)中没有副本，才会执行unclean选举，如果不选举那么就会导致整个broker挂掉，失去高可用性。但一般还是要禁止掉，同时增加多个replicas(副本)个数来保证ISR中有正常的副本。</p><p> 5.设置<code>replication.factor=3</code>副本个数，可以冗余消息到其他broker上。</p><p> 6.设置<code>min.insync.replicas&gt;1</code>,设置消息要写入多少个副本才算成功。生产环境最好要&gt;1。</p><p> 7.确保<code>replication.factor &gt; min.insync.replicas</code> 即副本个数大于需成功写入的个数。生产环境设置<code>replication.factor = min.insync.replicas + 1</code>这样可以保证有一个副本挂掉的情况下仍然可以提交数据。</p><p> 8.设置<code>enable.auto.commit = false</code> 即设置手动提交offset方式，对单consumer多线程的情况很关键。</p><p>在提交消息时，也建议同时使用异步提交+同步提交的策略。保证性能和安全性！</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">    try &#123;</span><br><span class="line">           while(true) &#123;</span><br><span class="line">             ConsumerRecords&lt;String, String&gt; records = consumer.poll(Duration.ofSeconds(1));</span><br><span class="line">             process(records); // 处理消息</span><br><span class="line">             commitAysnc(); // 使用异步提交规避阻塞</span><br><span class="line">            &#125;</span><br><span class="line">&#125; catch(Exception e) &#123;</span><br><span class="line">            handle(e); // 处理异常</span><br><span class="line">&#125; finally &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                   consumer.commitSync(); // 最后一次提交使用同步阻塞式提交</span><br><span class="line">&#125; finally &#123;</span><br><span class="line">     consumer.close();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h6 id=&quot;消息丢失-重复消费的场景：&quot;&gt;&lt;a href=&quot;#消息丢失-重复消费的场景：&quot; class=&quot;headerlink&quot; title=&quot;消息丢失/重复消费的场景：&quot;&gt;&lt;/a&gt;消息丢失/重复消费的场景：&lt;/h6&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;提交消息失败&lt;/p&gt;
+&lt;ul&gt;
+&lt;
+      
+    
+    </summary>
+    
+      <category term="kafka" scheme="https://jiarus.github.io/categories/kafka/"/>
+    
+    
+      <category term="kafka" scheme="https://jiarus.github.io/tags/kafka/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kafka分区机制原理</title>
+    <link href="https://jiarus.github.io/2019/03/02/Kafka%E5%88%86%E5%8C%BA%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
+    <id>https://jiarus.github.io/2019/03/02/Kafka分区最佳实践/</id>
+    <published>2019-03-02T15:57:00.000Z</published>
+    <updated>2019-08-11T02:38:54.482Z</updated>
+    
+    <content type="html"><![CDATA[<p>kafka消息组织结构：<br>主题-分区-消息<br><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5p8tk3wyej30bq07lwf0.jpg" alt><br>一、为什么分区？</p><ul><li>提供负载均衡、动态伸缩的能力</li><li>支持局部消息顺序消费</li></ul><p>二、分区策略</p><ul><li><p>默认分区策略</p><ul><li><p>轮询（Round-robin）是javaProducerAPI默认策略</p></li><li><p>随机（Randomness）</p></li><li><p>按消息键保存。自定义每条消息的消息键，消息键代表业务类型，使相同类型的业务放到同一个partition。因为一个分区只能针对同一个消费者，那么该消费者的消息就是有序的。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">   #按key类型划分</span><br><span class="line">   List&lt;PartitionInfo&gt; partitions = cluster.partitionsForTopic(topic);</span><br><span class="line">   List&lt;PartitionInfo&gt; partitions = cluster.partitionsForTopic(topic);</span><br><span class="line">     return Math.abs(key.hashCode()) % partitions.size();</span><br><span class="line">     </span><br><span class="line">#按地区分区,同理可以按Ip地域划分partition。</span><br><span class="line">   List&lt;PartitionInfo&gt; partitions = cluster.partitionsForTopic(topic);</span><br><span class="line">   return partitions.stream().filter(p -&gt; isSouth(p.leader().host())).map(PartitionInfo::partition).findAny().get();</span><br></pre></td></tr></table></figure></li></ul></li><li><p>自定义分区策略</p><blockquote><p>需要实现<code>org.apache.kafka.clients.producer.Partitioner</code>接口，设置并设置<code>partitioner.class</code>值为该实现类全路径类名</p></blockquote></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;kafka消息组织结构：&lt;br&gt;主题-分区-消息&lt;br&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006tNc79ly1g5p8tk3wyej30bq07lwf0.jpg&quot; alt&gt;&lt;br&gt;一、为什么分区？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;提供负
+      
+    
+    </summary>
+    
+      <category term="kafka" scheme="https://jiarus.github.io/categories/kafka/"/>
+    
+    
+      <category term="kafka" scheme="https://jiarus.github.io/tags/kafka/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>重写equals和hashCode引发的思考</title>
+    <link href="https://jiarus.github.io/2019/01/28/%E5%85%B3%E4%BA%8E%E9%87%8D%E5%86%99equals/"/>
+    <id>https://jiarus.github.io/2019/01/28/关于重写equals/</id>
+    <published>2019-01-28T04:47:00.000Z</published>
+    <updated>2019-08-10T05:56:23.726Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>关于重写equals方法</strong></p><blockquote><p>最近小伙伴问了我个问题：<br>在Set里存放对象，如果有两个对象属性相同，那么怎么能保证只存在一个对象？<br>HashSet是基于HashMap实现的，所以要看看HashMap的源码</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">final V putVal(int hash, K key, V value, boolean onlyIfAbsent,</span><br><span class="line">                   boolean evict) &#123;</span><br><span class="line">        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;</span><br><span class="line">        if ((tab = table) == null || (n = tab.length) == 0)</span><br><span class="line">            n = (tab = resize()).length;</span><br><span class="line">            //判断该hashCode的key是否存在</span><br><span class="line">        if ((p = tab[i = (n - 1) &amp; hash]) == null)</span><br><span class="line">            tab[i] = newNode(hash, key, value, null);</span><br><span class="line">        else &#123;</span><br><span class="line">            Node&lt;K,V&gt; e; K k;</span><br><span class="line">            //如果该hashCode存在，调用equals比较key的值</span><br><span class="line">            if (p.hash == hash &amp;&amp;</span><br><span class="line">                ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                e = p;</span><br><span class="line">            else if (p instanceof TreeNode)</span><br><span class="line">                e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);</span><br><span class="line">            else &#123;</span><br><span class="line">                for (int binCount = 0; ; ++binCount) &#123;</span><br><span class="line">                    if ((e = p.next) == null) &#123;</span><br><span class="line">                        p.next = newNode(hash, key, value, null);</span><br><span class="line">                        if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st</span><br><span class="line">                            treeifyBin(tab, hash);</span><br><span class="line">                        break;</span><br><span class="line">                    &#125;</span><br><span class="line">                    if (e.hash == hash &amp;&amp;</span><br><span class="line">                        ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                        break;</span><br><span class="line">                    p = e;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (e != null) &#123; // existing mapping for key</span><br><span class="line">                V oldValue = e.value;</span><br><span class="line">                if (!onlyIfAbsent || oldValue == null)</span><br><span class="line">                    e.value = value;</span><br><span class="line">                afterNodeAccess(e);</span><br><span class="line">                return oldValue;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ++modCount;</span><br><span class="line">        if (++size &gt; threshold)</span><br><span class="line">            resize();</span><br><span class="line">        afterNodeInsertion(evict);</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><p>可以看到，HashMap是根据hashCode来确定在Node数组中的位置，那么要使HashSet能够对对象去重，就首先需要重写对象的Hash方法，使相同值的对象的HashCode相等，其次还需要重写equals方法，因为即使hashCode相同还是会存放到Map中，这种情况属于Hash冲突，会使用链表存放该对象。</p><p>HashCode和equals的关系？</p><ul><li>以下是我的理解<blockquote><p>equals比较变量或者对象是否“相同”，这个相同是偏向于业务上的相同，和人理解的“相同”是一个概念。计算机判断的“相同”是hashCode是一致，但如果一个对象,那么计算机并不知道怎么判断他们是否相同<del>(总不能比较对象字节流吧。。)</del>，那么就只能使用Object的hashCode方法判断值是否一致。如果没重写就会导致计算机认为是不同的对象。<strong>所以就有了重写equals()一定要重写hashcode()的说法了</strong>。但注意hashCode相同equals不一定要相同，因为这个是由于hash算法的优劣决定的。</p></blockquote></li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//下面是Object的生成hashCode方法，根据内存地址生成</span><br><span class="line">/** This is stated explicitly here because it is important for</span><br><span class="line">     implementations to understand that equals() and hashCode() must</span><br><span class="line">     absolutely, positively work properly -- i.e., two Address</span><br><span class="line">     objects representing the same address are both equal (via</span><br><span class="line">     equals()) and have the same hash code. */</span><br><span class="line"> public int hashCode();</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;关于重写equals方法&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;最近小伙伴问了我个问题：&lt;br&gt;在Set里存放对象，如果有两个对象属性相同，那么怎么能保证只存在一个对象？&lt;br&gt;HashSet是基于HashMap实现的，所以要看看Hash
+      
+    
+    </summary>
+    
+      <category term="java" scheme="https://jiarus.github.io/categories/java/"/>
+    
+    
+      <category term="java" scheme="https://jiarus.github.io/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>@Transcational注解原理</title>
+    <link href="https://jiarus.github.io/2019/01/18/Transcational%E6%B3%A8%E8%A7%A3%E5%8E%9F%E7%90%86/"/>
+    <id>https://jiarus.github.io/2019/01/18/Transcational注解原理/</id>
+    <published>2019-01-18T11:20:00.000Z</published>
+    <updated>2019-08-10T06:59:43.130Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>@Transcational注解原理</strong></p><p>运行配置@Transactional注解的测试类的时候，具体会发生如下步骤</p><ul><li><p>事务开始时，通过AOP机制，生成一个代理connection对象，并将其放入DataSource实例的某个与DataSourceTransactionManager相关的某处容器中。在接下来的整个事务中，客户代码都应该使用该connection连接数据库，执行所有数据库命令(不使用该connection连接数据库执行的数据库命令，在本事务回滚的时候得不到回滚)</p></li><li><p>事务结束时，回滚在第1步骤中得到的代理connection对象上执行的数据库命令，然后关闭该代理connection对象</p></li></ul><p>根据上面所述，我们所使用的客户代码应该具有如下能力：</p><ul><li><p>每次执行数据库命令的时候<br>如果在事务的上下文环境中，那么不直接创建新的connection对象，而是尝试从DataSource实例的某个与DataSourceTransactionManager相关的某处容器中获取connection对象；在非事务的上下文环境中，直接创建新的connection对象</p></li><li><p>每次执行完数据库命令的时候<br>如果在事务的上下文环境中，那么不直接关闭connection对象，因为在整个事务中都需要使用该connection对象，而只是释放本次数据库命令对该connection对象的持有；在非事务的上下文环境中，直接关闭该connection对象</p></li></ul><p><strong>@Transactional 通常在哪里使用？</strong></p><blockquote><p>Spring团队的建议是你在具体的类（或类的方法）上使用 @Transactional 注解，而不要使用在类所要实现的任何接口上。你当然可以在接口上使用 @Transactional 注解，但是这将只能当你设置了基于接口的代理时它才生效。因为注解是 不能继承 的，这就意味着如果你正在使用基于类的代理时，那么事务的设置将不能被基于类的代理所识别，而且对象也将不会被事务代理所包装（将被确认为严重的）。因 此，请接受Spring团队的建议并且在具体的类上使用 @Transactional 注解。</p><p>可以在类或者方法上使用，不推荐在接口上使用。</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;@Transcational注解原理&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;运行配置@Transactional注解的测试类的时候，具体会发生如下步骤&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;事务开始时，通过AOP机制，生成一个代理connection对象，并将其放入Da
+      
+    
+    </summary>
+    
+      <category term="spring" scheme="https://jiarus.github.io/categories/spring/"/>
+    
+    
+      <category term="spring" scheme="https://jiarus.github.io/tags/spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mysql事务隔离级别</title>
+    <link href="https://jiarus.github.io/2018/11/02/Mysql%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/"/>
+    <id>https://jiarus.github.io/2018/11/02/Mysql事务隔离级别/</id>
+    <published>2018-11-02T11:30:00.000Z</published>
+    <updated>2019-08-02T12:18:40.545Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="Mysql事务隔离级别"><a href="#Mysql事务隔离级别" class="headerlink" title="Mysql事务隔离级别"></a>Mysql事务隔离级别</h5><p>假如你从Mysql设计师的角度看，在事务处理中可能会出现下面几种问题：<br>1.更新丢失</p><blockquote><p>   <del>A、B线程并发修改同一条数据，A修改成功并提交，B回滚了修改，这种情况那么也会把A提交的结果也回滚了。A更新的内容就丢失了。（目前的关系型数据库都不会出现这种问题了）</del></p></blockquote><p>2.脏读</p><blockquote><p> A、B线程并发修改同一条数据，A修改后未提交，B此时读会就会读到A提交前的数据，A也可能会回滚导致B结果错误。</p></blockquote><p>3.不可重复读</p><blockquote><p>A、B、C线程并发修改同一条数据，AB修改后提交，C可能分别读到三个不同的结果。</p></blockquote><p>4.幻读</p><blockquote><p>A、B线程并发修改同一条数据，A添加或者删除并提交了数据，B在A提交前和提交后读到了不同的行数的数据。</p></blockquote><p>正因为如此，设计师在数据上设计了4中事务隔离级别,数据库默认隔离级别是可重复度,可重复读使用了MVCC实现。而幻读可以使用间隙锁解决。</p><table><thead><tr><th></th><th>脏读</th><th>不可重复读</th><th>幻读</th></tr></thead><tbody><tr><td>读未提交(read-uncommitted)</td><td>YES</td><td>YES</td><td>YES</td></tr><tr><td>读已提交(read-commmitted)</td><td>NO</td><td>YES</td><td>YES</td></tr><tr><td>可重复读(repeatable)</td><td>NO</td><td>NO</td><td>YES</td></tr><tr><td>可串行化(serializable)</td><td>NO</td><td>NO</td><td>NO</td></tr></tbody></table>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h5 id=&quot;Mysql事务隔离级别&quot;&gt;&lt;a href=&quot;#Mysql事务隔离级别&quot; class=&quot;headerlink&quot; title=&quot;Mysql事务隔离级别&quot;&gt;&lt;/a&gt;Mysql事务隔离级别&lt;/h5&gt;&lt;p&gt;假如你从Mysql设计师的角度看，在事务处理中可能会出现下面几种问题
+      
+    
+    </summary>
+    
+      <category term="mysql" scheme="https://jiarus.github.io/categories/mysql/"/>
+    
+    
+      <category term="mysql" scheme="https://jiarus.github.io/tags/mysql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kafka参数配置(broker、topic、jvm)</title>
+    <link href="https://jiarus.github.io/2018/09/25/Kafka%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE-broker%E3%80%81topic%E3%80%81jvm/"/>
+    <id>https://jiarus.github.io/2018/09/25/Kafka参数配置-broker、topic、jvm/</id>
+    <published>2018-09-25T05:58:00.000Z</published>
+    <updated>2019-08-04T19:59:37.771Z</updated>
+    
+    <content type="html"><![CDATA[<p>broker中有大概200多个参数，挑选几个重要的记录下来：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">log.dirs = /data/kafka1,/data/kafka2,/data/kafka3 #建议每个目录都挂在不同的硬盘上，提高读写性能，也能够支持故障转移</span><br><span class="line"></span><br><span class="line">zookeeper.connect = zk1:2181,zk2:2181,zk3:2181/kafka1 #最后添加斜杠组名，使zk支持管理多个kafka集群。</span><br><span class="line"></span><br><span class="line">listeners:#PLAINTEXT 表示明文传输、SSL表示使用SSL或TLS加密传输</span><br><span class="line">advertised.listenners:#表明该broker对外发布</span><br><span class="line">#都使用主机名，不建议使用IP，因为Broker源代码中使用的是主机名，IP可能导致不能访问。</span><br></pre></td></tr></table></figure><p>Topic</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">auto.create.topics.enable：false #是否允许自动创建Topic,建议设置为false，不是设置有可能代码中写错了名称就自动创建错误的Topic。</span><br><span class="line">unclean.leader.election.enable:false #是否允许Unclean Leader选举,不允许数据不完整的副本竞选Leader</span><br><span class="line">auto.leader.rebalance.enable：false #是定期选举Leader，没有性能收益。</span><br><span class="line">retention.ms:规定Topic中消息存放的时间，覆盖Broker中的留存时间，默认7天</span><br><span class="line">retention.bytes:规定Topic中消息的大小，覆盖Broker中的存放数据大小，默认-1</span><br></pre></td></tr></table></figure><p>数据存放</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">log.retention.&#123;hour|minutes|ms)#设置Broker数据留存的时间，一般设置hour</span><br><span class="line">log.retention.byte#设置Broker存放数据的大小，-1不限制</span><br><span class="line">message.max.bytes#设置允许单条message的大小，默认1M，建议改成5M</span><br></pre></td></tr></table></figure><p>JVM</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">堆大小默认1G，建议手动修改为6G,因为KakfaBroker与客户端交互会在堆上创建大量的bytebuffer</span><br><span class="line">KAFKA_HEAP_OPTS：指定堆大小</span><br><span class="line">垃圾回收器，Java8设置为G1回收。</span><br><span class="line">KAFKA_JVM_PERFORMANCE_OPTS：指定垃圾回收器</span><br><span class="line">$&gt; export KAFKA_HEAP_OPTS=--Xms6g  --Xmx6g</span><br><span class="line">$&gt; export  KAFKA_JVM_PERFORMANCE_OPTS= -server -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:+ExplicitGCInvokesConcurrent -Djava.awt.headless=true</span><br><span class="line">$&gt; bin/kafka-server-start.sh config/server.properties</span><br></pre></td></tr></table></figure><p>操作系统</p><ul><li><p>文件描述符限制</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ulimit -n 1000000</span><br></pre></td></tr></table></figure></li><li><p>文件系统类型</p><p>  这里的文件系统类型指的是如ext3,ext4或XFS日志型文件系统，生产环境最好使用XFS类型。</p></li><li><p>Swappiness</p><p>  按照尽量少使用交换区的原则设置<br>  <code>vm.swappiness=1</code></p></li><li><p>提交时间<br>  kafka向页缓存（Page cache）写入数据即视为写成功来，并不是等落盘才算成功。页缓存会定时刷到文件中，间隔默认5秒可以适当增加这个间隔。kafka软件层做了多副本冗余，不用太担心宕机丢失数据。</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;broker中有大概200多个参数，挑选几个重要的记录下来：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;spa
+      
+    
+    </summary>
+    
+      <category term="kafka" scheme="https://jiarus.github.io/categories/kafka/"/>
+    
+    
+      <category term="kafka" scheme="https://jiarus.github.io/tags/kafka/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kafka线上部署方案</title>
+    <link href="https://jiarus.github.io/2018/09/20/Kafka%E7%BA%BF%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88/"/>
+    <id>https://jiarus.github.io/2018/09/20/Kafka线上部署方案/</id>
+    <published>2018-09-20T04:33:00.000Z</published>
+    <updated>2019-08-06T18:54:51.137Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>1.操作系统选择</strong></p><p>Linux/Windows/MacOS 三种操作系统kafka最好的搭档还是Linux，原因有几个方面</p><p>a.I/O模型</p><pre><code>kafka客户端的I/O使用Java的Selector实现，Selector在Linux上的实现机制是epoll，在Windows上是select。性能上不如Linux。</code></pre><p>b.数据传输效率</p><pre><code>Linux支持零拷贝（ZeroCopy）,而Windows直到Java 8的60更新版本才支持这个功能。零拷贝:把内核空间地址和用户空间的虚拟地址映射到同一个物理地址，这样DMA就可以填充对内核和用户空间进程同时可见的缓冲区了。省去了内核与用户空间的往来拷贝，java也利用操作系统的此特性来提升性能。</code></pre><p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5o833am0fj30e506mwei.jpg" alt></p><p>c.社区的支持度</p><pre><code>Kafka官方基本上不修复Windows存在的Bug</code></pre><p><strong>2.磁盘选择</strong></p><pre><code>kafka基本上是顺序读写，机械硬盘就可以支持，不需要固态硬盘</code></pre><p><strong>3.磁盘容量</strong><br><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g5o87ioioij31240dqwjb.jpg" alt></p><p><strong>4.集群数量</strong><br><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g5o8a860urj312l0u047d.jpg" alt></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;1.操作系统选择&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Linux/Windows/MacOS 三种操作系统kafka最好的搭档还是Linux，原因有几个方面&lt;/p&gt;
+&lt;p&gt;a.I/O模型&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;kafka客户端的I/O使用Java的Sel
+      
+    
+    </summary>
+    
+      <category term="kafka" scheme="https://jiarus.github.io/categories/kafka/"/>
+    
+    
+      <category term="kafka" scheme="https://jiarus.github.io/tags/kafka/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JVM内存模型和垃圾回收策略</title>
+    <link href="https://jiarus.github.io/2018/09/17/JVM%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <id>https://jiarus.github.io/2018/09/17/JVM基础知识/</id>
+    <published>2018-09-16T19:50:00.000Z</published>
+    <updated>2019-08-09T21:58:43.570Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>内存模型结构：</strong><br><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g5tyjpg4hoj30rs0k50vt.jpg" alt></p><ul><li>JVM内存模型主要有图中的5块组成：方法区、堆（这两块是线程共享的）、栈、本地方法栈、程序计数器（这三块是线程私有的）<ul><li>方法区：是线程共享的区域，用于存放类的模版信息、常量、静态变量、字段、方法等。具体实现：jdk1.7和之前都是永久代（Perm区），当永久代满了就会触发FullGC,影响整个系统。JDK1.8时取掉了永久代，改为了元空间(Metaspace)，元空间数据不再存放在JVM中而是存放到本地内存中。GC效率提高了。空间不足抛出OutOfMemoryError。</li><li>堆：也是线程共享的区域，存放java类的实例。具体可分为新生代和老年代，新生代又包括Eden区、survivor0、survivor1区，是GC主要管理的区域。空间不足抛出OutOfMemoryError。<ul><li>为什么有两个survivor区？<blockquote><p> 个人认为是复制算法决定的，需要一个空的内存区来存放存活的对象，这样才能清理数据碎片。</p></blockquote></li></ul></li><li>栈：是线程私有区域。包括了局部变量区、操作数栈、动态链接、方法出口信息。栈中可以包含多个栈帧，即一个线程内的调用多个方法开辟多个栈空间。空间不足抛出StackOverflowError。</li><li>本地方法栈：存放本地的C或C++方法。比如<code>public static native void sleep(long millis) throws InterruptedException;</code>这就是调用C编写的方法。</li><li>程序计数器：因为CPU运行时会切换，需要记录每个线程执行的指令地址。</li></ul></li><li><em>垃圾回收策略：*</em><br><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g5u0ogkj52j30x60q67h2.jpg" alt></li><li>垃圾对象判定标准：<ul><li>引用计数法：记录对象被引用的次数，引用一次加一，引用失效就减一，引用计数为0即为失效对象。目前新版本JDK不再使用，因为无法判断循环引用的对象是否过期。</li><li>根搜索法：构建一个GCRoots为根的树，从根开始搜索，不在树中的即为失效对象。</li></ul></li><li>垃圾回收算法：<ul><li>标记清除。对活跃对象标注，清除没有标注的对象。清除后空间内对象不再连续，会造成数据内存碎片的问题。</li><li>复制。对活跃对象标注，复制到新的空间，再清空老空间的数据。虽然解决了数据碎片，但是清理时会消耗内存空间。</li><li>标记整理。是对标记清除的优化，标记清除完数据，在对空间内的存活对象整理向前移动，使之连续。解决内存碎片的问题。</li><li>分代回收。将JVM堆分为新生代和老年代，不同的代使用不同的回收算法。新生代因为失效的比较多，所以使用复制算法。老年代因为存活率比较高，而且占用空间大也没有额外的空间分配，所以采用标记清除和标记整理算法。</li></ul></li></ul><p><strong>JVM垃圾回收器具体实现：</strong><br><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5u20hg9ezj30vs0u0dpg.jpg" alt><br><em>在生产环境一般在不同的代使用不同的垃圾回收器，图上显示不同回收器针对的内存代</em></p><ul><li><p>并行垃圾回收器（Parallel Garbage Collector）</p><ul><li>年轻代垃圾回收器。使用复制算法。</li></ul></li><li><p>并发标记扫描垃圾回收器（CMS Garbage Collector）</p><ul><li>老年代收集器。使用标记清除算法，GC可以和用户线程并发执行，牺牲了部分性能，减少停顿时间。缺点：GC时加重CPU压力影响性能，造成严重的内存碎片化。</li></ul></li><li><p>G1垃圾回收器（Garbage First Collector）</p><ul><li>使用标记整理+复制。JDK7正式发布，在JDK9中成为默认的垃圾回收器。手动设置：<code>-XX:+UseG1GC</code>。最主要就会有碎片整理的功能。<del>其他的有时间深入研究下2333…</del></li></ul></li></ul><p><strong>FullGC</strong>  </p><p>FullGC发生的条件：</p><ul><li><p>年老代（Tenured）被写满；</p></li><li><p>持久代（Perm）被写满；</p></li><li><p>System.gc()被显示调用；</p></li><li><p>上一次GC之后Heap的各域分配策略动态变化；</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;内存模型结构：&lt;/strong&gt;&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006tNc79ly1g5tyjpg4hoj30rs0k50vt.jpg&quot; alt&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;JVM内存模型主要有图中的5块
+      
+    
+    </summary>
+    
+      <category term="JVM" scheme="https://jiarus.github.io/categories/JVM/"/>
+    
+    
+      <category term="JVM" scheme="https://jiarus.github.io/tags/JVM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java类生命周期</title>
+    <link href="https://jiarus.github.io/2018/09/17/Java%E7%B1%BB%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%8F%8A%E5%BA%95%E5%B1%82%E8%B0%83%E7%94%A8/"/>
+    <id>https://jiarus.github.io/2018/09/17/Java类生命周期及底层调用/</id>
+    <published>2018-09-16T19:49:00.000Z</published>
+    <updated>2019-08-09T21:24:11.616Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5u31ckv27j31e40f4wj3.jpg" alt></p><ul><li><p>加载</p><ul><li>先说下<strong>类加载器（ClassLoader）</strong>:java类经过编译生产.class文件。JVM通过类加载器读取类的二进制流，然后在做其他操作。类加载器主要有<strong>引导类加载器</strong>、<strong>扩展类加载器</strong>、<strong>应用程序类加载器</strong>。每次加载一个用户的类都是先判断是否加载，过然后逐层请求父类加载器去获取，如果父类获取不到该类，则交给子类去加载。这种模式称为<strong>双亲委派模型</strong>。好处：1.避免重复加载。2.保证系统安全性，防止被核心库被替换。</li><li>使用类加载器来加载。将类信息存放到元空间，然后在堆中实例化Class对象，最为元空间类的入口。</li></ul></li><li><p>连接</p><ul><li><p>验证</p><ul><li>验证类是否符合java规范。</li></ul></li><li><p>准备</p><ul><li>为变量赋默认值。只有final+static修饰的变量才会赋显示的初始化值。其他变量都只会赋默认值。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//这里只有num3会赋值1，其他都是0</span><br><span class="line">private static int num = 1;</span><br><span class="line">private static int num2;</span><br><span class="line">private static final int num3 = 1;</span><br></pre></td></tr></table></figure></li></ul></li><li><p>解析</p><ul><li>将常量池中的符号引用替换为直接引用的过程。</li></ul></li></ul></li><li><p>初始化</p><ul><li>只有主动使用类才会执行初始化。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//初始化顺序</span><br><span class="line">父类--静态变量</span><br><span class="line">父类--静态初始化块</span><br><span class="line">子类--静态变量</span><br><span class="line">子类--静态初始化块</span><br><span class="line">父类--变量</span><br><span class="line">父类--初始化块</span><br><span class="line">父类--构造器</span><br><span class="line">子类--变量</span><br><span class="line">子类--初始化块</span><br><span class="line">子类--构造器</span><br></pre></td></tr></table></figure></li></ul></li><li><p>使用</p></li><li><p>卸载</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006tNc79ly1g5u31ckv27j31e40f4wj3.jpg&quot; alt&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;加载&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;先说下&lt;strong&gt;类加载器（ClassLoa
+      
+    
+    </summary>
+    
+      <category term="java" scheme="https://jiarus.github.io/categories/java/"/>
+    
+    
+      <category term="java" scheme="https://jiarus.github.io/tags/java/"/>
+    
+  </entry>
+  
+</feed>
