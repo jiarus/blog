@@ -311,6 +311,33 @@
   </entry>
   
   <entry>
+    <title>广告竞价为什么取第二高价？</title>
+    <link href="https://jiarus.github.io/2019/03/05/%E5%B9%BF%E5%91%8A%E7%AB%9E%E4%BB%B7%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%96%E7%AC%AC%E4%BA%8C%E9%AB%98%E4%BB%B7%EF%BC%9F/"/>
+    <id>https://jiarus.github.io/2019/03/05/广告竞价为什么取第二高价？/</id>
+    <published>2019-03-05T13:38:00.000Z</published>
+    <updated>2019-08-11T13:40:16.278Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>广义第二高阶 规定价高者得，但只需按照第二报价支付。</p></blockquote><p>其一，GSP能让竞价成功的广告主失去调低出价的动力，因为无论是否调低出价，自己的真实出价都不会改变，除非竞价失败；</p><p>其二，GSP还能让未竞价成功的广告主失去以最小竞价单位递增出价的动力，因为这种出价策略很难赢得竞价。因此，GSP被称为单位置最优竞价策略。由于GSP的这种优势，现在几乎所有的互联网竞价广告都采用这种方式。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;广义第二高阶 规定价高者得，但只需按照第二报价支付。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;其一，GSP能让竞价成功的广告主失去调低出价的动力，因为无论是否调低出价，自己的真实出价都不会改变，除非竞价失败；&lt;/p&gt;
+&lt;p&gt;其二，GSP还能让未竞
+      
+    
+    </summary>
+    
+    
+      <category term="广告系统" scheme="https://jiarus.github.io/tags/%E5%B9%BF%E5%91%8A%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Kafka分区机制原理</title>
     <link href="https://jiarus.github.io/2019/03/02/Kafka%E5%88%86%E5%8C%BA%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
     <id>https://jiarus.github.io/2019/03/02/Kafka分区最佳实践/</id>
@@ -516,35 +543,6 @@
     
     
       <category term="JVM" scheme="https://jiarus.github.io/tags/JVM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java类生命周期</title>
-    <link href="https://jiarus.github.io/2018/09/17/Java%E7%B1%BB%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%8F%8A%E5%BA%95%E5%B1%82%E8%B0%83%E7%94%A8/"/>
-    <id>https://jiarus.github.io/2018/09/17/Java类生命周期及底层调用/</id>
-    <published>2018-09-16T19:49:00.000Z</published>
-    <updated>2019-08-09T21:24:11.616Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5u31ckv27j31e40f4wj3.jpg" alt></p><ul><li><p>加载</p><ul><li>先说下<strong>类加载器（ClassLoader）</strong>:java类经过编译生产.class文件。JVM通过类加载器读取类的二进制流，然后在做其他操作。类加载器主要有<strong>引导类加载器</strong>、<strong>扩展类加载器</strong>、<strong>应用程序类加载器</strong>。每次加载一个用户的类都是先判断是否加载，过然后逐层请求父类加载器去获取，如果父类获取不到该类，则交给子类去加载。这种模式称为<strong>双亲委派模型</strong>。好处：1.避免重复加载。2.保证系统安全性，防止被核心库被替换。</li><li>使用类加载器来加载。将类信息存放到元空间，然后在堆中实例化Class对象，最为元空间类的入口。</li></ul></li><li><p>连接</p><ul><li><p>验证</p><ul><li>验证类是否符合java规范。</li></ul></li><li><p>准备</p><ul><li>为变量赋默认值。只有final+static修饰的变量才会赋显示的初始化值。其他变量都只会赋默认值。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//这里只有num3会赋值1，其他都是0</span><br><span class="line">private static int num = 1;</span><br><span class="line">private static int num2;</span><br><span class="line">private static final int num3 = 1;</span><br></pre></td></tr></table></figure></li></ul></li><li><p>解析</p><ul><li>将常量池中的符号引用替换为直接引用的过程。</li></ul></li></ul></li><li><p>初始化</p><ul><li>只有主动使用类才会执行初始化。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//初始化顺序</span><br><span class="line">父类--静态变量</span><br><span class="line">父类--静态初始化块</span><br><span class="line">子类--静态变量</span><br><span class="line">子类--静态初始化块</span><br><span class="line">父类--变量</span><br><span class="line">父类--初始化块</span><br><span class="line">父类--构造器</span><br><span class="line">子类--变量</span><br><span class="line">子类--初始化块</span><br><span class="line">子类--构造器</span><br></pre></td></tr></table></figure></li></ul></li><li><p>使用</p></li><li><p>卸载</p></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006tNc79ly1g5u31ckv27j31e40f4wj3.jpg&quot; alt&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;加载&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;先说下&lt;strong&gt;类加载器（ClassLoa
-      
-    
-    </summary>
-    
-      <category term="java" scheme="https://jiarus.github.io/categories/java/"/>
-    
-    
-      <category term="java" scheme="https://jiarus.github.io/tags/java/"/>
     
   </entry>
   
