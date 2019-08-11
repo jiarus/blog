@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://jiarus.github.io/"/>
-  <updated>2019-08-10T06:54:06.684Z</updated>
+  <updated>2019-08-11T02:36:48.123Z</updated>
   <id>https://jiarus.github.io/</id>
   
   <author>
@@ -15,27 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Redis Debug 命令</title>
-    <link href="https://jiarus.github.io/2019/08/10/Redis-Debug-%E5%91%BD%E4%BB%A4/"/>
-    <id>https://jiarus.github.io/2019/08/10/Redis-Debug-命令/</id>
-    <published>2019-08-10T06:45:32.000Z</published>
-    <updated>2019-08-10T06:54:06.684Z</updated>
-    
-    <content type="html"><![CDATA[<p>查看某一个Key的Debug信息，使用<code>debug object [key]</code><br><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g5ukxhidosj30ts06mq3r.jpg" alt></p><p>查看redis内存使用情况使用<code>info memeroy</code><br><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5ukxk9mpej30860azmy5.jpg" alt></p><ul><li>used_memory_human: 已使用内存（格式化可读性的）</li><li>used_memory_peak_human: 使用最高峰值</li><li>total_system_memory_human: 总内存</li><li>used_memory_rss_huamn: Redis进程占用内存</li><li>evicted_keys: 因为内存满而被驱逐/回收的key</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;查看某一个Key的Debug信息，使用&lt;code&gt;debug object [key]&lt;/code&gt;&lt;br&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/006tNc79ly1g5ukxhidosj30ts06mq3r.jpg&quot; alt&gt;&lt;/p
-      
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>计算机CPU性能提升</title>
@@ -410,6 +389,27 @@
     
     
       <category term="spring" scheme="https://jiarus.github.io/tags/spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis Debug 命令</title>
+    <link href="https://jiarus.github.io/2019/01/10/Redis-Debug-%E5%91%BD%E4%BB%A4/"/>
+    <id>https://jiarus.github.io/2019/01/10/Redis-Debug-命令/</id>
+    <published>2019-01-10T06:45:00.000Z</published>
+    <updated>2019-08-11T13:08:02.055Z</updated>
+    
+    <content type="html"><![CDATA[<p>查看某一个Key的Debug信息，使用<code>debug object [key]</code><br><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g5ukxhidosj30ts06mq3r.jpg" alt></p><p>查看redis内存使用情况使用<code>info memeroy</code><br><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5ukxk9mpej30860azmy5.jpg" alt></p><ul><li>used_memory_human: 已使用内存（格式化可读性的）</li><li>used_memory_peak_human: 使用最高峰值</li><li>total_system_memory_human: 总内存</li><li>used_memory_rss_huamn: Redis进程占用内存</li><li>evicted_keys: 因为内存满而被驱逐/回收的key</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;查看某一个Key的Debug信息，使用&lt;code&gt;debug object [key]&lt;/code&gt;&lt;br&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/006tNc79ly1g5ukxhidosj30ts06mq3r.jpg&quot; alt&gt;&lt;/p
+      
+    
+    </summary>
+    
     
   </entry>
   

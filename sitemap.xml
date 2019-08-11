@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jiarus.github.io/2019/01/10/Redis-Debug-%E5%91%BD%E4%BB%A4/</loc>
+    
+    <lastmod>2019-08-11T13:08:02.055Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jiarus.github.io/repository/index.html</loc>
     
     <lastmod>2019-08-11T04:25:08.512Z</lastmod>
@@ -96,13 +103,6 @@
     <loc>https://jiarus.github.io/2019/01/18/Transcational%E6%B3%A8%E8%A7%A3%E5%8E%9F%E7%90%86/</loc>
     
     <lastmod>2019-08-10T06:59:43.130Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jiarus.github.io/2019/08/10/Redis-Debug-%E5%91%BD%E4%BB%A4/</loc>
-    
-    <lastmod>2019-08-10T06:54:06.684Z</lastmod>
     
   </url>
   
