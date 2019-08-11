@@ -17,17 +17,17 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>友情链接 | fever的个人博客</title>
+  <title>Repositories | fever的个人博客</title>
   <meta property="og:type" content="website">
-<meta property="og:title" content="友情链接">
-<meta property="og:url" content="https://jiarus.github.io/links/index.html">
+<meta property="og:title" content="Repositories">
+<meta property="og:url" content="https://jiarus.github.io/repository/index.html">
 <meta property="og:site_name" content="jiarus">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-11T04:11:54.345Z">
+<meta property="og:updated_time" content="2019-08-11T04:25:08.512Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="友情链接">
+<meta name="twitter:title" content="Repositories">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://jiarus.github.io/links/index.html">
+  <link rel="canonical" href="https://jiarus.github.io/repository/index.html">
   
     <link rel="alternate" href="/atom.xml" title="jiarus" type="application/atom+xml">
   
@@ -338,30 +338,45 @@
 
   
   <main class="main" role="main">
-  <article class="article article-links article-type-list" itemscope="">
+  <article class="article article-repository article-type-list" itemscope="">
   <header class="article-header">
-    <h1 itemprop="title">友情链接</h1>
-    <p class="text-muted">
-      Welcome to the exchange link, you can leave a message on this page
-    </p>
+    <h1 itemprop="title">Repositories</h1>
+    <p class="text-muted">I have <span id="repo-count">0</span> projects on Github</p>
   </header>
   <div class="article-body">
-    <div class="row">
-      
+    <div class="repo-content">
+      <div class="blankslate">
+        <p>正在加载...</p>
+      </div>
     </div>
   </div>
 </article>
 
   
-  <section id="comments">
-  	
-           
-    
-  </section>
 
 
 
-
+<!--Github项模版-->
+<script type="text/template" id="list-template">
+  <li class="col-sm-6 col-md-6 col-lg-4">
+    <div class="repo hover-shadow hover-grow">
+      <div class="repo-image geopattern" data-pattern-id="{%=name%}"></div>
+      <h3 class="repo-title"><a href="{%=clone_url%}" target="_blank" rel="external nofollow noopener noreferrer">{%=full_name%}</a></h3>
+      <p class="repo-body">{%=description%}</p>
+      <div class="repo-meta">
+        <span class="meta meta-type pull-left" aria-label="{%=language%} project">{%=language%}</span>
+        <span class="meta meta-star" aria-label="{%=stargazers_count%} stars"><i class="icon icon-star-fill"></i> {%=stargazers_count%}</span>
+        <span class="meta meta-fork" aria-label="{%=forks_count%} forks"><i class="icon icon-code-fork"></i> {%=forks_count%}</span>
+        <span class="meta meta-last-updated" aria-label="最后更新时间：{%=updated_at%}">
+        <i class="icon icon-clock"></i> <time datetime="{%=updated_at%}">{%=updated_at%}</time></span>
+      </div>
+    </div>
+  </li>
+</script>
+<!--获取失败模版-->
+<script type="text/template" id="error-template">
+  <h3>加载失败</h3><p>请刷新或稍后再试...</p>
+</script>
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -423,28 +438,61 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 </script>
 
 
+   <script type="text/javascript">
+var open = function() {
+  var baiduTpl = new Object();
+  var handleTpl = function() {
+    baiduTpl.list = baidu.template("list-template");
+    baiduTpl.error = baidu.template("error-template");
+  };
+
+  var handleGithub = function() {
+    var repoContainer = $('.repo-content');
+    var errorContainer = repoContainer.find(".blankslate");
+    var countContainer = $("#repo-count");
+
+    $.get("https://api.github.com/users/jiarus/repos", function(result) {
+      if (result) {
+        errorContainer.remove();
+        countContainer.text(result.length); //设置项目个数
+        var ul = $("<ul class='repo-list row clearfix'></ul>");
+        result.sort(function(a, b) {
+          return new Date(b.updated_at) - new Date(a.updated_at)
+        }).sort(function(a, b) {
+          var a_start = a.stargazers_count;
+          var b_start = b.stargazers_count;
+          if (a.fork) a_start * 0.5;
+          if (b.fork) b_start * 0.5;
+          return b_start - a_start;
+        }).map(function(repo) {
+          if (!repo.description) repo.description = "";
+          repo.updated_at = repo.updated_at.substring(0, repo.updated_at.lastIndexOf("T"));
+          var html = baiduTpl.list(repo);
+          ul.append(html);
+        })
+
+        repoContainer.append(ul);
+        $(".geopattern").each(function() {
+          $(this).geopattern($(this).data('pattern-id'));
+        });
+      } else {
+        errorContainer.append(baiduTpl.error());
+      }
+    });
+  };
+
+  return {
+    init: function() {
+      handleTpl();
+      handleGithub();
+    }
+  }
+};
+$(open().init);
+</script>
 
 
 
-   
-    
-  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
-  <script src="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
-  <script type="text/javascript">
-  var gitalk = new Gitalk({
-    clientID: 'c8e620c400da4fd98414',
-    clientSecret: '0ec3e154177b1891fc7e45f48c7339d08da2e920',
-    repo: 'blog-commets',
-    owner: 'jiarus',
-    admin: ['jiarus'],
-    id: md5(location.pathname),
-    distractionFreeMode: true
-  })
-  gitalk.render('comments')
-  </script>
-
-      
 
 
 
