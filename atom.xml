@@ -95,31 +95,6 @@
   </entry>
   
   <entry>
-    <title>使用一维数组存储二叉树</title>
-    <link href="https://jiarus.github.io/2019/07/10/%E4%BD%BF%E7%94%A8%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E5%AD%98%E5%82%A8%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    <id>https://jiarus.github.io/2019/07/10/使用一维数组存储二叉树/</id>
-    <published>2019-07-10T03:58:00.000Z</published>
-    <updated>2019-08-10T03:59:41.632Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">/***</span><br><span class="line"> * 需求：使用一维数组存储二叉树</span><br><span class="line"> * 步骤：</span><br><span class="line"> * 1、查看原始数据的个数（8个），从而制定二叉树层级（4层），得到满二叉树节点个数（15个）</span><br><span class="line"> * 2、二叉树节点（15个）为一维数组，全设置为0</span><br><span class="line"> * 3、循环遍历原始数据，第一个值为树根</span><br><span class="line"> * 4、第二个值与父节点比较，如果大于树根，则往右子树比较，如果数组内的值小于或等于树根，则往左子树比较</span><br><span class="line"> * 5、【循环】步骤4，直到形成二叉树</span><br><span class="line"> * </span><br><span class="line"> * 备注：左节点的坐标等于父节点的坐标*2，右节点的坐标等于父节点的坐标*2+1</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">import java.io.*;</span><br><span class="line">public class binaryTree&#123; </span><br><span class="line"></span><br><span class="line">    public static void main(String args[]) throws IOException</span><br><span class="line"></span><br><span class="line">       &#123;  </span><br><span class="line">        int i,level;</span><br><span class="line">        int data[]=&#123;6,3,5,9,7,8,4,2&#125;; /*原始数组*/</span><br><span class="line">        int btree[]=new int[16];</span><br><span class="line">        for(i=0;i&lt;16;i++) btree[i]=0;</span><br><span class="line">        System.out.print(&quot;原始数组内容: \n&quot;);</span><br><span class="line">        for(i=0;i&lt;8;i++)</span><br><span class="line">        System.out.print(&quot;[&quot;+data[i]+&quot;] &quot;);</span><br><span class="line">        System.out.println();</span><br><span class="line">        for(i=0;i&lt;8;i++)                    /*把原始数组中的值逐一对比*/</span><br><span class="line">        &#123;  </span><br><span class="line">            System.out.println(&quot;i==&gt;&quot;+i);</span><br><span class="line">            for(level=1;btree[level]!=0;)   /*比较树根及数组内的值*/</span><br><span class="line">            &#123;  </span><br><span class="line">                System.out.println(&quot;levele==&gt;&quot;+level+&quot; btree[level]==&gt;&quot;+btree[level]);</span><br><span class="line">                if(data[i]&gt;btree[level])    /*如果数组内的值大于树根，则往右子树比较*/</span><br><span class="line">                    level=level*2+1;</span><br><span class="line">                else                        /*如果数组内的值小于或等于树根，则往左子树比较*/</span><br><span class="line">                    level=level*2;</span><br><span class="line">            &#125;                               /*如果子树节点的值不为0，则再与数组内的值比较一次*/</span><br><span class="line">            btree[level]=data[i];           /*把数组值放入二叉树*/</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.print(&quot;二叉树内容：\n&quot;);</span><br><span class="line">        for (i=1;i&lt;16;i++)</span><br><span class="line">            System.out.print(&quot;[&quot;+btree[i]+&quot;] &quot;);</span><br><span class="line">        System.out.print(&quot;\n&quot;);</span><br><span class="line"></span><br><span class="line">       &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class
-      
-    
-    </summary>
-    
-      <category term="算法" scheme="https://jiarus.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="算法" scheme="https://jiarus.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Java并发包常用类用法及原理</title>
     <link href="https://jiarus.github.io/2019/06/02/Java%E5%B9%B6%E5%8F%91%E5%8C%85%E5%B8%B8%E7%94%A8%E7%B1%BB%E7%94%A8%E6%B3%95%E5%8F%8A%E5%8E%9F%E7%90%86/"/>
     <id>https://jiarus.github.io/2019/06/02/Java并发包常用类用法及原理/</id>
@@ -543,6 +518,35 @@
     
     
       <category term="JVM" scheme="https://jiarus.github.io/tags/JVM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java类生命周期</title>
+    <link href="https://jiarus.github.io/2018/09/17/Java%E7%B1%BB%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%8F%8A%E5%BA%95%E5%B1%82%E8%B0%83%E7%94%A8/"/>
+    <id>https://jiarus.github.io/2018/09/17/Java类生命周期及底层调用/</id>
+    <published>2018-09-16T19:49:00.000Z</published>
+    <updated>2019-08-09T21:24:11.616Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5u31ckv27j31e40f4wj3.jpg" alt></p><ul><li><p>加载</p><ul><li>先说下<strong>类加载器（ClassLoader）</strong>:java类经过编译生产.class文件。JVM通过类加载器读取类的二进制流，然后在做其他操作。类加载器主要有<strong>引导类加载器</strong>、<strong>扩展类加载器</strong>、<strong>应用程序类加载器</strong>。每次加载一个用户的类都是先判断是否加载，过然后逐层请求父类加载器去获取，如果父类获取不到该类，则交给子类去加载。这种模式称为<strong>双亲委派模型</strong>。好处：1.避免重复加载。2.保证系统安全性，防止被核心库被替换。</li><li>使用类加载器来加载。将类信息存放到元空间，然后在堆中实例化Class对象，最为元空间类的入口。</li></ul></li><li><p>连接</p><ul><li><p>验证</p><ul><li>验证类是否符合java规范。</li></ul></li><li><p>准备</p><ul><li>为变量赋默认值。只有final+static修饰的变量才会赋显示的初始化值。其他变量都只会赋默认值。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//这里只有num3会赋值1，其他都是0</span><br><span class="line">private static int num = 1;</span><br><span class="line">private static int num2;</span><br><span class="line">private static final int num3 = 1;</span><br></pre></td></tr></table></figure></li></ul></li><li><p>解析</p><ul><li>将常量池中的符号引用替换为直接引用的过程。</li></ul></li></ul></li><li><p>初始化</p><ul><li>只有主动使用类才会执行初始化。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//初始化顺序</span><br><span class="line">父类--静态变量</span><br><span class="line">父类--静态初始化块</span><br><span class="line">子类--静态变量</span><br><span class="line">子类--静态初始化块</span><br><span class="line">父类--变量</span><br><span class="line">父类--初始化块</span><br><span class="line">父类--构造器</span><br><span class="line">子类--变量</span><br><span class="line">子类--初始化块</span><br><span class="line">子类--构造器</span><br></pre></td></tr></table></figure></li></ul></li><li><p>使用</p></li><li><p>卸载</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;http://ww3.sinaimg.cn/large/006tNc79ly1g5u31ckv27j31e40f4wj3.jpg&quot; alt&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;加载&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;先说下&lt;strong&gt;类加载器（ClassLoa
+      
+    
+    </summary>
+    
+      <category term="java" scheme="https://jiarus.github.io/categories/java/"/>
+    
+    
+      <category term="java" scheme="https://jiarus.github.io/tags/java/"/>
     
   </entry>
   
