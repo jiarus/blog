@@ -152,6 +152,41 @@
   </entry>
   
   <entry>
+    <title>innodb锁实现机制及高并发优化</title>
+    <link href="https://jiarus.github.io/2019/04/28/innodb%E9%94%81%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6%E5%8F%8A%E9%AB%98%E5%B9%B6%E5%8F%91%E4%BC%98%E5%8C%96/"/>
+    <id>https://jiarus.github.io/2019/04/28/innodb锁实现机制及高并发优化/</id>
+    <published>2019-04-28T03:53:00.000Z</published>
+    <updated>2019-08-13T04:28:31.019Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>innoDB行锁实现：</strong></p><ul><li>record lock<ul><li>对索引项加锁</li></ul></li><li>gap lock<ul><li>对索引之间的间隙加锁</li></ul></li><li>next-key lock<ul><li>前两种的组合，对索引和索引之间的间隙加锁</li></ul></li></ul><p><strong>高并发锁优化</strong></p><ul><li>尽量使用低级别事务隔离机制</li><li>避免行锁升级到表锁<ul><li>当使用非索引字段更新数据，就会升级为表锁。</li></ul></li><li>减少事务锁定资源量和锁定时间<ul><li>在事务中尽量把行锁放到事务最后执行。</li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;innoDB行锁实现：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;record lock&lt;ul&gt;
+&lt;li&gt;对索引项加锁&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;gap lock&lt;ul&gt;
+&lt;li&gt;对索引之间的间隙加锁&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;l
+      
+    
+    </summary>
+    
+      <category term="mysql" scheme="https://jiarus.github.io/categories/mysql/"/>
+    
+    
+      <category term="mysql" scheme="https://jiarus.github.io/tags/mysql/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Kakfa主题管理</title>
     <link href="https://jiarus.github.io/2019/04/26/Kakfa%E4%B8%BB%E9%A2%98%E7%AE%A1%E7%90%86/"/>
     <id>https://jiarus.github.io/2019/04/26/Kakfa主题管理/</id>
@@ -174,6 +209,34 @@
     
     
       <category term="kafka" scheme="https://jiarus.github.io/tags/kafka/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mysql索引优化</title>
+    <link href="https://jiarus.github.io/2019/04/25/Mysql%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96/"/>
+    <id>https://jiarus.github.io/2019/04/25/Mysql索引优化/</id>
+    <published>2019-04-25T04:31:00.000Z</published>
+    <updated>2019-08-13T04:58:20.575Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>索引使用存在的问题：</strong></p><ul><li>回表<ul><li>innodb默认使用主键索引是聚簇索引，其他索引是非聚簇索引。当使用非聚簇索引查询时，先在B+Tree叶子节点上获得主键id，然后根据主键id再去聚簇索引查询叶子节点的行数据。这两次查询就称作回表。</li></ul></li><li>页分裂<ul><li>B+Tree数据存放在叶子节点上，叶子节点大小为16K会自动分裂生成更多叶子节点，这样会导致内存碎片，索引结构不紧凑，查询效率低。</li></ul></li></ul><p><strong>索引优化：</strong></p><ul><li><p>建立整型自增主键</p><ul><li><p>如果我们定义了主键(PRIMARY KEY)，那么InnoDB会选择主键作为聚集索引、如果没有显式定义主键，则InnoDB会选择第一个不包含有NULL值的唯一索引作为主键索引、如果也没有这样的唯一索引，则InnoDB会选择内置6字节长的ROWID作为隐含的聚集索引(ROWID随着行记录的写入而主键递增，这个ROWID不像ORACLE的ROWID那样可引用，是隐含的)</p></li><li><p>如果我们使用了随机的UUID来作为主键，因为是无序的，如果某个节点达到来16k,插入就需要移动数据，这样事实上在聚簇数据上会容易产生B+Tree的分裂、也容易浪费系统性能。</p></li></ul></li><li><p>使用覆盖索引</p><ul><li>比如要查询a,b,c三个列的数据，可以在a,b,c三列上建立组合索引，可以直接从这三列的组合索引上获得数据，不需要在进行回表查询。</li></ul></li><li><p>使用前缀索引</p><ul><li><p>如果在大字段上建立索引，会导致每个页上存放的索引数少，那么就需要查询多个页，降低了查询效率。可以使用前缀索引，只使用列的部分数据建立索引。  </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 设置前缀索引</span><br><span class="line">alter table demo add index name( user_name(4) )</span><br></pre></td></tr></table></figure><blockquote><p>注意：order by 不能使用前缀索引。也不能把前缀索引作覆盖索引。</p></blockquote></li></ul></li><li><p>避免索引失效</p><ul><li>复合索引按最左匹配原则</li><li>复合索引使用or，如果or前后包含了非复合索引字段，也不能使用复合索引。</li></ul></li></ul><p><strong>特殊情况：</strong></p><ul><li>当发生回表时候，假如查询的的数据行数很多(超过整张表20%)，mysql优化器会转为使用聚簇索引，如果发现mysql优化的结果不如使用辅助索引来的快，那么可以手动使用命令<code>force index</code>强制使用辅助索引。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;索引使用存在的问题：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;回表&lt;ul&gt;
+&lt;li&gt;innodb默认使用主键索引是聚簇索引，其他索引是非聚簇索引。当使用非聚簇索引查询时，先在B+Tree叶子节点上获得主键id，然后根据主键id再去聚簇索引查询叶子节点的行
+      
+    
+    </summary>
+    
+      <category term="mysql" scheme="https://jiarus.github.io/categories/mysql/"/>
+    
+    
+      <category term="mysql" scheme="https://jiarus.github.io/tags/mysql/"/>
     
   </entry>
   
@@ -420,9 +483,9 @@
     <link href="https://jiarus.github.io/2018/11/02/Mysql%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/"/>
     <id>https://jiarus.github.io/2018/11/02/Mysql事务隔离级别/</id>
     <published>2018-11-02T11:30:00.000Z</published>
-    <updated>2019-08-02T12:18:40.545Z</updated>
+    <updated>2019-08-13T03:33:44.787Z</updated>
     
-    <content type="html"><![CDATA[<h5 id="Mysql事务隔离级别"><a href="#Mysql事务隔离级别" class="headerlink" title="Mysql事务隔离级别"></a>Mysql事务隔离级别</h5><p>假如你从Mysql设计师的角度看，在事务处理中可能会出现下面几种问题：<br>1.更新丢失</p><blockquote><p>   <del>A、B线程并发修改同一条数据，A修改成功并提交，B回滚了修改，这种情况那么也会把A提交的结果也回滚了。A更新的内容就丢失了。（目前的关系型数据库都不会出现这种问题了）</del></p></blockquote><p>2.脏读</p><blockquote><p> A、B线程并发修改同一条数据，A修改后未提交，B此时读会就会读到A提交前的数据，A也可能会回滚导致B结果错误。</p></blockquote><p>3.不可重复读</p><blockquote><p>A、B、C线程并发修改同一条数据，AB修改后提交，C可能分别读到三个不同的结果。</p></blockquote><p>4.幻读</p><blockquote><p>A、B线程并发修改同一条数据，A添加或者删除并提交了数据，B在A提交前和提交后读到了不同的行数的数据。</p></blockquote><p>正因为如此，设计师在数据上设计了4中事务隔离级别,数据库默认隔离级别是可重复度,可重复读使用了MVCC实现。而幻读可以使用间隙锁解决。</p><table><thead><tr><th></th><th>脏读</th><th>不可重复读</th><th>幻读</th></tr></thead><tbody><tr><td>读未提交(read-uncommitted)</td><td>YES</td><td>YES</td><td>YES</td></tr><tr><td>读已提交(read-commmitted)</td><td>NO</td><td>YES</td><td>YES</td></tr><tr><td>可重复读(repeatable)</td><td>NO</td><td>NO</td><td>YES</td></tr><tr><td>可串行化(serializable)</td><td>NO</td><td>NO</td><td>NO</td></tr></tbody></table>]]></content>
+    <content type="html"><![CDATA[<h5 id="Mysql事务隔离级别"><a href="#Mysql事务隔离级别" class="headerlink" title="Mysql事务隔离级别"></a>Mysql事务隔离级别</h5><p>假如你从Mysql设计师的角度看，在事务处理中可能会出现下面几种问题：<br>1.更新丢失</p><blockquote><p>   <del>A、B线程并发修改同一条数据，A修改成功并提交，B回滚了修改，这种情况那么也会把A提交的结果也回滚了。A更新的内容就丢失了。（使用悲观锁for update，或乐观锁解决）</del></p></blockquote><p>2.脏读</p><blockquote><p> A、B线程并发修改同一条数据，A修改后未提交，B此时读会就会读到A提交前的数据，A也可能会回滚导致B结果错误。</p></blockquote><p>3.不可重复读</p><blockquote><p>A、B线程并发修改同一条数据，AB同时读数据，A修改后提交，B再去读会读到两个个不同的结果。</p></blockquote><p>4.幻读</p><blockquote><p>A、B线程并发修改同一条数据，A添加或者删除并提交了数据，B在A提交前和提交后读到了不同的行数的数据。</p></blockquote><p>正因为如此，设计师在数据上设计了4中事务隔离级别,数据库默认隔离级别是可重复度,读已提交，可重复读使用了MVCC实现。而幻读可以使用间隙锁解决。</p><table><thead><tr><th></th><th>脏读</th><th>不可重复读</th><th>幻读</th><th>锁机制</th></tr></thead><tbody><tr><td>读未提交(read-uncommitted)</td><td>YES</td><td>YES</td><td>YES</td><td>A事务加X锁，禁止其他事务修改</td></tr><tr><td>读已提交(read-commmitted)</td><td>NO</td><td>YES</td><td>YES</td><td>B读取加S锁，A只能再B读完才能修改</td></tr><tr><td>可重复读(repeatable)</td><td>NO</td><td>NO</td><td>YES</td><td>B事务加S锁，A只能在B事务结束才能修改</td></tr><tr><td>可串行化(serializable)</td><td>NO</td><td>NO</td><td>NO</td><td>A加S锁，B加表级X锁</td></tr></tbody></table><p>共享锁(S)：<code>select ... lock in share mode</code></p><p>排他锁(X)：<code>select ... for update</code></p>]]></content>
     
     <summary type="html">
     
@@ -490,61 +553,6 @@
     
     
       <category term="mongodb" scheme="https://jiarus.github.io/tags/mongodb/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Kafka线上部署方案</title>
-    <link href="https://jiarus.github.io/2018/09/20/Kafka%E7%BA%BF%E4%B8%8A%E9%83%A8%E7%BD%B2%E6%96%B9%E6%A1%88/"/>
-    <id>https://jiarus.github.io/2018/09/20/Kafka线上部署方案/</id>
-    <published>2018-09-20T04:33:00.000Z</published>
-    <updated>2019-08-06T18:54:51.137Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>1.操作系统选择</strong></p><p>Linux/Windows/MacOS 三种操作系统kafka最好的搭档还是Linux，原因有几个方面</p><p>a.I/O模型</p><pre><code>kafka客户端的I/O使用Java的Selector实现，Selector在Linux上的实现机制是epoll，在Windows上是select。性能上不如Linux。</code></pre><p>b.数据传输效率</p><pre><code>Linux支持零拷贝（ZeroCopy）,而Windows直到Java 8的60更新版本才支持这个功能。零拷贝:把内核空间地址和用户空间的虚拟地址映射到同一个物理地址，这样DMA就可以填充对内核和用户空间进程同时可见的缓冲区了。省去了内核与用户空间的往来拷贝，java也利用操作系统的此特性来提升性能。</code></pre><p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5o833am0fj30e506mwei.jpg" alt></p><p>c.社区的支持度</p><pre><code>Kafka官方基本上不修复Windows存在的Bug</code></pre><p><strong>2.磁盘选择</strong></p><pre><code>kafka基本上是顺序读写，机械硬盘就可以支持，不需要固态硬盘</code></pre><p><strong>3.磁盘容量</strong><br><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g5o87ioioij31240dqwjb.jpg" alt></p><p><strong>4.集群数量</strong><br><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g5o8a860urj312l0u047d.jpg" alt></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;strong&gt;1.操作系统选择&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Linux/Windows/MacOS 三种操作系统kafka最好的搭档还是Linux，原因有几个方面&lt;/p&gt;
-&lt;p&gt;a.I/O模型&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;kafka客户端的I/O使用Java的Sel
-      
-    
-    </summary>
-    
-      <category term="kafka" scheme="https://jiarus.github.io/categories/kafka/"/>
-    
-    
-      <category term="kafka" scheme="https://jiarus.github.io/tags/kafka/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JVM内存模型和垃圾回收策略</title>
-    <link href="https://jiarus.github.io/2018/09/17/JVM%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
-    <id>https://jiarus.github.io/2018/09/17/JVM基础知识/</id>
-    <published>2018-09-16T19:50:00.000Z</published>
-    <updated>2019-08-09T21:58:43.570Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>内存模型结构：</strong><br><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g5tyjpg4hoj30rs0k50vt.jpg" alt></p><ul><li>JVM内存模型主要有图中的5块组成：方法区、堆（这两块是线程共享的）、栈、本地方法栈、程序计数器（这三块是线程私有的）<ul><li>方法区：是线程共享的区域，用于存放类的模版信息、常量、静态变量、字段、方法等。具体实现：jdk1.7和之前都是永久代（Perm区），当永久代满了就会触发FullGC,影响整个系统。JDK1.8时取掉了永久代，改为了元空间(Metaspace)，元空间数据不再存放在JVM中而是存放到本地内存中。GC效率提高了。空间不足抛出OutOfMemoryError。</li><li>堆：也是线程共享的区域，存放java类的实例。具体可分为新生代和老年代，新生代又包括Eden区、survivor0、survivor1区，是GC主要管理的区域。空间不足抛出OutOfMemoryError。<ul><li>为什么有两个survivor区？<blockquote><p> 个人认为是复制算法决定的，需要一个空的内存区来存放存活的对象，这样才能清理数据碎片。</p></blockquote></li></ul></li><li>栈：是线程私有区域。包括了局部变量区、操作数栈、动态链接、方法出口信息。栈中可以包含多个栈帧，即一个线程内的调用多个方法开辟多个栈空间。空间不足抛出StackOverflowError。</li><li>本地方法栈：存放本地的C或C++方法。比如<code>public static native void sleep(long millis) throws InterruptedException;</code>这就是调用C编写的方法。</li><li>程序计数器：因为CPU运行时会切换，需要记录每个线程执行的指令地址。</li></ul></li><li><em>垃圾回收策略：*</em><br><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g5u0ogkj52j30x60q67h2.jpg" alt></li><li>垃圾对象判定标准：<ul><li>引用计数法：记录对象被引用的次数，引用一次加一，引用失效就减一，引用计数为0即为失效对象。目前新版本JDK不再使用，因为无法判断循环引用的对象是否过期。</li><li>根搜索法：构建一个GCRoots为根的树，从根开始搜索，不在树中的即为失效对象。</li></ul></li><li>垃圾回收算法：<ul><li>标记清除。对活跃对象标注，清除没有标注的对象。清除后空间内对象不再连续，会造成数据内存碎片的问题。</li><li>复制。对活跃对象标注，复制到新的空间，再清空老空间的数据。虽然解决了数据碎片，但是清理时会消耗内存空间。</li><li>标记整理。是对标记清除的优化，标记清除完数据，在对空间内的存活对象整理向前移动，使之连续。解决内存碎片的问题。</li><li>分代回收。将JVM堆分为新生代和老年代，不同的代使用不同的回收算法。新生代因为失效的比较多，所以使用复制算法。老年代因为存活率比较高，而且占用空间大也没有额外的空间分配，所以采用标记清除和标记整理算法。</li></ul></li></ul><p><strong>JVM垃圾回收器具体实现：</strong><br><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5u20hg9ezj30vs0u0dpg.jpg" alt><br><em>在生产环境一般在不同的代使用不同的垃圾回收器，图上显示不同回收器针对的内存代</em></p><ul><li><p>并行垃圾回收器（Parallel Garbage Collector）</p><ul><li>年轻代垃圾回收器。使用复制算法。</li></ul></li><li><p>并发标记扫描垃圾回收器（CMS Garbage Collector）</p><ul><li>老年代收集器。使用标记清除算法，GC可以和用户线程并发执行，牺牲了部分性能，减少停顿时间。缺点：GC时加重CPU压力影响性能，造成严重的内存碎片化。</li></ul></li><li><p>G1垃圾回收器（Garbage First Collector）</p><ul><li>使用标记整理+复制。JDK7正式发布，在JDK9中成为默认的垃圾回收器。手动设置：<code>-XX:+UseG1GC</code>。最主要就会有碎片整理的功能。<del>其他的有时间深入研究下2333…</del></li></ul></li></ul><p><strong>FullGC</strong>  </p><p>FullGC发生的条件：</p><ul><li><p>年老代（Tenured）被写满；</p></li><li><p>持久代（Perm）被写满；</p></li><li><p>System.gc()被显示调用；</p></li><li><p>上一次GC之后Heap的各域分配策略动态变化；</p></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;strong&gt;内存模型结构：&lt;/strong&gt;&lt;br&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/006tNc79ly1g5tyjpg4hoj30rs0k50vt.jpg&quot; alt&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;JVM内存模型主要有图中的5块
-      
-    
-    </summary>
-    
-      <category term="JVM" scheme="https://jiarus.github.io/categories/JVM/"/>
-    
-    
-      <category term="JVM" scheme="https://jiarus.github.io/tags/JVM/"/>
     
   </entry>
   

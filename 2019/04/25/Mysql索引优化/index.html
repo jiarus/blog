@@ -17,21 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>Mysql日志 | fever的个人博客</title>
-  <meta name="description" content="Mysql日志简介日志类型： error_log 错误日志，会记录Mysql启动、运行、停止过程中所有的异常信息。 log_error_verbosity = [1,2,3]可以设置错误日志级别 log_error_service是Mysql8.0的新特性，可以设置处理日志的组件，如输出为json格式等   general_log 常规日志，记录运行是所有的SQL操作信息（包含查询），在生产环境上">
+  <title>Mysql索引优化 | fever的个人博客</title>
+  <meta name="description" content="索引使用存在的问题：  回表 innodb默认使用主键索引是聚簇索引，其他索引是非聚簇索引。当使用非聚簇索引查询时，先在B+Tree叶子节点上获得主键id，然后根据主键id再去聚簇索引查询叶子节点的行数据。这两次查询就称作回表。   页分裂 B+Tree数据存放在叶子节点上，叶子节点大小为16K会自动分裂生成更多叶子节点，这样会导致内存碎片，索引结构不紧凑，查询效率低。    索引优化：  建立整">
 <meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mysql日志">
-<meta property="og:url" content="https://jiarus.github.io/2018/07/21/Mysql日志/index.html">
+<meta property="og:title" content="Mysql索引优化">
+<meta property="og:url" content="https://jiarus.github.io/2019/04/25/Mysql索引优化/index.html">
 <meta property="og:site_name" content="jiarus">
-<meta property="og:description" content="Mysql日志简介日志类型： error_log 错误日志，会记录Mysql启动、运行、停止过程中所有的异常信息。 log_error_verbosity = [1,2,3]可以设置错误日志级别 log_error_service是Mysql8.0的新特性，可以设置处理日志的组件，如输出为json格式等   general_log 常规日志，记录运行是所有的SQL操作信息（包含查询），在生产环境上">
+<meta property="og:description" content="索引使用存在的问题：  回表 innodb默认使用主键索引是聚簇索引，其他索引是非聚簇索引。当使用非聚簇索引查询时，先在B+Tree叶子节点上获得主键id，然后根据主键id再去聚簇索引查询叶子节点的行数据。这两次查询就称作回表。   页分裂 B+Tree数据存放在叶子节点上，叶子节点大小为16K会自动分裂生成更多叶子节点，这样会导致内存碎片，索引结构不紧凑，查询效率低。    索引优化：  建立整">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-31T15:01:59.175Z">
+<meta property="og:updated_time" content="2019-08-13T04:58:20.575Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mysql日志">
-<meta name="twitter:description" content="Mysql日志简介日志类型： error_log 错误日志，会记录Mysql启动、运行、停止过程中所有的异常信息。 log_error_verbosity = [1,2,3]可以设置错误日志级别 log_error_service是Mysql8.0的新特性，可以设置处理日志的组件，如输出为json格式等   general_log 常规日志，记录运行是所有的SQL操作信息（包含查询），在生产环境上">
+<meta name="twitter:title" content="Mysql索引优化">
+<meta name="twitter:description" content="索引使用存在的问题：  回表 innodb默认使用主键索引是聚簇索引，其他索引是非聚簇索引。当使用非聚簇索引查询时，先在B+Tree叶子节点上获得主键id，然后根据主键id再去聚簇索引查询叶子节点的行数据。这两次查询就称作回表。   页分裂 B+Tree数据存放在叶子节点上，叶子节点大小为16K会自动分裂生成更多叶子节点，这样会导致内存碎片，索引结构不紧凑，查询效率低。    索引优化：  建立整">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://jiarus.github.io/2018/07/21/Mysql日志/index.html">
+  <link rel="canonical" href="https://jiarus.github.io/2019/04/25/Mysql索引优化/index.html">
   
     <link rel="alternate" href="/atom.xml" title="jiarus" type="application/atom+xml">
   
@@ -332,14 +332,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-Mysql日志" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-Mysql索引优化" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      Mysql日志
+      Mysql索引优化
     </h1>
   
 
@@ -347,8 +347,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2018/07/21/Mysql日志/" class="article-date">
-	  <time datetime="2018-07-21T14:34:00.000Z" itemprop="datePublished">2018-07-21</time>
+	<a href="/2019/04/25/Mysql索引优化/" class="article-date">
+	  <time datetime="2019-04-25T04:31:00.000Z" itemprop="datePublished">2019-04-25</time>
 	</a>
 </span>
         
@@ -366,45 +366,66 @@
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/07/21/Mysql日志/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/04/25/Mysql索引优化/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 330(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 655(words)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 1(minutes)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 2(minutes)</span>
 	
 
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h5 id="Mysql日志简介"><a href="#Mysql日志简介" class="headerlink" title="Mysql日志简介"></a>Mysql日志简介</h5><h6 id="日志类型："><a href="#日志类型：" class="headerlink" title="日志类型："></a>日志类型：</h6><ul>
-<li>error_log<blockquote>
-<p>错误日志，会记录Mysql启动、运行、停止过程中所有的异常信息。</p>
-<p><code>log_error_verbosity = [1,2,3]</code>可以设置错误日志级别</p>
-<p><code>log_error_service</code>是Mysql8.0的新特性，可以设置处理日志的组件，如输出为json格式等</p>
+        <p><strong>索引使用存在的问题：</strong></p>
+<ul>
+<li>回表<ul>
+<li>innodb默认使用主键索引是聚簇索引，其他索引是非聚簇索引。当使用非聚簇索引查询时，先在B+Tree叶子节点上获得主键id，然后根据主键id再去聚簇索引查询叶子节点的行数据。这两次查询就称作回表。</li>
+</ul>
+</li>
+<li>页分裂<ul>
+<li>B+Tree数据存放在叶子节点上，叶子节点大小为16K会自动分裂生成更多叶子节点，这样会导致内存碎片，索引结构不紧凑，查询效率低。</li>
+</ul>
+</li>
+</ul>
+<p><strong>索引优化：</strong></p>
+<ul>
+<li><p>建立整型自增主键</p>
+<ul>
+<li><p>如果我们定义了主键(PRIMARY KEY)，那么InnoDB会选择主键作为聚集索引、如果没有显式定义主键，则InnoDB会选择第一个不包含有NULL值的唯一索引作为主键索引、如果也没有这样的唯一索引，则InnoDB会选择内置6字节长的ROWID作为隐含的聚集索引(ROWID随着行记录的写入而主键递增，这个ROWID不像ORACLE的ROWID那样可引用，是隐含的)</p>
+</li>
+<li><p>如果我们使用了随机的UUID来作为主键，因为是无序的，如果某个节点达到来16k,插入就需要移动数据，这样事实上在聚簇数据上会容易产生B+Tree的分裂、也容易浪费系统性能。</p>
+</li>
+</ul>
+</li>
+<li><p>使用覆盖索引</p>
+<ul>
+<li>比如要查询a,b,c三个列的数据，可以在a,b,c三列上建立组合索引，可以直接从这三列的组合索引上获得数据，不需要在进行回表查询。</li>
+</ul>
+</li>
+<li><p>使用前缀索引</p>
+<ul>
+<li><p>如果在大字段上建立索引，会导致每个页上存放的索引数少，那么就需要查询多个页，降低了查询效率。可以使用前缀索引，只使用列的部分数据建立索引。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- 设置前缀索引</span><br><span class="line">alter table demo add index name( user_name(4) )</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：order by 不能使用前缀索引。也不能把前缀索引作覆盖索引。</p>
 </blockquote>
 </li>
-<li>general_log<blockquote>
-<p>常规日志，记录运行是所有的SQL操作信息（包含查询），在生产环境上不建议开启</p>
-</blockquote>
+</ul>
 </li>
-<li>slow_query_log<blockquote>
-<p>慢查询日志，根据配置的筛选条件，匹配SQL，一般用来找出执行慢的SQL语句，默认只匹配DML语句，也可以设置DDL语句。</p>
-</blockquote>
+<li><p>避免索引失效</p>
+<ul>
+<li>复合索引按最左匹配原则</li>
+<li>复合索引使用or，如果or前后包含了非复合索引字段，也不能使用复合索引。</li>
+</ul>
 </li>
-<li>binary_log<blockquote>
-<p>二进制日志，记录了处理对表修改成功的如：insert,delete,update的行为，并不会记录select。主要用来主从同步，基于时间点的数据恢复。</p>
-<p>开启日志<code>log_bin=/var/lib/mysql/mysql-bin</code>设置binlog开启，并且设置路径<br>设置bin_log格式<code>binlog_format=row</code>二进制日志有三种模式，基于语句(statement)的，基于行的（row），以及结合前两者的混合模式（mixed）,<br>主从同步建议使用row</p>
-<p>设置日志刷新时机<code>sync_binlog=1</code></p>
-<p>也可以绑定<code>binlog_do_db</code>/排除<code>binlog-ignore-db</code>开启binlog的库</p>
-</blockquote>
-</li>
-<li>relay_log<blockquote>
-<p>中继日志<br>使用在主从复制的情况，从库会生成relay_log,并且会在同步完成自动删除</p>
-</blockquote>
-</li>
+</ul>
+<p><strong>特殊情况：</strong></p>
+<ul>
+<li>当发生回表时候，假如查询的的数据行数很多(超过整张表20%)，mysql优化器会转为使用聚簇索引，如果发现mysql优化的结果不如使用辅助索引来的快，那么可以手动使用命令<code>force index</code>强制使用辅助索引。</li>
 </ul>
 
       
@@ -415,7 +436,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://jiarus.github.io/2018/07/21/Mysql日志/" title="Mysql日志" target="_blank" rel="external">https://jiarus.github.io/2018/07/21/Mysql日志/</a>
+      <a href="https://jiarus.github.io/2019/04/25/Mysql索引优化/" title="Mysql索引优化" target="_blank" rel="external">https://jiarus.github.io/2019/04/25/Mysql索引优化/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -462,12 +483,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2018/07/30/Redis总结/" title="redis六种基本数据结构"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+      <a href="/2019/04/26/Kakfa主题管理/" title="Kakfa主题管理"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2018/07/20/Mysql不同发行版区别及升级步骤/" title="Mysql不同发行版特性及升级步骤"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2019/04/20/Golang中遍历非指针对象的坑/" title="Golang中遍历非指针对象的坑"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
