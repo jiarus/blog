@@ -295,6 +295,34 @@
   </entry>
   
   <entry>
+    <title>mysql如何避免死锁</title>
+    <link href="https://jiarus.github.io/2019/04/13/mysql%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81/"/>
+    <id>https://jiarus.github.io/2019/04/13/mysql如何避免死锁/</id>
+    <published>2019-04-13T04:33:00.000Z</published>
+    <updated>2019-08-13T10:25:10.750Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>Mysql死锁：</strong></p><p>通常是多个事务互相持有对方不兼容的锁导致的。</p><p>在可重复度RR及以上级别会生成gap lock 和 next-key lock<br>兼容矩阵图（横向是已持有锁，纵向是请求的锁）</p><blockquote><p>Record Lock : RK <br><br> Gap Lock : GK <br><br> Insert Intention Lock : IK <br><br> Next-key Lock : NK <br></p></blockquote><p>  lock   | RK  | GK | IK | NK |<br>———|—————–|<br>  RK     |  0  | 1  | 1 | 0   |<br>  GK     |  1  | 1  | 1 | 1   |<br>  IK     |  1  | 0  | 1 | 0   |<br>  NK     |  0  | 1  | 1 | 0   |</p><p><strong>发生死锁的条件：</strong><br>situation1:<br><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g5y4b7d48xj31150u0438.jpg" alt><br>AB都获得GK，插入时都想获得IK,等待对方的GK释放,导致死锁。</p><p>situation2:<br><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g5y4pfu3rhj311q06yab9.jpg" alt><br><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5y4qcec9qj311u0bqjtb.jpg" alt><br><strong>如何避免：</strong></p><ul><li>尽量使用主键更新数据，防止使用非聚簇索引回表时和使用聚簇索引冲突造成死锁。</li><li>在允许幻读和不可重复度的情况下，尽量使用RC的隔离级别，避免gap lock造成的死锁。</li><li>避免长事务，将事务拆解</li><li>设置锁超时等待<code>innodb_lock_wait_timeout</code></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;Mysql死锁：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;通常是多个事务互相持有对方不兼容的锁导致的。&lt;/p&gt;
+&lt;p&gt;在可重复度RR及以上级别会生成gap lock 和 next-key lock&lt;br&gt;兼容矩阵图（横向是已持有锁，纵向是请求的锁）&lt;/p&gt;
+&lt;blo
+      
+    
+    </summary>
+    
+      <category term="mysql" scheme="https://jiarus.github.io/categories/mysql/"/>
+    
+    
+      <category term="mysql" scheme="https://jiarus.github.io/tags/mysql/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Kafka幂等性和事务</title>
     <link href="https://jiarus.github.io/2019/04/07/Kafka%E5%B9%82%E7%AD%89%E6%80%A7%E5%92%8C%E4%BA%8B%E5%8A%A1/"/>
     <id>https://jiarus.github.io/2019/04/07/Kafka幂等性和事务/</id>
@@ -526,33 +554,6 @@
     
     
       <category term="kafka" scheme="https://jiarus.github.io/tags/kafka/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MongoDB操作命令总结</title>
-    <link href="https://jiarus.github.io/2018/09/23/MongoDB%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/"/>
-    <id>https://jiarus.github.io/2018/09/23/MongoDB操作命令总结/</id>
-    <published>2018-09-23T08:50:00.000Z</published>
-    <updated>2019-08-12T18:48:56.418Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>导出查询数据</strong></p><p>使用javascript导入，下面文件命名为<code>dump.js</code></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">db.auth(&quot;teddy_bbc&quot;,&quot;teddy_bbc123&quot;);</span><br><span class="line"></span><br><span class="line">var c = db.adStatDTO.aggregate([&#123; &quot;$match&quot; : &#123; &quot;actionType&quot; : 3, &quot;clickTime&quot; : &#123; &quot;$gte&quot; : &quot;1540828800000&quot;, &quot;$lte&quot; : &quot;1540915199000&quot;&#125; &#125; &#125;] );</span><br><span class="line"></span><br><span class="line">while(c.hasNext()) &#123;</span><br><span class="line"></span><br><span class="line">    printjson(c.next());</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在命令行执行</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/mongodb-linux-x86_64-3.4.1/bin/mongo xxxx:3717/dump.js&gt; result.js</span><br></pre></td></tr></table></figure><p><strong>导入</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongoimport -d bbc_ad_stat -c adStatDTO --file result.js --headerline --type json/csv -f field</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;strong&gt;导出查询数据&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;使用javascript导入，下面文件命名为&lt;code&gt;dump.js&lt;/code&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutte
-      
-    
-    </summary>
-    
-      <category term="mongoDB" scheme="https://jiarus.github.io/categories/mongoDB/"/>
-    
-    
-      <category term="mongodb" scheme="https://jiarus.github.io/tags/mongodb/"/>
     
   </entry>
   
