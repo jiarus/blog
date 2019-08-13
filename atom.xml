@@ -299,7 +299,7 @@
     <link href="https://jiarus.github.io/2019/04/13/mysql%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81/"/>
     <id>https://jiarus.github.io/2019/04/13/mysql如何避免死锁/</id>
     <published>2019-04-13T04:33:00.000Z</published>
-    <updated>2019-08-13T10:25:10.750Z</updated>
+    <updated>2019-08-13T10:26:36.067Z</updated>
     
     <content type="html"><![CDATA[<p><strong>Mysql死锁：</strong></p><p>通常是多个事务互相持有对方不兼容的锁导致的。</p><p>在可重复度RR及以上级别会生成gap lock 和 next-key lock<br>兼容矩阵图（横向是已持有锁，纵向是请求的锁）</p><blockquote><p>Record Lock : RK <br><br> Gap Lock : GK <br><br> Insert Intention Lock : IK <br><br> Next-key Lock : NK <br></p></blockquote><p>  lock   | RK  | GK | IK | NK |<br>———|—————–|<br>  RK     |  0  | 1  | 1 | 0   |<br>  GK     |  1  | 1  | 1 | 1   |<br>  IK     |  1  | 0  | 1 | 0   |<br>  NK     |  0  | 1  | 1 | 0   |</p><p><strong>发生死锁的条件：</strong><br>situation1:<br><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g5y4b7d48xj31150u0438.jpg" alt><br>AB都获得GK，插入时都想获得IK,等待对方的GK释放,导致死锁。</p><p>situation2:<br><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g5y4pfu3rhj311q06yab9.jpg" alt><br><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5y4qcec9qj311u0bqjtb.jpg" alt><br><strong>如何避免：</strong></p><ul><li>尽量使用主键更新数据，防止使用非聚簇索引回表时和使用聚簇索引冲突造成死锁。</li><li>在允许幻读和不可重复度的情况下，尽量使用RC的隔离级别，避免gap lock造成的死锁。</li><li>避免长事务，将事务拆解</li><li>设置锁超时等待<code>innodb_lock_wait_timeout</code></li></ul>]]></content>
     
