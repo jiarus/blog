@@ -18,18 +18,18 @@
   
   
   <title>Kafka消息无丢失/重复消费配置 | fever的个人博客</title>
-  <meta name="description" content="消息丢失/重复消费的场景： 提交消息失败  使用producer.send(msg)提交消息。因为没有回调结果，这时可能消息broker因为网络波动并没有收到，此时消息就丢失了。所以建议使用有回调函数的producer.send(msg,callback)。   Broker端丢失消息  消费者丢失/重复消费消息  offset超前，超过了HighWater（真实已消费的位置）。再次消费会从off">
+  <meta name="description" content="消息丢失/重复消费的场景： 提交消息失败  使用producer.send(msg)提交消息。因为没有回调结果，这时可能消息broker因为网络波动并没有收到，此时消息就丢失了。所以建议使用有回调函数的producer.send(msg,callback)。  自动提交offset。可能你使用了多线程处理消息并且是自动提交。如果某个线程处理失败，并且没有显示地通知那么自动提交后就会丢失消息。">
 <meta name="keywords" content="kafka">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kafka消息无丢失&#x2F;重复消费配置">
 <meta property="og:url" content="https://jiarus.github.io/2019/04/06/Kafka消息无丢失配置/index.html">
 <meta property="og:site_name" content="jiarus">
-<meta property="og:description" content="消息丢失/重复消费的场景： 提交消息失败  使用producer.send(msg)提交消息。因为没有回调结果，这时可能消息broker因为网络波动并没有收到，此时消息就丢失了。所以建议使用有回调函数的producer.send(msg,callback)。   Broker端丢失消息  消费者丢失/重复消费消息  offset超前，超过了HighWater（真实已消费的位置）。再次消费会从off">
+<meta property="og:description" content="消息丢失/重复消费的场景： 提交消息失败  使用producer.send(msg)提交消息。因为没有回调结果，这时可能消息broker因为网络波动并没有收到，此时消息就丢失了。所以建议使用有回调函数的producer.send(msg,callback)。  自动提交offset。可能你使用了多线程处理消息并且是自动提交。如果某个线程处理失败，并且没有显示地通知那么自动提交后就会丢失消息。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-06T19:40:45.506Z">
+<meta property="og:updated_time" content="2019-08-13T18:34:50.848Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kafka消息无丢失&#x2F;重复消费配置">
-<meta name="twitter:description" content="消息丢失/重复消费的场景： 提交消息失败  使用producer.send(msg)提交消息。因为没有回调结果，这时可能消息broker因为网络波动并没有收到，此时消息就丢失了。所以建议使用有回调函数的producer.send(msg,callback)。   Broker端丢失消息  消费者丢失/重复消费消息  offset超前，超过了HighWater（真实已消费的位置）。再次消费会从off">
+<meta name="twitter:description" content="消息丢失/重复消费的场景： 提交消息失败  使用producer.send(msg)提交消息。因为没有回调结果，这时可能消息broker因为网络波动并没有收到，此时消息就丢失了。所以建议使用有回调函数的producer.send(msg,callback)。  自动提交offset。可能你使用了多线程处理消息并且是自动提交。如果某个线程处理失败，并且没有显示地通知那么自动提交后就会丢失消息。">
   <!-- Canonical links -->
   <link rel="canonical" href="https://jiarus.github.io/2019/04/06/Kafka消息无丢失配置/index.html">
   
@@ -203,7 +203,7 @@
   <div class="widget">
     <h3 class="widget-title">Categories</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/kafka/">kafka</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mongoDB/">mongoDB</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mybatis/">mybatis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/redis/">redis</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作记录/">工作记录</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器安全/">服务器安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机组成原理/">计算机组成原理</a><span class="category-list-count">2</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/kafka/">kafka</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mongoDB/">mongoDB</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mybatis/">mybatis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/redis/">redis</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作记录/">工作记录</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器安全/">服务器安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机组成原理/">计算机组成原理</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -213,7 +213,7 @@
   <div class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-body">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/">Ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/golang/">golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作记录/">工作记录</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/广告系统/">广告系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/服务器安全/">服务器安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/">Ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/golang/">golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作记录/">工作记录</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/广告系统/">广告系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/服务器安全/">服务器安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -232,7 +232,7 @@
   <div class="widget">
     <h3 class="widget-title">Archive</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -293,13 +293,13 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/java/">java</a>
+                <a class="category-link" href="/categories/kafka/">kafka</a>
               </p>
               <p class="item-title">
-                <a href="/2019/06/02/Java并发包常用类用法及原理/" class="title">Java并发包常用类用法及原理</a>
+                <a href="/2019/07/14/Kafka消息位移设置/" class="title">Kafka重设消息位移</a>
               </p>
               <p class="item-date">
-                <time datetime="2019-06-02T04:33:00.000Z" itemprop="datePublished">2019-06-02</time>
+                <time datetime="2019-07-14T09:04:00.000Z" itemprop="datePublished">2019-07-14</time>
               </p>
             </div>
           </li>
@@ -308,13 +308,13 @@
             
             <div class="item-inner">
               <p class="item-category">
-                
+                <a class="category-link" href="/categories/java/">java</a>
               </p>
               <p class="item-title">
-                <a href="/2019/05/08/布隆过滤器/" class="title">布隆过滤器</a>
+                <a href="/2019/06/02/Java并发包常用类用法及原理/" class="title">Java并发包常用类用法及原理</a>
               </p>
               <p class="item-date">
-                <time datetime="2019-05-08T07:00:00.000Z" itemprop="datePublished">2019-05-08</time>
+                <time datetime="2019-06-02T04:33:00.000Z" itemprop="datePublished">2019-06-02</time>
               </p>
             </div>
           </li>
@@ -369,7 +369,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/04/06/Kafka消息无丢失配置/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 675(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 671(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 2(minutes)</span>
@@ -382,17 +382,16 @@
         <h6 id="消息丢失-重复消费的场景："><a href="#消息丢失-重复消费的场景：" class="headerlink" title="消息丢失/重复消费的场景："></a>消息丢失/重复消费的场景：</h6><ul>
 <li><p>提交消息失败</p>
 <ul>
-<li>使用<code>producer.send(msg)</code>提交消息。因为没有回调结果，这时可能消息broker因为网络波动并没有收到，此时消息就丢失了。所以建议使用有回调函数的<code>producer.send(msg,callback)</code>。</li>
-</ul>
-</li>
-<li><p>Broker端丢失消息</p>
-</li>
-<li><p>消费者丢失/重复消费消息</p>
-<ul>
-<li><p>offset超前，超过了HighWater（真实已消费的位置）。再次消费会从offset位置开始，中间的消息就丢失了。相反offset落后与HW就导致重复消费。</p>
+<li><p>使用<code>producer.send(msg)</code>提交消息。因为没有回调结果，这时可能消息broker因为网络波动并没有收到，此时消息就丢失了。所以建议使用有回调函数的<code>producer.send(msg,callback)</code>。</p>
 </li>
 <li><p>自动提交offset。可能你使用了多线程处理消息并且是自动提交。如果某个线程处理失败，并且没有显示地通知那么自动提交后就会丢失消息。</p>
 </li>
+</ul>
+</li>
+<li><p>Broker端丢失消息</p>
+<ul>
+<li>使用了unclean leader 选举。</li>
+<li>offset超前，超过了HighWater（真实已消费的位置）。再次消费会从offset位置开始，中间的消息就丢失了。相反offset落后与HW就导致重复消费。    </li>
 </ul>
 </li>
 </ul>
@@ -407,9 +406,6 @@
 <p> 8.设置<code>enable.auto.commit = false</code> 即设置手动提交offset方式，对单consumer多线程的情况很关键。</p>
 <p>在提交消息时，也建议同时使用异步提交+同步提交的策略。保证性能和安全性！</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">    try &#123;</span><br><span class="line">           while(true) &#123;</span><br><span class="line">             ConsumerRecords&lt;String, String&gt; records = consumer.poll(Duration.ofSeconds(1));</span><br><span class="line">             process(records); // 处理消息</span><br><span class="line">             commitAysnc(); // 使用异步提交规避阻塞</span><br><span class="line">            &#125;</span><br><span class="line">&#125; catch(Exception e) &#123;</span><br><span class="line">            handle(e); // 处理异常</span><br><span class="line">&#125; finally &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                   consumer.commitSync(); // 最后一次提交使用同步阻塞式提交</span><br><span class="line">	&#125; finally &#123;</span><br><span class="line">	     consumer.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
       
     </div>
     <div class="article-footer">

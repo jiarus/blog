@@ -17,21 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>Redis缓存失效引发的问题 | fever的个人博客</title>
-  <meta name="description" content="项目中使用redis作为缓存服务时，当redis中存放的key过期，或者不存在缓存时候可以会引发各种问题： 1.缓存穿透 特指故意构建redis中不存在的key，使请求直接落到数据库层。  解决办法： 1.使用redis构建布隆过滤器，提前将存在的key放入，每次现在过滤器中查找是否存在key，不存在就视为非法的key,不继续进行查找。 2.缓存null值，数据库查询结果为空也缓存在redis，但">
-<meta name="keywords" content="redis">
+  <title>Kafka重设消息位移 | fever的个人博客</title>
+  <meta name="description" content="为什么重设位移？开发中有时候会碰到，消息消费端出现故障统计错误，或者消息格式出现问题，需要修改消费者逻辑重新消费的情况。重设消息位移可以使消费者重新读取队列中的消息。 重设位移策略    纬度 策略 含义    位移纬度 earliest 位移到队列未过期的最早消息    latest 位移到队列未过期的最新消息    current 位移到队列已消费到的最新消息    specified-off">
+<meta name="keywords" content="kafka">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis缓存失效引发的问题">
-<meta property="og:url" content="https://jiarus.github.io/2018/09/14/Redis缓存失效的问题/index.html">
+<meta property="og:title" content="Kafka重设消息位移">
+<meta property="og:url" content="https://jiarus.github.io/2019/07/14/Kafka消息位移设置/index.html">
 <meta property="og:site_name" content="jiarus">
-<meta property="og:description" content="项目中使用redis作为缓存服务时，当redis中存放的key过期，或者不存在缓存时候可以会引发各种问题： 1.缓存穿透 特指故意构建redis中不存在的key，使请求直接落到数据库层。  解决办法： 1.使用redis构建布隆过滤器，提前将存在的key放入，每次现在过滤器中查找是否存在key，不存在就视为非法的key,不继续进行查找。 2.缓存null值，数据库查询结果为空也缓存在redis，但">
+<meta property="og:description" content="为什么重设位移？开发中有时候会碰到，消息消费端出现故障统计错误，或者消息格式出现问题，需要修改消费者逻辑重新消费的情况。重设消息位移可以使消费者重新读取队列中的消息。 重设位移策略    纬度 策略 含义    位移纬度 earliest 位移到队列未过期的最早消息    latest 位移到队列未过期的最新消息    current 位移到队列已消费到的最新消息    specified-off">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-04T14:12:01.821Z">
+<meta property="og:updated_time" content="2019-08-14T09:33:23.672Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis缓存失效引发的问题">
-<meta name="twitter:description" content="项目中使用redis作为缓存服务时，当redis中存放的key过期，或者不存在缓存时候可以会引发各种问题： 1.缓存穿透 特指故意构建redis中不存在的key，使请求直接落到数据库层。  解决办法： 1.使用redis构建布隆过滤器，提前将存在的key放入，每次现在过滤器中查找是否存在key，不存在就视为非法的key,不继续进行查找。 2.缓存null值，数据库查询结果为空也缓存在redis，但">
+<meta name="twitter:title" content="Kafka重设消息位移">
+<meta name="twitter:description" content="为什么重设位移？开发中有时候会碰到，消息消费端出现故障统计错误，或者消息格式出现问题，需要修改消费者逻辑重新消费的情况。重设消息位移可以使消费者重新读取队列中的消息。 重设位移策略    纬度 策略 含义    位移纬度 earliest 位移到队列未过期的最早消息    latest 位移到队列未过期的最新消息    current 位移到队列已消费到的最新消息    specified-off">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://jiarus.github.io/2018/09/14/Redis缓存失效的问题/index.html">
+  <link rel="canonical" href="https://jiarus.github.io/2019/07/14/Kafka消息位移设置/index.html">
   
     <link rel="alternate" href="/atom.xml" title="jiarus" type="application/atom+xml">
   
@@ -332,14 +332,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-Redis缓存失效的问题" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-Kafka消息位移设置" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      Redis缓存失效引发的问题
+      Kafka重设消息位移
     </h1>
   
 
@@ -347,24 +347,29 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2018/09/14/Redis缓存失效的问题/" class="article-date">
-	  <time datetime="2018-09-14T13:34:00.000Z" itemprop="datePublished">2018-09-14</time>
+	<a href="/2019/07/14/Kafka消息位移设置/" class="article-date">
+	  <time datetime="2019-07-14T09:04:00.000Z" itemprop="datePublished">2019-07-14</time>
 	</a>
 </span>
         
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/kafka/">kafka</a>
+  </span>
+
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/redis/">redis</a>
+	<a class="article-tag-link" href="/tags/kafka/">kafka</a>
   </span>
 
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/09/14/Redis缓存失效的问题/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/07/14/Kafka消息位移设置/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 415(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 302(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 1(minutes)</span>
@@ -374,28 +379,60 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p>项目中使用redis作为缓存服务时，当redis中存放的key过期，或者不存在缓存时候可以会引发各种问题：</p>
-<p><strong>1.缓存穿透</strong></p>
-<p>特指故意构建redis中不存在的key，使请求直接落到数据库层。</p>
-<blockquote>
-<p>解决办法：</p>
-<p>1.使用redis构建布隆过滤器，提前将存在的key放入，每次现在过滤器中查找是否存在key，不存在就视为非法的key,不继续进行查找。</p>
-<p>2.缓存null值，数据库查询结果为空也缓存在redis，但过期时间要设置短一点。</p>
-</blockquote>
-<p><strong>2.缓存击穿</strong></p>
-<p>指redis中某个key过期导致请求落到数据库层，就像在缓存上打了个洞。</p>
-<blockquote>
-<p>解决办法：</p>
-<p>1.使用互斥锁。如果redis是单机可以使用synchronized或者lock实现，集群可以使用分布式锁setnx。只允许一个线程去执行查询数据库的操作然后缓存结果，其他线程等待并重试。<del>(我觉得这种方式比使用队列要好)</del></p>
-<p>2.提前预判过期。在value中设置过期时间，比真实的ttl提前一点，这样每次使用redis查询完，判断value中的过期时间是否过期。提前增加ttl的时间。</p>
-<p>3.最暴力也是简单的设置key永不过期。</p>
-</blockquote>
-<p><strong>3.缓存雪崩</strong></p>
-<p>指redis中部分key集中过期，使大量请求落到数据库层，对数据库造成极大压力，可能压垮数据库。</p>
-<blockquote>
-<p>解决办法：</p>
-<p>1.key过期时间生成使用随机因子，不使用相同的过期时间，防止集体过期。</p>
-</blockquote>
+        <p><strong>为什么重设位移？</strong><br>开发中有时候会碰到，消息消费端出现故障统计错误，或者消息格式出现问题，需要修改消费者逻辑重新消费的情况。重设消息位移可以使消费者重新读取队列中的消息。</p>
+<p><strong>重设位移策略</strong></p>
+<table>
+<thead>
+<tr>
+<th>纬度</th>
+<th>策略</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>位移纬度</td>
+<td>earliest</td>
+<td>位移到队列未过期的最早消息</td>
+</tr>
+<tr>
+<td></td>
+<td>latest</td>
+<td>位移到队列未过期的最新消息</td>
+</tr>
+<tr>
+<td></td>
+<td>current</td>
+<td>位移到队列已消费到的最新消息</td>
+</tr>
+<tr>
+<td></td>
+<td>specified-offset</td>
+<td>位移到指定的offset处</td>
+</tr>
+<tr>
+<td></td>
+<td>shift-by-N</td>
+<td>位移到当前位移的前/后N处</td>
+</tr>
+<tr>
+<td>时间纬度</td>
+<td>datetime</td>
+<td>位移到某个时间点</td>
+</tr>
+<tr>
+<td></td>
+<td>duration</td>
+<td>位移到当前时间前指定间隔处</td>
+</tr>
+</tbody></table>
+<p><strong>设置方法</strong></p>
+<ul>
+<li><p>通过producer API设置</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    //设置单个分区的位移</span><br><span class="line">    void seek(TopicPartition partition, long offset);</span><br><span class="line">void seek(TopicPartition partition, OffsetAndMetadata offsetAndMetadata);</span><br><span class="line">    //设置多个partition位移</span><br><span class="line">    void seekToBeginning(Collection&lt;TopicPartition&gt; partitions);</span><br><span class="line">void seekToEnd(Collection&lt;TopicPartition&gt; partitions);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过kafka-consumer-groups.sh脚本设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#设置</span><br><span class="line">bin/kafka-consumer-groups.sh --bootstrap-server kafka-host:port --group test-group --reset-offsets --all-topics -[--to-earliest/--to-latest/--to-current/--to-offset &lt;offset&gt;/--shift-by &lt;offset_N&gt;/--to-datetime &lt;2019-06-20T20:00:00&gt;/--by-duration &lt;PD0H30M0S&gt;] –execute</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
@@ -405,7 +442,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://jiarus.github.io/2018/09/14/Redis缓存失效的问题/" title="Redis缓存失效引发的问题" target="_blank" rel="external">https://jiarus.github.io/2018/09/14/Redis缓存失效的问题/</a>
+      <a href="https://jiarus.github.io/2019/07/14/Kafka消息位移设置/" title="Kafka重设消息位移" target="_blank" rel="external">https://jiarus.github.io/2019/07/14/Kafka消息位移设置/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -452,12 +489,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2018/09/17/Java类生命周期及底层调用/" title="Java类生命周期"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+      <a href="/2019/07/27/Kafka版本号总结/" title="Kafka版本号"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2018/08/30/Mysql引擎/" title="Mysql存储引擎区别"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2019/06/02/Java并发包常用类用法及原理/" title="Java并发包常用类用法及原理"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
