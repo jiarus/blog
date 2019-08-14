@@ -533,27 +533,30 @@
   </entry>
   
   <entry>
-    <title>Mysql事务隔离级别</title>
-    <link href="https://jiarus.github.io/2018/11/02/Mysql%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/"/>
-    <id>https://jiarus.github.io/2018/11/02/Mysql事务隔离级别/</id>
-    <published>2018-11-02T11:30:00.000Z</published>
-    <updated>2019-08-13T03:33:44.787Z</updated>
+    <title>Tomcat线程池原理</title>
+    <link href="https://jiarus.github.io/2018/12/02/Tomcat%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%8E%9F%E7%90%86/"/>
+    <id>https://jiarus.github.io/2018/12/02/Tomcat线程池原理/</id>
+    <published>2018-12-01T18:05:00.000Z</published>
+    <updated>2019-08-14T18:35:29.537Z</updated>
     
-    <content type="html"><![CDATA[<h5 id="Mysql事务隔离级别"><a href="#Mysql事务隔离级别" class="headerlink" title="Mysql事务隔离级别"></a>Mysql事务隔离级别</h5><p>假如你从Mysql设计师的角度看，在事务处理中可能会出现下面几种问题：<br>1.更新丢失</p><blockquote><p>   <del>A、B线程并发修改同一条数据，A修改成功并提交，B回滚了修改，这种情况那么也会把A提交的结果也回滚了。A更新的内容就丢失了。（使用悲观锁for update，或乐观锁解决）</del></p></blockquote><p>2.脏读</p><blockquote><p> A、B线程并发修改同一条数据，A修改后未提交，B此时读会就会读到A提交前的数据，A也可能会回滚导致B结果错误。</p></blockquote><p>3.不可重复读</p><blockquote><p>A、B线程并发修改同一条数据，AB同时读数据，A修改后提交，B再去读会读到两个个不同的结果。</p></blockquote><p>4.幻读</p><blockquote><p>A、B线程并发修改同一条数据，A添加或者删除并提交了数据，B在A提交前和提交后读到了不同的行数的数据。</p></blockquote><p>正因为如此，设计师在数据上设计了4中事务隔离级别,数据库默认隔离级别是可重复度,读已提交，可重复读使用了MVCC实现。而幻读可以使用间隙锁解决。</p><table><thead><tr><th></th><th>脏读</th><th>不可重复读</th><th>幻读</th><th>锁机制</th></tr></thead><tbody><tr><td>读未提交(read-uncommitted)</td><td>YES</td><td>YES</td><td>YES</td><td>A事务加X锁，禁止其他事务修改</td></tr><tr><td>读已提交(read-commmitted)</td><td>NO</td><td>YES</td><td>YES</td><td>B读取加S锁，A只能再B读完才能修改</td></tr><tr><td>可重复读(repeatable)</td><td>NO</td><td>NO</td><td>YES</td><td>B事务加S锁，A只能在B事务结束才能修改</td></tr><tr><td>可串行化(serializable)</td><td>NO</td><td>NO</td><td>NO</td><td>A加S锁，B加表级X锁</td></tr></tbody></table><p>共享锁(S)：<code>select ... lock in share mode</code></p><p>排他锁(X)：<code>select ... for update</code></p>]]></content>
+    <content type="html"><![CDATA[<p><strong>Tomcat线程池扩充了java的ThreadPoolExecutor</strong></p><ul><li>tomcat定制了自己的Queue（重写了LinkedBlockingQueue）和ThreadFactory</li><li>最大线程数（maximumPoolSize）线程池大小有控制，可以通过参数设置</li></ul><p><strong>处理流程：</strong></p><ul><li>前corePoolSize个任务入队，同时在线程池创建一个线程。</li><li>之后的任务直接放入队列，不创建线程，当任务队列满了就开始创建临时线程。</li><li>当达到最大线程数，<strong>仍旧尝试向队列添加任务</strong>（这点和原生线程池有所不同）。</li><li>添加失败,拒绝服务。</li></ul>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h5 id=&quot;Mysql事务隔离级别&quot;&gt;&lt;a href=&quot;#Mysql事务隔离级别&quot; class=&quot;headerlink&quot; title=&quot;Mysql事务隔离级别&quot;&gt;&lt;/a&gt;Mysql事务隔离级别&lt;/h5&gt;&lt;p&gt;假如你从Mysql设计师的角度看，在事务处理中可能会出现下面几种问题
+        &lt;p&gt;&lt;strong&gt;Tomcat线程池扩充了java的ThreadPoolExecutor&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;tomcat定制了自己的Queue（重写了LinkedBlockingQueue）和ThreadFactory&lt;/li&gt;
+&lt;li&gt;最大线程数（
       
     
     </summary>
     
-      <category term="mysql" scheme="https://jiarus.github.io/categories/mysql/"/>
+      <category term="tomcat" scheme="https://jiarus.github.io/categories/tomcat/"/>
     
     
-      <category term="mysql" scheme="https://jiarus.github.io/tags/mysql/"/>
+      <category term="tomcat" scheme="https://jiarus.github.io/tags/tomcat/"/>
     
   </entry>
   
