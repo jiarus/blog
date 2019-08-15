@@ -18,19 +18,20 @@
   
   
   <title>Java并发包常用类用法及原理 | fever的个人博客</title>
-  <meta name="description" content="com.java.util.concurrent包是java5时添加的，专门处理多线程提供的工具类  一、Atomic二、Lock三、BlockingQueue四、BlockDeque五、ConcurrnetMap六、CountDownLatch七、CyclicBarrier八、ExecutorService九、ForkJoinPool  1.atomic包  AtomicBoolean、Atom">
+  <meta name="description" content="com.java.util.concurrent包是java5时添加的，专门处理多线程提供的工具类  一、Atomic二、Lock三、BlockingQueue四、BlockDeque五、ConcurrnetMap六、CountDownLatch七、CyclicBarrier八、ExecutorService九、CopyOnWriteList  1.atomic包  AtomicBoolean、A">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java并发包常用类用法及原理">
 <meta property="og:url" content="https://jiarus.github.io/2019/06/02/Java并发包常用类用法及原理/index.html">
 <meta property="og:site_name" content="jiarus">
-<meta property="og:description" content="com.java.util.concurrent包是java5时添加的，专门处理多线程提供的工具类  一、Atomic二、Lock三、BlockingQueue四、BlockDeque五、ConcurrnetMap六、CountDownLatch七、CyclicBarrier八、ExecutorService九、ForkJoinPool  1.atomic包  AtomicBoolean、Atom">
+<meta property="og:description" content="com.java.util.concurrent包是java5时添加的，专门处理多线程提供的工具类  一、Atomic二、Lock三、BlockingQueue四、BlockDeque五、ConcurrnetMap六、CountDownLatch七、CyclicBarrier八、ExecutorService九、CopyOnWriteList  1.atomic包  AtomicBoolean、A">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g5st76um2ej30w00k0dlh.jpg">
-<meta property="og:updated_time" content="2019-08-13T17:27:49.314Z">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g60n7s7eatj311a0hctcz.jpg">
+<meta property="og:updated_time" content="2019-08-15T16:35:46.980Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发包常用类用法及原理">
-<meta name="twitter:description" content="com.java.util.concurrent包是java5时添加的，专门处理多线程提供的工具类  一、Atomic二、Lock三、BlockingQueue四、BlockDeque五、ConcurrnetMap六、CountDownLatch七、CyclicBarrier八、ExecutorService九、ForkJoinPool  1.atomic包  AtomicBoolean、Atom">
+<meta name="twitter:description" content="com.java.util.concurrent包是java5时添加的，专门处理多线程提供的工具类  一、Atomic二、Lock三、BlockingQueue四、BlockDeque五、ConcurrnetMap六、CountDownLatch七、CyclicBarrier八、ExecutorService九、CopyOnWriteList  1.atomic包  AtomicBoolean、A">
 <meta name="twitter:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g5st76um2ej30w00k0dlh.jpg">
   <!-- Canonical links -->
   <link rel="canonical" href="https://jiarus.github.io/2019/06/02/Java并发包常用类用法及原理/index.html">
@@ -205,7 +206,7 @@
   <div class="widget">
     <h3 class="widget-title">Categories</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/kafka/">kafka</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mongoDB/">mongoDB</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mybatis/">mybatis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/redis/">redis</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tomcat/">tomcat</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作记录/">工作记录</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器安全/">服务器安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络协议/">网络协议</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机组成原理/">计算机组成原理</a><span class="category-list-count">2</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JVM/">JVM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/kafka/">kafka</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mongoDB/">mongoDB</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mybatis/">mybatis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mysql/">mysql</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/redis/">redis</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tomcat/">tomcat</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作记录/">工作记录</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/服务器安全/">服务器安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络协议/">网络协议</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机组成原理/">计算机组成原理</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -215,7 +216,7 @@
   <div class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-body">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/">Ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/golang/">golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作记录/">工作记录</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/广告系统/">广告系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/服务器安全/">服务器安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络协议/">网络协议</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/">Ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/golang/">golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工作记录/">工作记录</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/广告系统/">广告系统</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/服务器安全/">服务器安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络协议/">网络协议</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机组成原理/">计算机组成原理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -225,7 +226,7 @@
   <div class="widget">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/JVM/" style="font-size: 13px;">JVM</a> <a href="/tags/Ubuntu/" style="font-size: 13px;">Ubuntu</a> <a href="/tags/golang/" style="font-size: 13px;">golang</a> <a href="/tags/java/" style="font-size: 13.5px;">java</a> <a href="/tags/kafka/" style="font-size: 13.83px;">kafka</a> <a href="/tags/linux/" style="font-size: 13.17px;">linux</a> <a href="/tags/mongodb/" style="font-size: 13px;">mongodb</a> <a href="/tags/mybatis/" style="font-size: 13px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 14px;">mysql</a> <a href="/tags/redis/" style="font-size: 13.5px;">redis</a> <a href="/tags/shell/" style="font-size: 13px;">shell</a> <a href="/tags/spring/" style="font-size: 13.17px;">spring</a> <a href="/tags/tomcat/" style="font-size: 13px;">tomcat</a> <a href="/tags/工作记录/" style="font-size: 13.67px;">工作记录</a> <a href="/tags/广告系统/" style="font-size: 13.17px;">广告系统</a> <a href="/tags/服务器安全/" style="font-size: 13px;">服务器安全</a> <a href="/tags/算法/" style="font-size: 13.33px;">算法</a> <a href="/tags/网络协议/" style="font-size: 13px;">网络协议</a> <a href="/tags/计算机组成原理/" style="font-size: 13.17px;">计算机组成原理</a>
+      <a href="/tags/JVM/" style="font-size: 13px;">JVM</a> <a href="/tags/Ubuntu/" style="font-size: 13px;">Ubuntu</a> <a href="/tags/golang/" style="font-size: 13px;">golang</a> <a href="/tags/java/" style="font-size: 13.67px;">java</a> <a href="/tags/kafka/" style="font-size: 13.83px;">kafka</a> <a href="/tags/linux/" style="font-size: 13.17px;">linux</a> <a href="/tags/mongodb/" style="font-size: 13px;">mongodb</a> <a href="/tags/mybatis/" style="font-size: 13px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 14px;">mysql</a> <a href="/tags/redis/" style="font-size: 13.5px;">redis</a> <a href="/tags/shell/" style="font-size: 13px;">shell</a> <a href="/tags/spring/" style="font-size: 13.17px;">spring</a> <a href="/tags/tomcat/" style="font-size: 13px;">tomcat</a> <a href="/tags/工作记录/" style="font-size: 13.67px;">工作记录</a> <a href="/tags/广告系统/" style="font-size: 13.17px;">广告系统</a> <a href="/tags/服务器安全/" style="font-size: 13px;">服务器安全</a> <a href="/tags/算法/" style="font-size: 13.33px;">算法</a> <a href="/tags/网络协议/" style="font-size: 13px;">网络协议</a> <a href="/tags/计算机组成原理/" style="font-size: 13.17px;">计算机组成原理</a> <a href="/tags/设计模式/" style="font-size: 13px;">设计模式</a>
     </div>
   </div>
 
@@ -234,7 +235,7 @@
   <div class="widget">
     <h3 class="widget-title">Archive</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -371,10 +372,10 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/06/02/Java并发包常用类用法及原理/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2.3k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2.5k(words)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 8(minutes)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 9(minutes)</span>
 	
 
       </div>
@@ -383,11 +384,11 @@
       
         <p>com.java.util.concurrent包是java5时添加的，专门处理多线程提供的工具类</p>
 <blockquote>
-<p><a href="#1"><strong>一、Atomic</strong></a><br><br><a href="#2"><strong>二、Lock</strong></a><br><br><a href="#3"><strong>三、BlockingQueue</strong></a><br><br><a href="#4"><strong>四、BlockDeque</strong></a><br><br><a href="#5"><strong>五、ConcurrnetMap</strong></a><br><br><a href="#6"><strong>六、CountDownLatch</strong></a><br><br><a href="#7"><strong>七、CyclicBarrier</strong></a><br><br><a href="#8"><strong>八、ExecutorService</strong></a><br><br><a href="#9"><strong>九、ForkJoinPool</strong></a><br></p>
+<p><a href="#1"><strong>一、Atomic</strong></a><br><br><a href="#2"><strong>二、Lock</strong></a><br><br><a href="#3"><strong>三、BlockingQueue</strong></a><br><br><a href="#4"><strong>四、BlockDeque</strong></a><br><br><a href="#5"><strong>五、ConcurrnetMap</strong></a><br><br><a href="#6"><strong>六、CountDownLatch</strong></a><br><br><a href="#7"><strong>七、CyclicBarrier</strong></a><br><br><a href="#8"><strong>八、ExecutorService</strong></a><br><br><a href="#9"><strong>九、CopyOnWriteList</strong></a><br></p>
 </blockquote>
 <p><a name="1"><strong>1.atomic包</strong></a></p>
 <blockquote>
-<p>AtomicBoolean、AtomicInteger、AtomicLong、AtomicReference<br>类提供多种方法，可以原子性地为参数取值、赋值、交换值（getAndSet）、比较并且设置值（CAS:compareAndSet）等。</p>
+<p>AtomicBoolean、AtomicInteger、AtomicLong、AtomicReference<br>类提供多种方法，可以原子性地为参数取值、赋值、交换值（getAndSet）、比较并且设置值（CAS:compareAndSet）（失败就重试，直到没有冲突为止）等。</p>
 </blockquote>
 <p>为什么需要使用atomic？<br>先说几个概念：</p>
 <ul>
@@ -414,12 +415,17 @@
 <ul>
 <li><p>ReentrantLock</p>
 <ul>
-<li>可重入的互斥锁，即同一线程可以多次获得该锁，线程间是互斥的。</li>
+<li>可重入的互斥锁，即同一线程可以多次获得该锁，线程间是互斥的。使用CAS+CLH（双向链表）实现</li>
 </ul>
 </li>
 <li><p>ReentrantReadWriteLock</p>
 <ul>
 <li>可重入的读写锁，是在ReentrantLock的基础上的增强，更细粒度地控制。在特殊场景中会使用到，分为readLock和writeLock，读读共享，读写和写写排他。</li>
+</ul>
+</li>
+<li><p>StampLock</p>
+<ul>
+<li>读写并发锁，适用于读远远大于写的场景。</li>
 </ul>
 </li>
 </ul>
@@ -592,6 +598,12 @@
 <blockquote>
 <p>4.扩容<br>    数组容量增加一倍，并迁移链表中的数据</p>
 </blockquote>
+<ul>
+<li>ConcurrentSkipListMap<ul>
+<li>使用跳表skipList实现，可以支持排序，对应非线程安全的TreeMap是使用红黑树实现的。ConcurrentSkipListMap适用于高并发的写操作（千万级），因为它锁住的节点少，相对于红黑树平衡造成的锁竞争，ConcurrentSkipListMap效率更高。</li>
+</ul>
+</li>
+</ul>
 <p><a name="6"><strong>6.CountDownLatch</strong></a></p>
 <blockquote>
 <p>倒计时控制器(<del>自己起的名字</del>)。因为他类似于一个倒计时启动的功能。<br>初始化指定倒计时的值<code>CountDownLatch latch = new CountDownLatch(3)</code>并使用<code>latch.await()</code>等待执行，当其他其他线程调用3次<code>latch.countDown()</code>就触发主线程继续。</p>
@@ -666,15 +678,20 @@
 <p>3.newSingleThreadExecutor:只创建一个线程，但是队列使用<code>LinkedBlockingQueue</code>无界队列。</p>
 </blockquote>
 <ul>
-<li>ScheduledThreadPoolExecutor<blockquote>
+<li><p>ScheduledThreadPoolExecutor</p>
+<blockquote>
 <p>继承了ThreadPoolExecutor，可以设置核心和最大线程的大小，使用<code>DelayedWorkQueue</code>延迟队列。</p>
 </blockquote>
 </li>
-</ul>
-<p><a name="9"><strong>9.ForkJoinPool</strong></a></p>
+<li><p>ForkJoinPool</p>
 <blockquote>
 <p>实现了Executor接口，支持将一个大任务分为若干个子任务交给子线程处理，然后合并为一个结果集。采用了分治和递归的思想。内部维护了多个队列。<br><del>（挖坑以后用到了再详细写）</del></p>
 </blockquote>
+</li>
+</ul>
+<p><a name="9"><strong>9.CopyOnWriteList</strong></a></p>
+<p>CopyOnWriteList是并发场景下的List容器，适用于读远大于写的场景。相对于Vector的线程安全List，Vector所有方法上都有Synchronized同步锁，会造成大量的锁竞争。CopyOnWriteList使用读写分离的机制，它实现了无锁并发读，写操作加锁，发生在新的副本上，写完成后将原容器指向副本。</p>
+<p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g60n7s7eatj311a0hctcz.jpg" alt></p>
 
       
     </div>
