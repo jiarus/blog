@@ -18,20 +18,20 @@
   
   
   <title>Java并发包常用类用法及原理 | fever的个人博客</title>
-  <meta name="description" content="com.java.util.concurrent包是java5时添加的，专门处理多线程提供的工具类  一、Atomic二、Lock三、BlockingQueue四、BlockDeque五、ConcurrnetMap六、CountDownLatch七、CyclicBarrier八、ExecutorService九、CopyOnWriteList  1.atomic包  AtomicBoolean、A">
+  <meta name="description" content="com.java.util.concurrent包是java5时添加的，专门处理多线程提供的工具类  一、Atomic二、Lock三、BlockingQueue四、BlockDeque五、ConcurrnetMap六、CountDownLatch七、CyclicBarrier八、ExecutorService九、CopyOnWriteList十、ThreadLocal  1.atomic包  At">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java并发包常用类用法及原理">
 <meta property="og:url" content="https://jiarus.github.io/2019/06/02/Java并发包常用类用法及原理/index.html">
 <meta property="og:site_name" content="jiarus">
-<meta property="og:description" content="com.java.util.concurrent包是java5时添加的，专门处理多线程提供的工具类  一、Atomic二、Lock三、BlockingQueue四、BlockDeque五、ConcurrnetMap六、CountDownLatch七、CyclicBarrier八、ExecutorService九、CopyOnWriteList  1.atomic包  AtomicBoolean、A">
+<meta property="og:description" content="com.java.util.concurrent包是java5时添加的，专门处理多线程提供的工具类  一、Atomic二、Lock三、BlockingQueue四、BlockDeque五、ConcurrnetMap六、CountDownLatch七、CyclicBarrier八、ExecutorService九、CopyOnWriteList十、ThreadLocal  1.atomic包  At">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g5st76um2ej30w00k0dlh.jpg">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g60n7s7eatj311a0hctcz.jpg">
-<meta property="og:updated_time" content="2019-08-15T16:35:46.980Z">
+<meta property="og:updated_time" content="2019-08-19T02:17:51.654Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发包常用类用法及原理">
-<meta name="twitter:description" content="com.java.util.concurrent包是java5时添加的，专门处理多线程提供的工具类  一、Atomic二、Lock三、BlockingQueue四、BlockDeque五、ConcurrnetMap六、CountDownLatch七、CyclicBarrier八、ExecutorService九、CopyOnWriteList  1.atomic包  AtomicBoolean、A">
+<meta name="twitter:description" content="com.java.util.concurrent包是java5时添加的，专门处理多线程提供的工具类  一、Atomic二、Lock三、BlockingQueue四、BlockDeque五、ConcurrnetMap六、CountDownLatch七、CyclicBarrier八、ExecutorService九、CopyOnWriteList十、ThreadLocal  1.atomic包  At">
 <meta name="twitter:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g5st76um2ej30w00k0dlh.jpg">
   <!-- Canonical links -->
   <link rel="canonical" href="https://jiarus.github.io/2019/06/02/Java并发包常用类用法及原理/index.html">
@@ -372,7 +372,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/06/02/Java并发包常用类用法及原理/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2.5k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2.7k(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 9(minutes)</span>
@@ -384,7 +384,7 @@
       
         <p>com.java.util.concurrent包是java5时添加的，专门处理多线程提供的工具类</p>
 <blockquote>
-<p><a href="#1"><strong>一、Atomic</strong></a><br><br><a href="#2"><strong>二、Lock</strong></a><br><br><a href="#3"><strong>三、BlockingQueue</strong></a><br><br><a href="#4"><strong>四、BlockDeque</strong></a><br><br><a href="#5"><strong>五、ConcurrnetMap</strong></a><br><br><a href="#6"><strong>六、CountDownLatch</strong></a><br><br><a href="#7"><strong>七、CyclicBarrier</strong></a><br><br><a href="#8"><strong>八、ExecutorService</strong></a><br><br><a href="#9"><strong>九、CopyOnWriteList</strong></a><br></p>
+<p><a href="#1"><strong>一、Atomic</strong></a><br><br><a href="#2"><strong>二、Lock</strong></a><br><br><a href="#3"><strong>三、BlockingQueue</strong></a><br><br><a href="#4"><strong>四、BlockDeque</strong></a><br><br><a href="#5"><strong>五、ConcurrnetMap</strong></a><br><br><a href="#6"><strong>六、CountDownLatch</strong></a><br><br><a href="#7"><strong>七、CyclicBarrier</strong></a><br><br><a href="#8"><strong>八、ExecutorService</strong></a><br><br><a href="#9"><strong>九、CopyOnWriteList</strong></a><br><br><a href="#10"><strong>十、ThreadLocal</strong></a><br></p>
 </blockquote>
 <p><a name="1"><strong>1.atomic包</strong></a></p>
 <blockquote>
@@ -692,6 +692,10 @@
 <p><a name="9"><strong>9.CopyOnWriteList</strong></a></p>
 <p>CopyOnWriteList是并发场景下的List容器，适用于读远大于写的场景。相对于Vector的线程安全List，Vector所有方法上都有Synchronized同步锁，会造成大量的锁竞争。CopyOnWriteList使用读写分离的机制，它实现了无锁并发读，写操作加锁，发生在新的副本上，写完成后将原容器指向副本。</p>
 <p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g60n7s7eatj311a0hctcz.jpg" alt></p>
+<p><a name="10"><strong>10.ThreadLocal</strong></a></p>
+<p>ThreadLocal用于处理同一线程数据共享的操作类。目的减少参数传递，和不同线程之间的数据隔离。<br>原理：内部使用<strong>静态的ThreadLocalMap对象</strong>存放元素，同一线程使用同一个ThreadLocalMap，key是ThreadLocal对象，value是存放的值。<br>ThreadLocalMap使用Entry数组实现，是一个弱引用对象，当线程被销毁时候ThreadLocalMap也会被回收。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">static class Entry extends WeakReference&lt;ThreadLocal&lt;?&gt;&gt; &#123;</span><br><span class="line">            /** The value associated with this ThreadLocal. */</span><br><span class="line">            Object value;</span><br><span class="line"></span><br><span class="line">            Entry(ThreadLocal&lt;?&gt; k, Object v) &#123;</span><br><span class="line">                super(k);</span><br><span class="line">                value = v;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
