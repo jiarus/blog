@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://jiarus.github.io/"/>
-  <updated>2019-08-11T02:36:48.123Z</updated>
+  <updated>2019-08-22T02:36:11.740Z</updated>
   <id>https://jiarus.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mysql explain分析工具</title>
+    <link href="https://jiarus.github.io/2019/08/18/mysql-explain%E5%B7%A5%E5%85%B7/"/>
+    <id>https://jiarus.github.io/2019/08/18/mysql-explain工具/</id>
+    <published>2019-08-18T02:06:00.000Z</published>
+    <updated>2019-08-22T02:36:11.740Z</updated>
+    
+    <content type="html"><![CDATA[<p>explain是mysql中的一个关键字可以分析sql查询的是如何执行的。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain sql语句</span><br></pre></td></tr></table></figure><p><img src="http://ww3.sinaimg.cn/large/006y8mN6ly1g688g3w99ij31uq06c3zq.jpg" alt></p><ul><li><p>id</p><ul><li>id代表sql执行的顺序，id值越大越被优先执行。</li><li>id相同代表顺序执行。</li></ul></li><li><p>select_type</p><ul><li>simple 简单查询，不包含子查询和union查询</li><li>primary 包含子查询，最外层就是primary<br><img src="http://ww1.sinaimg.cn/large/006y8mN6ly1g688o1ffd9j31b606c755.jpg" alt></li><li>subquery 在SELECT或WHERE列表中包含了子查询</li><li>derived 在FROM列表中包含的子查询被标记为DERIVED（衍生），MySQL会递归执行这些子查询，把结果放在临时表中</li><li>union 若第二个SELECT出现在UNION之后，则被标记为UNION：若UNION包含在FROM子句的子查询中，外层SELECT将被标记为：DERIVED</li><li>union result 从UNION表获取结果的SELECT</li></ul></li><li><p>table</p><ul><li>当前查询的表</li></ul></li><li><p>type</p><ul><li>system 表仅有一行数据</li><li>const 一次索引就找到结果</li><li>eq_ref 关联查询使用了唯一索引</li><li>ref 匹配了多个索引</li><li>range 扫描了部分索引</li><li>index 扫描了全表索引</li><li>all 没有使用索引并且扫描了全表<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system &gt; const &gt; eq_ref &gt; ref &gt; range &gt; index &gt; all</span><br></pre></td></tr></table></figure></li></ul></li><li><p>possible_keys 提示使用哪个索引会在该表中找到行</p></li><li><p>keys 使用哪些索引，没使用为null</p></li><li><p>key_len 索引使用的字节数，值越小越好。</p></li><li><p>ref 显示索引的哪一列被使用</p></li><li><p>rows sql执行需要读取的行数，值越小越好</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;explain是mysql中的一个关键字可以分析sql查询的是如何执行的。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;
+      
+    
+    </summary>
+    
+      <category term="mysql" scheme="https://jiarus.github.io/categories/mysql/"/>
+    
+    
+      <category term="mysql" scheme="https://jiarus.github.io/tags/mysql/"/>
+    
+  </entry>
   
   <entry>
     <title>计算机CPU性能提升</title>
@@ -537,27 +563,6 @@
     
     
       <category term="spring" scheme="https://jiarus.github.io/tags/spring/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Redis Debug 命令</title>
-    <link href="https://jiarus.github.io/2019/01/10/Redis-Debug-%E5%91%BD%E4%BB%A4/"/>
-    <id>https://jiarus.github.io/2019/01/10/Redis-Debug-命令/</id>
-    <published>2019-01-10T06:45:00.000Z</published>
-    <updated>2019-08-11T13:08:02.055Z</updated>
-    
-    <content type="html"><![CDATA[<p>查看某一个Key的Debug信息，使用<code>debug object [key]</code><br><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g5ukxhidosj30ts06mq3r.jpg" alt></p><p>查看redis内存使用情况使用<code>info memeroy</code><br><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5ukxk9mpej30860azmy5.jpg" alt></p><ul><li>used_memory_human: 已使用内存（格式化可读性的）</li><li>used_memory_peak_human: 使用最高峰值</li><li>total_system_memory_human: 总内存</li><li>used_memory_rss_huamn: Redis进程占用内存</li><li>evicted_keys: 因为内存满而被驱逐/回收的key</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;查看某一个Key的Debug信息，使用&lt;code&gt;debug object [key]&lt;/code&gt;&lt;br&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/006tNc79ly1g5ukxhidosj30ts06mq3r.jpg&quot; alt&gt;&lt;/p
-      
-    
-    </summary>
-    
     
   </entry>
   
